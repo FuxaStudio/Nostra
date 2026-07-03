@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;color:#111a44;background:#fff;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3,p{margin:0;}
+::-webkit-scrollbar{height:8px;width:8px;}
+::-webkit-scrollbar-thumb{background:rgba(120,134,168,.4);border-radius:8px;}
+</style>
+</helmet>
+
+<div style="position:relative;background:#fff;overflow-x:clip;min-height:100vh;">
+
+  <header style="position:sticky;top:0;z-index:60;padding:16px 22px 0;background:#fff;">
+    <div style="max-width:1320px;margin:0 auto;background:#003FFF;border-radius:48px;display:flex;align-items:center;gap:24px;padding:12px 20px 12px 24px;box-shadow:0 6px 30px rgba(0,20,90,.18);">
+      <a href="Home%20-%20Royal%20Philharmonic%20Orchestra.dc.html" aria-label="Capella Nostra — domů" style="display:flex;align-items:center;gap:12px;flex:none;">
+        <img src="./logo-nostra-mqy3vj7u.png" alt="" style="width:40px;height:40px;object-fit:contain;flex:none;">
+        <span style="color:#fff;font-weight:800;font-size:13px;line-height:1.05;">Capella<br>Nostra</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:20px;margin-left:auto;">
+        <a href="Home%20-%20Royal%20Philharmonic%20Orchestra.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Domů</a>
+        <a href="Koncerty.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Koncerty</a>
+        <a href="#" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">O nás</a>
+        <a href="#" style="color:#fff;font-size:15px;font-weight:700;white-space:nowrap;background:rgba(255,255,255,.18);padding:8px 15px;border-radius:30px;">Členové</a>
+        <a href="Galerie.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Galerie</a>
+        <a href="#" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Kontakt</a>
+        <a href="#" style="margin-left:4px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:11px 20px;border-radius:40px;white-space:nowrap;">Poptat koncert <span>→</span></a>
+        <button onClick="{{ toggleLang }}" aria-label="Language" style="margin-left:2px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;font-family:inherit;font-weight:600;font-size:14px;padding:8px 13px;border-radius:40px;cursor:pointer;white-space:nowrap;"><sc-if value="{{ isCs }}" hint-placeholder-val="{{ true }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg></sc-if><sc-if value="{{ isEn }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg></sc-if><span>{{ langLabel }}</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <section data-screen-label="Členové – úvod" style="background:#fff;padding:78px 0 40px;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+      <p style="font-size:14px;font-weight:700;color:#003FFF;letter-spacing:.02em;margin-bottom:14px;">Soubor</p>
+      <h1 style="font-size:clamp(34px,4.4vw,52px);font-weight:700;letter-spacing:-.012em;line-height:1.04;margin-bottom:18px;color:#111a44;">Lidé za naším zvukem</h1>
+      <p style="font-size:clamp(17px,1.5vw,19px);line-height:1.55;color:#3a4366;max-width:640px;">{{ lead }}</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Členové – umělecké vedení" style="position:relative;background:#003FFF;padding:88px 0;overflow:hidden;">
+    <svg viewBox="0 0 1200 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9;"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2">
+      <path d="M-60,86 C260,16 520,176 780,96 S1160,28 1320,108"></path>
+      <path d="M-60,108 C260,38 520,198 780,118 S1160,50 1320,130"></path>
+      <path d="M-60,130 C260,60 520,220 780,140 S1160,72 1320,152"></path>
+      <path d="M-60,152 C260,82 520,242 780,162 S1160,94 1320,174"></path>
+      <path d="M-60,174 C260,104 520,264 780,184 S1160,116 1320,196"></path>
+    </g></svg>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;flex-wrap:wrap;flex-direction:row-reverse;align-items:center;gap:56px;justify-content:space-between;">
+        <div style="flex:0 0 320px;width:320px;max-width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.55);background:#1746e0;box-shadow:0 24px 60px rgba(0,12,60,.4);">
+          <sc-for list="{{ conductorList }}" as="cd" hint-placeholder-count="1">
+            <img src="{{ cd.img }}" alt="{{ cd.name }}" style="width:100%;height:100%;object-fit:cover;">
+          </sc-for>
+        </div>
+        <div style="flex:1 1 440px;min-width:300px;color:#fff;">
+          <p style="font-size:14px;font-weight:700;color:#cdd9ff;letter-spacing:.02em;margin-bottom:12px;">Umělecký vedoucí</p>
+          <h2 style="font-size:clamp(30px,3.4vw,40px);font-weight:700;letter-spacing:-.012em;line-height:1.05;margin-bottom:8px;">{{ conductor.name }}</h2>
+          <p style="font-size:18px;font-weight:600;color:#dbe3ff;margin-bottom:20px;">{{ conductor.role }}</p>
+          <p style="font-size:17px;line-height:1.6;color:#e7ecff;max-width:520px;margin-bottom:28px;">{{ conductor.note }}</p>
+          <sc-if value="{{ showLeadership }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;gap:14px;flex-wrap:wrap;">
+              <sc-for list="{{ leaders }}" as="l" hint-placeholder-count="2">
+                <div style="display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:10px 18px 10px 10px;">
+                  <div style="flex:none;width:46px;height:46px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,.18);">
+                    <img src="{{ l.img }}" alt="{{ l.name }}" style="width:100%;height:100%;object-fit:cover;">
+                  </div>
+                  <div>
+                    <p style="font-size:15px;font-weight:700;line-height:1.15;color:#fff;">{{ l.name }}</p>
+                    <p style="font-size:13px;font-weight:600;color:#cdd9ff;">{{ l.role }}</p>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Členové – hudebníci" style="background:#f7f5f2;padding:84px 0 96px;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:42px;">
+        <h2 style="font-size:clamp(26px,2.6vw,32px);font-weight:700;letter-spacing:-.012em;color:#111a44;">Členové souboru</h2>
+        <span style="font-size:15px;font-weight:600;color:#7c86a8;white-space:nowrap;">{{ count }} hudebníků</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:30px 24px;">
+        <sc-for list="{{ members }}" as="m" hint-placeholder-count="24">
+          <div style="text-align:center;">
+            <div style="position:relative;width:100%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:linear-gradient(150deg,#e7ecfb,#d4def7);margin-bottom:14px;">
+              <img src="{{ m.img }}" alt="{{ m.name }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:{{ memberFilter }};">
+              <sc-if value="{{ portraitRings }}" hint-placeholder-val="{{ true }}">
+                <span style="position:absolute;inset:0;border-radius:50%;border:2px solid #003FFF;pointer-events:none;"></span>
+              </sc-if>
+            </div>
+            <h3 style="font-size:15.5px;font-weight:700;color:#111a44;line-height:1.2;margin-bottom:3px;">{{ m.name }}</h3>
+            <p style="font-size:13px;font-weight:600;color:#5b6a9a;">{{ m.role }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer data-screen-label="Patička" style="background: #003FFF; color: #fff">
+    <div style="max-width:1180px;margin:0 auto;padding:74px 44px 28px;text-align:center;">
+      <h2 style="font-size:clamp(46px,8.4vw,132px);font-weight:800;letter-spacing:-.025em;line-height:.9;margin:0 0 18px;">Capella Nostra</h2>
+      <p style="font-size:clamp(17px,2vw,22px);color:#cdd7ff;margin:0 auto 30px;max-width:520px;">Hudba, která spojuje.</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-bottom:38px;">
+        <a href="#" aria-label="Instagram" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"></circle></svg></a>
+        <a href="#" aria-label="Facebook" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.5V5.5c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2H8.2V14h2.5v7h2.8z"></path></svg></a>
+      </div>
+      <ul style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin:0 0 36px;list-style:none;padding:0;">
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Domů</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Koncerty</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">O nás</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Členové</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Galerie</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Kontakt</a></li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px;font-size:14.5px;color:#e7ecff;margin-bottom:34px;">
+        <a href="mailto:info@capellanostra.cz" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">info@capellanostra.cz</a>
+        <span aria-hidden="true" style="color:rgba(255,255,255,.4);">·</span>
+        <a href="tel:+420777123456" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">+420 777 123 456</a>
+      </div>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,.22);margin:0 0 22px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:#cdd7ff;flex-wrap:wrap;">
+        <span style="color:#fff;font-weight:600;">Capella Nostra © 2026</span>
+        <div style="display:flex;gap:22px;">
+          <a href="#" style="color:#cdd7ff;text-decoration:underline;text-underline-offset:3px;">Zásady ochrany osobních údajů</a>
+        </div>
+        <a href="#" style="color:#cdd7ff;white-space:nowrap;">Realizace webu: <strong style="color:#fff;text-decoration:underline;text-underline-offset:3px;">FuxaStudio</strong></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#003FFF"></rect><g fill="none" stroke="#fff" stroke-width="2.4"><circle cx="34" cy="42" r="11"></circle><circle cx="66" cy="42" r="11"></circle><circle cx="50" cy="64" r="11"></circle></g></svg>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;portraitRings&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Členové&quot;},&quot;grayscalePortraits&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Členové&quot;},&quot;showLeadership&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Členové&quot;}}">
+class Component extends DCLogic {
+  state = { lang: 'cs' };
+
+  _toggleLang() { this.setState(function (s) { return { lang: s.lang === 'cs' ? 'en' : 'cs' }; }); }
+
+  renderVals() {
+    var p = this.props || {};
+    var ini = function (n) { return n.split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase(); };
+    var tag = function (o) { return Object.assign({}, o, { initials: ini(o.name) }); };
+
+    var conductor = tag({
+      name: 'Jan Kohout',
+      role: 'Dirigent & umělecký vedoucí',
+      note: 'Zakladatel a umělecký vedoucí souboru. Pod jeho taktovkou spojuje Capella Nostra preciznost s radostí ze společné hry.',
+      img: 'https://www.rpo.co.uk/uploads/images/Series-pages/2026-27/_square_m/127781/RPO-x-VP-Season-VP-Image-c-Frances-Marshall.webp?v=1776418512%2C0.5105%2C0.3287'
+    });
+
+    var leaders = [
+      { name: 'Eliška Marešová', role: 'Koncertní mistryně · 1. housle', img: 'https://www.rpo.co.uk/uploads/images/Artist-images/Emilia-Hoving/_thumb_l/56474/Emilia-Hoving.webp?v=1781698932' },
+      { name: 'Martin Beneš', role: 'Sbormistr & asistent dirigenta', img: 'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_s/118510/26-03-12-Brass-Quintet-RPO-Gala-Andy-Paradise.webp?v=1775930695' }
+    ].map(tag);
+
+    var pool = [
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_m/118221/2026-04-09-Cadogan-Hall-harp-credit-Frances-Marshall.webp?v=1775928668%2C0.4407%2C0.638',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/400/rpo-perform-mahler-at-rah.webp?v=1781624695',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/52737/Music-of-Bond-RAH-26-11-25-c-Danny-Kaan-45.webp?v=1775930973%2C0.4399%2C0.2927',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_s/53679/Joe-Hisaishi-RPO-Royal-Albert-Hall-24-Nov-24-c-Tim-Lutton-44.webp?v=1775931422',
+      'https://www.rpo.co.uk/uploads/images/RPCO/_square_s/105238/RPCO-Interstellar-in-concert-Royal-Albert-Hall-April-2026-c-Suzy-Red-5.webp?v=1775930749%2C0.6539%2C0.4069',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/118499/2025-10-21-Mahler-Bernstein-Royal-Albert-Hall-Philharmonia-Chorus-Andy-Paradise.webp?v=1775930432',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Festival-Hall/_square_s/52763/RPO-and-Vasily-Petrenko-at-RFH-Multitudes-27-April-2025-credit-Mark-Allan-9.webp?v=1775931495',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_thumb_l/53681/Royal-Philharmonic-Orchestra-players-credit-Ben-Wright-1.webp?v=1775831370%2C0.3943%2C0.2867',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/52737/Music-of-Bond-RAH-26-11-25-c-Danny-Kaan-45.webp?v=1775930973%2C0.4399%2C0.2927',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/RPCO/_thumb_l/127766/2026-07-11-Shanay-Holmes-Cadogan-Hall-RPCO-3000x200.webp?v=1776418441%2C0.3868%2C0.2234',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_m/118221/2026-04-09-Cadogan-Hall-harp-credit-Frances-Marshall.webp?v=1775928668%2C0.4407%2C0.638',
+      'https://www.rpo.co.uk/uploads/images/RPCO/_square_s/105238/RPCO-Interstellar-in-concert-Royal-Albert-Hall-April-2026-c-Suzy-Red-5.webp?v=1775930749%2C0.6539%2C0.4069'
+    ];
+
+    var memberData = [
+      { name: 'Anna Procházková', role: '1. housle' },
+      { name: 'Jakub Svoboda', role: '1. housle' },
+      { name: 'Tereza Nováková', role: '1. housle' },
+      { name: 'Filip Horák', role: '2. housle' },
+      { name: 'Klára Pospíšilová', role: '2. housle' },
+      { name: 'Ondřej Marek', role: '2. housle' },
+      { name: 'Karolína Müllerová', role: '2. housle' },
+      { name: 'Veronika Krejčí', role: 'Viola' },
+      { name: 'David Růžička', role: 'Viola' },
+      { name: 'Hana Bláhová', role: 'Violoncello' },
+      { name: 'Lukáš Fiala', role: 'Violoncello' },
+      { name: 'Vojtěch Říha', role: 'Violoncello' },
+      { name: 'Markéta Sedláčková', role: 'Kontrabas' },
+      { name: 'Štěpán Dvořáček', role: 'Kontrabas' },
+      { name: 'Petr Kučera', role: 'Flétna' },
+      { name: 'Lucie Veselá', role: 'Hoboj' },
+      { name: 'Tomáš Urban', role: 'Klarinet' },
+      { name: 'Barbora Doležalová', role: 'Fagot' },
+      { name: 'Jan Šťastný', role: 'Lesní roh' },
+      { name: 'Kateřina Macháčková', role: 'Trubka' },
+      { name: 'Michal Kovář', role: 'Pozoun' },
+      { name: 'Nikola Černá', role: 'Harfa' },
+      { name: 'Adam Pokorný', role: 'Klavír & cembalo' },
+      { name: 'Simona Holubová', role: 'Tympány & bicí' }
+    ];
+    var members = memberData.map(function (m, i) { return tag(Object.assign({}, m, { img: pool[i % pool.length] })); });
+
+    var lang = this.state.lang;
+    var grayscale = !!p.grayscalePortraits;
+
+    return {
+      conductor: conductor,
+      conductorList: [conductor],
+      leaders: leaders,
+      members: members,
+      count: members.length + leaders.length + 1,
+      lead: 'Capellu Nostru tvoří hudebníci, kteří spojují svůj čas, talent a vášeň pro klasickou hudbu do jediného společného zvuku.',
+      isCs: lang === 'cs',
+      isEn: lang === 'en',
+      langLabel: lang === 'cs' ? 'CZ' : 'EN',
+      toggleLang: () => this._toggleLang(),
+      portraitRings: p.portraitRings !== false,
+      showLeadership: p.showLeadership !== false,
+      memberFilter: grayscale ? 'grayscale(1) contrast(.96)' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

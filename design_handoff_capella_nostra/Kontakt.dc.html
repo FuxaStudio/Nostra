@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;color:#111a44;background:#fff;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3,p{margin:0;}
+input,textarea,button{font-family:inherit;}
+input::placeholder,textarea::placeholder{color:#aab0c8;}
+::-webkit-scrollbar{height:8px;width:8px;}
+::-webkit-scrollbar-thumb{background:rgba(120,134,168,.4);border-radius:8px;}
+</style>
+</helmet>
+
+<div style="position:relative;background:#fff;overflow-x:clip;min-height:100vh;">
+
+  <header style="position:sticky;top:0;z-index:60;padding:18px 22px 0;background:#fff;">
+    <div style="max-width:1320px;margin:0 auto;background:#003FFF;border-radius:48px;display:flex;align-items:center;gap:30px;padding:13px 22px 13px 26px;box-shadow:0 6px 30px rgba(0,20,90,.18);">
+      <a href="Home%20-%20Royal%20Philharmonic%20Orchestra.dc.html" aria-label="Capella Nostra — domů" style="display:flex;align-items:center;gap:14px;flex:none;">
+        <img src="./logo-nostra-mqy3vj7u.png" alt="Capella Nostra logo" style="width:46px;height:46px;object-fit:cover;border-radius:8px;flex:none;">
+        <span style="color:#fff;font-weight:800;font-size:13px;line-height:1.02;letter-spacing:.02em;">Capella Nostra</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:26px;margin-left:auto;">
+        <a href="Home%20-%20Royal%20Philharmonic%20Orchestra.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Domů</a>
+        <a href="Koncerty.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Koncerty</a>
+        <a href="#" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">O nás</a>
+        <a href="Členové.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Členové</a>
+        <a href="Galerie.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Galerie</a>
+        <a href="#" style="color:#fff;font-size:15px;font-weight:700;white-space:nowrap;background:rgba(255,255,255,.18);padding:8px 15px;border-radius:30px;">Kontakt</a>
+        <a href="#poptavka" style="margin-left:6px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:11px 22px;border-radius:40px;white-space:nowrap;">Poptat koncert <span style="font-size:15px;">→</span></a>
+        <button onClick="{{ toggleLang }}" aria-label="Language" style="margin-left:4px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;font-family:inherit;font-weight:600;font-size:14px;padding:8px 13px;border-radius:40px;cursor:pointer;white-space:nowrap;"><sc-if value="{{ isCs }}" hint-placeholder-val="{{ true }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;width:23px;height:19px"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg></sc-if><sc-if value="{{ isEn }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg></sc-if><span>{{ langLabel }}</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <section id="poptavka" data-screen-label="Kontakt – split (info + formulář)" style="background:#f7f5f2;padding:84px 0 100px;scroll-margin-top:96px;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;flex-wrap:wrap;gap:56px 64px;align-items:flex-start;">
+
+        <!-- LEVÝ SLOUPEC: kontaktní informace -->
+        <div style="flex:1 1 360px;max-width:460px;min-width:0;">
+          <p style="font-size:14px;font-weight:700;color:#003FFF;letter-spacing:.16em;margin-bottom:16px;">KONTAKT</p>
+          <h1 style="font-size:clamp(34px,3.8vw,50px);font-weight:700;letter-spacing:-.014em;line-height:1.05;color:#111a44;margin-bottom:18px;">Ozvěte se nám</h1>
+          <p style="font-size:18px;line-height:1.55;color:#3a4366;">Máte dotaz, nebo si přejete pozvat Capellu Nostra na svou akci? Napište nám — rádi se ozveme a domluvíme termín i program na míru.</p>
+
+          <div style="height:1px;background:#e4e0d6;margin:30px 0 6px;"></div>
+
+          <a href="mailto:info@capellanostra.cz" style="display:flex;align-items:center;gap:15px;padding:16px 0;transition:transform .15s ease;" style-hover="transform:translateX(3px);">
+            <span style="width:50px;height:50px;border-radius:14px;background:#edf1ff;display:flex;align-items:center;justify-content:center;flex:none;">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3.5 7.5l8.5 6 8.5-6"></path></svg>
+            </span>
+            <span style="min-width:0;">
+              <span style="display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:#8a93b5;margin-bottom:3px;">E-MAIL</span>
+              <span style="display:block;font-size:18px;font-weight:700;color:#111a44;word-break:break-word;">info@capellanostra.cz</span>
+            </span>
+          </a>
+
+          <a href="tel:+420777123456" style="display:flex;align-items:center;gap:15px;padding:16px 0;transition:transform .15s ease;" style-hover="transform:translateX(3px);">
+            <span style="width:50px;height:50px;border-radius:14px;background:#edf1ff;display:flex;align-items:center;justify-content:center;flex:none;">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="1.8"><path d="M5 4h4l2 5-2.6 1.5a11 11 0 0 0 5 5L16 13l5 2v4c0 1-1 2-2 2A16 16 0 0 1 3 6c0-1 1-2 2-2z"></path></svg>
+            </span>
+            <span style="min-width:0;">
+              <span style="display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:#8a93b5;margin-bottom:3px;">TELEFON</span>
+              <span style="display:block;font-size:18px;font-weight:700;color:#111a44;">+420 777 123 456</span>
+            </span>
+          </a>
+
+          <sc-if value="{{ showSocial }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:18px 0 0;">
+            <span style="display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:#8a93b5;margin-bottom:14px;">SOCIÁLNÍ SÍTĚ</span>
+            <div style="display:flex;gap:11px;flex-wrap:wrap;">
+              <a href="#" aria-label="Instagram" style="width:46px;height:46px;border-radius:50%;border:1.5px solid #cdd6f5;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease;" style-hover="background:#edf1ff;border-color:#003FFF;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="#003FFF" stroke="none"></circle></svg></a>
+              <a href="#" aria-label="Facebook" style="width:46px;height:46px;border-radius:50%;border:1.5px solid #cdd6f5;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease;" style-hover="background:#edf1ff;border-color:#003FFF;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#003FFF"><path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.5V5.5c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2H8.2V14h2.5v7h2.8z"></path></svg></a>
+              <a href="#" aria-label="YouTube" style="width:46px;height:46px;border-radius:50%;border:1.5px solid #cdd6f5;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease;" style-hover="background:#edf1ff;border-color:#003FFF;"><svg width="22" height="22" viewBox="0 0 24 24" fill="#003FFF"><path d="M21.6 8.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C16 5.1 12 5.1 12 5.1s-4 0-6.8.2c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2.2 9.8 2.2 11.5v1c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.5.1 6.7.2 6.7.2s4 0 6.8-.2c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1c0-1.7-.2-3.3-.2-3.3zM9.9 14.6V9.4l5.2 2.6-5.2 2.6z"></path></svg></a>
+              <a href="#" aria-label="Spotify" style="width:46px;height:46px;border-radius:50%;border:1.5px solid #cdd6f5;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease;" style-hover="background:#edf1ff;border-color:#003FFF;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#003FFF"></circle><path d="M7.5 9.8c3-.7 6.2-.4 8.8 1.1M8 12.7c2.4-.5 4.9-.3 7 .9M8.4 15.4c1.9-.4 3.8-.2 5.5.7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path></svg></a>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+
+        <!-- PRAVÝ SLOUPEC: formulář -->
+        <div style="flex:1.25 1 460px;min-width:0;">
+
+          <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubmit }}" noValidate="{{ true }}" style="background:#fff;border:1px solid #e7eaf4;border-radius:24px;padding:34px 34px 36px;box-shadow:0 12px 44px rgba(17,26,68,.09);">
+            <p style="font-size:13px;font-weight:700;color:#003FFF;letter-spacing:.16em;margin-bottom:10px;">NAPIŠTE NÁM</p>
+            <h2 style="font-size:24px;font-weight:700;letter-spacing:-.01em;line-height:1.12;color:#111a44;margin-bottom:8px;">Pošlete nám zprávu</h2>
+            <sc-if value="{{ showResponseNote }}" hint-placeholder-val="{{ true }}"><p style="font-size:15px;color:#5b6a9a;margin-bottom:24px;">Odpovídáme zpravidla do dvou pracovních dnů.</p></sc-if>
+
+            <div style="margin-bottom:18px;">
+              <label for="cn-name" style="display:block;font-size:13.5px;font-weight:600;color:#5b6a9a;margin-bottom:8px;">Jméno <span style="color:#003FFF;">*</span></label>
+              <input id="cn-name" type="text" placeholder="Vaše jméno" value="{{ name }}" onChange="{{ onName }}" style="width:100%;border:1.6px solid #d7dbec;border-radius:11px;background:#fff;height:50px;padding:0 15px;font-size:15.5px;color:#111a44;outline:none;transition:border-color .15s ease,box-shadow .15s ease;" style-focus="border-color:#003FFF;box-shadow:0 0 0 3px rgba(0,63,255,.13);">
+              <sc-if value="{{ errName }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:13px;color:#d83a3a;margin-top:7px;">{{ errName }}</span></sc-if>
+            </div>
+
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;">
+              <div style="flex:1 1 200px;min-width:0;">
+                <label for="cn-email" style="display:block;font-size:13.5px;font-weight:600;color:#5b6a9a;margin-bottom:8px;">E-mail <span style="color:#003FFF;">*</span></label>
+                <input id="cn-email" type="email" placeholder="vas@email.cz" value="{{ email }}" onChange="{{ onEmail }}" style="width:100%;border:1.6px solid #d7dbec;border-radius:11px;background:#fff;height:50px;padding:0 15px;font-size:15.5px;color:#111a44;outline:none;transition:border-color .15s ease,box-shadow .15s ease;" style-focus="border-color:#003FFF;box-shadow:0 0 0 3px rgba(0,63,255,.13);">
+                <sc-if value="{{ errEmail }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:13px;color:#d83a3a;margin-top:7px;">{{ errEmail }}</span></sc-if>
+              </div>
+              <div style="flex:1 1 200px;min-width:0;">
+                <label for="cn-phone" style="display:block;font-size:13.5px;font-weight:600;color:#5b6a9a;margin-bottom:8px;">Telefon</label>
+                <input id="cn-phone" type="tel" placeholder="+420…" value="{{ phone }}" onChange="{{ onPhone }}" style="width:100%;border:1.6px solid #d7dbec;border-radius:11px;background:#fff;height:50px;padding:0 15px;font-size:15.5px;color:#111a44;outline:none;transition:border-color .15s ease,box-shadow .15s ease;" style-focus="border-color:#003FFF;box-shadow:0 0 0 3px rgba(0,63,255,.13);">
+              </div>
+            </div>
+
+            <div style="margin-bottom:18px;">
+              <label for="cn-message" style="display:block;font-size:13.5px;font-weight:600;color:#5b6a9a;margin-bottom:8px;">Zpráva <span style="color:#003FFF;">*</span></label>
+              <textarea id="cn-message" placeholder="Termín, místo, typ akce, počet hostů…" value="{{ message }}" onChange="{{ onMessage }}" style="width:100%;border:1.6px solid #d7dbec;border-radius:11px;background:#fff;min-height:132px;padding:13px 15px;font-size:15.5px;color:#111a44;line-height:1.5;outline:none;resize:vertical;transition:border-color .15s ease,box-shadow .15s ease;" style-focus="border-color:#003FFF;box-shadow:0 0 0 3px rgba(0,63,255,.13);"></textarea>
+              <sc-if value="{{ errMessage }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:13px;color:#d83a3a;margin-top:7px;">{{ errMessage }}</span></sc-if>
+            </div>
+
+            <label style="display:flex;align-items:flex-start;gap:11px;margin-bottom:6px;cursor:pointer;">
+              <input type="checkbox" checked="{{ gdpr }}" onChange="{{ onGdpr }}" style="width:19px;height:19px;margin-top:2px;accent-color:#003FFF;flex:none;cursor:pointer;">
+              <span style="font-size:14px;color:#5b6a9a;line-height:1.45;">Souhlasím se <a href="#" style="color:#003FFF;text-decoration:underline;text-underline-offset:2px;">zpracováním osobních údajů</a> za účelem vyřízení mé poptávky.</span>
+            </label>
+            <sc-if value="{{ errGdpr }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:13px;color:#d83a3a;margin:2px 0 0 30px;">{{ errGdpr }}</span></sc-if>
+
+            <div style="margin-top:26px;">
+              <button type="submit" style="display:inline-flex;align-items:center;gap:9px;background:#003FFF;color:#fff;font-weight:600;font-size:16px;padding:15px 32px;border-radius:42px;border:none;cursor:pointer;transition:background .15s ease,transform .15s ease;" style-hover="background:#0030c4;transform:translateY(-2px);">Odeslat poptávku <span style="font-size:16px;">→</span></button>
+            </div>
+          </form>
+          </sc-if>
+
+          <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff;border:1px solid #e4e8f4;border-radius:24px;padding:54px 40px;text-align:center;box-shadow:0 12px 44px rgba(17,26,68,.1);">
+            <div style="width:76px;height:76px;border-radius:50%;background:#edf1ff;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+            </div>
+            <h2 style="font-size:clamp(26px,3vw,32px);font-weight:700;color:#111a44;margin-bottom:14px;letter-spacing:-.01em;">Děkujeme za zprávu!</h2>
+            <p style="font-size:17px;line-height:1.55;color:#3a4366;max-width:430px;margin:0 auto 30px;">Vaše poptávka byla odeslána. Ozveme se vám co nejdříve — zpravidla do dvou pracovních dnů.</p>
+            <button onClick="{{ onReset }}" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.7px solid #003FFF;color:#003FFF;font-weight:600;font-size:15px;padding:13px 26px;border-radius:40px;cursor:pointer;transition:background .15s ease,color .15s ease;" style-hover="background:#003FFF;color:#fff;">Odeslat další zprávu</button>
+          </div>
+          </sc-if>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer data-screen-label="Patička" style="background:#003FFF;color:#fff;">
+    <div style="max-width:1180px;margin:0 auto;padding:74px 44px 28px;text-align:center;">
+      <h2 style="font-size:clamp(46px,8.4vw,132px);font-weight:800;letter-spacing:-.025em;line-height:.9;margin:0 0 18px;">Capella Nostra</h2>
+      <p style="font-size:clamp(17px,2vw,22px);color:#cdd7ff;margin:0 auto 30px;max-width:520px;">Hudba, která spojuje.</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-bottom:38px;">
+        <a href="#" aria-label="Instagram" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"></circle></svg></a>
+        <a href="#" aria-label="Facebook" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.5V5.5c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2H8.2V14h2.5v7h2.8z"></path></svg></a>
+      </div>
+      <ul style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin:0 0 36px;list-style:none;padding:0;">
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Domů</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Koncerty</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">O nás</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Členové</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Galerie</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Kontakt</a></li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px;font-size:14.5px;color:#e7ecff;margin-bottom:34px;">
+        <a href="mailto:info@capellanostra.cz" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">info@capellanostra.cz</a>
+        <span aria-hidden="true" style="color:rgba(255,255,255,.4);">·</span>
+        <a href="tel:+420777123456" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">+420 777 123 456</a>
+      </div>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,.22);margin:0 0 22px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:#cdd7ff;flex-wrap:wrap;">
+        <span style="color:#fff;font-weight:600;">Capella Nostra © 2026</span>
+        <div style="display:flex;gap:22px;">
+          <a href="#" style="color:#cdd7ff;text-decoration:underline;text-underline-offset:3px;">Zásady ochrany osobních údajů</a>
+        </div>
+        <a href="#" style="color:#cdd7ff;white-space:nowrap;">Realizace webu: <strong style="color:#fff;text-decoration:underline;text-underline-offset:3px;">FuxaStudio</strong></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#003FFF"></rect><g fill="none" stroke="#fff" stroke-width="3.4" stroke-linejoin="round"><rect x="22" y="31" width="56" height="38" rx="5"></rect><path d="M24 35l26 18 26-18"></path></g></svg>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSocial&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Kontaktní údaje&quot;},&quot;showResponseNote&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Formulář&quot;},&quot;gdprRequired&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Formulář&quot;}}">
+class Component extends DCLogic {
+  state = { name: '', email: '', phone: '', message: '', gdpr: false, errors: {}, submitted: false, lang: 'cs' };
+
+  _toggleLang() { this.setState((s) => ({ lang: s.lang === 'cs' ? 'en' : 'cs' })); }
+
+  _set(field, val) {
+    this.setState(s => {
+      const errors = Object.assign({}, s.errors);
+      delete errors[field];
+      return Object.assign({}, s, { [field]: val, errors: errors });
+    });
+  }
+
+  _validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  _submit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const s = this.state;
+    const p = this.props || {};
+    const gdprRequired = p.gdprRequired !== false;
+    const errors = {};
+    if (!s.name.trim()) errors.name = 'Vyplňte prosím své jméno.';
+    if (!s.email.trim()) errors.email = 'Vyplňte prosím e-mail.';
+    else if (!this._validEmail(s.email.trim())) errors.email = 'Zadejte platný e-mail.';
+    if (!s.message.trim()) errors.message = 'Napište nám prosím zprávu.';
+    if (gdprRequired && !s.gdpr) errors.gdpr = 'Bez souhlasu nelze zprávu odeslat.';
+    if (Object.keys(errors).length) { this.setState({ errors: errors }); return; }
+    this.setState({ submitted: true });
+  }
+
+  _reset() { this.setState({ name: '', email: '', phone: '', message: '', gdpr: false, errors: {}, submitted: false }); }
+
+  renderVals() {
+    const s = this.state;
+    const p = this.props || {};
+    return {
+      isCs: s.lang === 'cs', isEn: s.lang === 'en', langLabel: s.lang === 'cs' ? 'CZ' : 'EN', toggleLang: () => this._toggleLang(),
+      name: s.name, email: s.email, phone: s.phone, message: s.message, gdpr: s.gdpr,
+      onName: (e) => this._set('name', e.target.value),
+      onEmail: (e) => this._set('email', e.target.value),
+      onPhone: (e) => this._set('phone', e.target.value),
+      onMessage: (e) => this._set('message', e.target.value),
+      onGdpr: (e) => this._set('gdpr', e.target.checked),
+      onSubmit: (e) => this._submit(e),
+      onReset: () => this._reset(),
+      submitted: s.submitted,
+      notSubmitted: !s.submitted,
+      errName: s.errors.name, errEmail: s.errors.email, errMessage: s.errors.message, errGdpr: s.errors.gdpr,
+      showSocial: p.showSocial !== false,
+      showResponseNote: p.showResponseNote !== false
+    };
+  }
+}
+</script>
+</body>
+</html>

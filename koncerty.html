@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koncerty — Capella Nostra</title>
+<meta name="description" content="Přehled nadcházejících koncertů Capelly Nostra v sezóně 2026/2027 i archiv proběhlých vystoupení.">
+<meta name="theme-color" content="#003FFF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Capella Nostra">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Koncerty — Capella Nostra">
+<meta property="og:description" content="Přehled nadcházejících koncertů Capelly Nostra v sezóně 2026/2027 i archiv proběhlých vystoupení.">
+<!-- Po nasazení nahraďte relativní cestu absolutní URL (https://domena.cz/assets/og-cover.jpg) a doplňte og:url. -->
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<script src="js/icons.js"></script>
+
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="brand" aria-label="Capella Nostra — domů">
+      <img src="assets/logo.png" alt="Capella Nostra logo" width="46" height="46">
+      <span>Capella Nostra</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Domů</a>
+      <a href="koncerty.html" class="is-active">Koncerty</a>
+      <a href="o-nas.html">O nás</a>
+      <a href="clenove.html">Členové</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="kontakt.html#poptavka" class="nav-cta">Poptat koncert <span>→</span></a>
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Jazyk / Language">
+        <svg class="flag-cs" width="22" height="15" viewBox="0 0 60 30"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg>
+        <svg class="flag-en" width="22" height="15" viewBox="0 0 60 30" hidden><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg>
+        <span class="lang-label">CZ</span>
+      </button>
+      <button class="nav-close" id="navClose" type="button" aria-label="Zavřít menu">
+        <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
+      </button>
+    </nav>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Otevřít menu" aria-expanded="false">
+      <svg class="icon" width="18" height="18"><use href="#i-menu"></use></svg>
+    </button>
+    <div class="nav-scrim" id="navScrim"></div>
+  </div>
+</header>
+
+<section class="hero-koncerty" id="koncertyHero">
+  <img id="heroImg" alt="">
+  <div class="scrim"></div>
+  <div class="inner">
+    <div class="container-lg">
+      <p class="kicker">NEJBLIŽŠÍ KONCERT</p>
+      <div class="card" id="heroCard"></div>
+    </div>
+  </div>
+</section>
+
+<section class="upcoming">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="kicker">Nadcházející koncerty</p>
+        <h2 class="h2">Sezóna 2026 / 2027</h2>
+      </div>
+    </div>
+    <div class="grid-concerts" id="concertsGrid"></div>
+    <div class="load-more-wrap" id="loadMoreWrap" hidden>
+      <button class="btn-load-more" id="loadMoreBtn" type="button">Načíst další koncerty <span>↓</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="archive">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="kicker">Proběhlé koncerty</p>
+        <h2 class="h2">Z archivu souboru</h2>
+      </div>
+      <a href="galerie.html">Plná fotodokumentace v Galerii <span>→</span></a>
+    </div>
+    <div class="grid-archive" id="archiveGrid"></div>
+  </div>
+</section>
+
+<section class="inquiry">
+  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="none"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2">
+    <path d="M-60,86 C260,16 520,176 780,96 S1160,28 1320,108"></path>
+    <path d="M-60,108 C260,38 520,198 780,118 S1160,50 1320,130"></path>
+    <path d="M-60,130 C260,60 520,220 780,140 S1160,72 1320,152"></path>
+    <path d="M-60,152 C260,82 520,242 780,162 S1160,94 1320,174"></path>
+    <path d="M-60,174 C260,104 520,264 780,184 S1160,116 1320,196"></path>
+    <path d="M-60,196 C260,126 520,286 780,206 S1160,138 1320,218"></path>
+  </g></svg>
+  <div class="inner">
+    <p class="kicker">POPTÁVKA</p>
+    <h2 class="h2">Chcete Capellu Nostra na své akci?</h2>
+    <p>Koncert, slavnostní událost nebo firemní akce — rádi pro vás připravíme program na míru. Ozvěte se a domluvíme termín i repertoár.</p>
+    <a href="kontakt.html#poptavka" class="btn btn-white btn-lg">Poptat koncert <span>→</span></a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="inner">
+    <h2 class="footer-word">Capella Nostra</h2>
+    <p class="footer-tagline">Hudba, která spojuje.</p>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
+      <a href="#" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+    </div>
+    <ul class="footer-nav">
+      <li><a href="index.html">Domů</a></li>
+      <li><a href="koncerty.html">Koncerty</a></li>
+      <li><a href="o-nas.html">O nás</a></li>
+      <li><a href="clenove.html">Členové</a></li>
+      <li><a href="galerie.html">Galerie</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="footer-contact">
+      <a href="mailto:info@capellanostra.cz">info@capellanostra.cz</a>
+      <span aria-hidden="true">·</span>
+      <a href="tel:+420777123456">+420 777 123 456</a>
+    </div>
+    <hr class="footer-hr">
+    <div class="footer-bottom">
+      <span class="copyright">Capella Nostra © 2026</span>
+      <div><a href="zasady-ochrany-osobnich-udaju.html" class="privacy">Zásady ochrany osobních údajů</a></div>
+      <a href="#" class="credit">Realizace webu: <strong>FuxaStudio</strong></a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/koncerty.js"></script>
+</body>
+</html>

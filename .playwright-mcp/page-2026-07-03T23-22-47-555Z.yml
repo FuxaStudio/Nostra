@@ -1,0 +1,296 @@
+- generic [active] [ref=f28e1]:
+  - banner [ref=f28e2]:
+    - generic [ref=f28e3]:
+      - link "Capella Nostra — domů" [ref=f28e4] [cursor=pointer]:
+        - /url: index.html
+        - img "Capella Nostra logo" [ref=f28e5]
+        - generic [ref=f28e6]: Capella Nostra
+      - navigation [ref=f28e7]:
+        - link "Domů" [ref=f28e8] [cursor=pointer]:
+          - /url: index.html
+        - link "Koncerty" [ref=f28e9] [cursor=pointer]:
+          - /url: koncerty.html
+        - link "O nás" [ref=f28e10] [cursor=pointer]:
+          - /url: o-nas.html
+        - link "Členové" [ref=f28e11] [cursor=pointer]:
+          - /url: clenove.html
+        - link "Galerie" [ref=f28e12] [cursor=pointer]:
+          - /url: galerie.html
+        - link "Kontakt" [ref=f28e13] [cursor=pointer]:
+          - /url: kontakt.html
+        - link "Poptat koncert →" [ref=f28e14] [cursor=pointer]:
+          - /url: kontakt.html#poptavka
+          - text: Poptat koncert
+          - generic [ref=f28e15]: →
+        - button "Jazyk / Language" [ref=f28e16] [cursor=pointer]:
+          - img [ref=f28e17]
+          - generic [ref=f28e21]: CZ
+  - generic [ref=f28e24]:
+    - paragraph [ref=f28e25]: NEJBLIŽŠÍ KONCERT
+    - generic [ref=f28e26]:
+      - heading "Slavnostní zahájení sezóny" [level=1] [ref=f28e27]
+      - paragraph [ref=f28e28]: Slavnostní zahájení nové koncertní sezóny s díly českých i světových mistrů.
+      - list [ref=f28e29]:
+        - listitem [ref=f28e30]:
+          - img [ref=f28e31]
+          - text: 12. září 2026 · 19:00
+        - listitem [ref=f28e33]:
+          - img [ref=f28e34]
+          - text: Kostel sv. Mikuláše, Praha
+      - link "Vstupenky ↗" [ref=f28e36] [cursor=pointer]:
+        - /url: "#"
+        - text: Vstupenky
+        - generic [ref=f28e37]: ↗
+  - generic [ref=f28e39]:
+    - generic [ref=f28e41]:
+      - paragraph [ref=f28e42]: Nadcházející koncerty
+      - heading "Sezóna 2026 / 2027" [level=2] [ref=f28e43]
+    - generic [ref=f28e44]:
+      - link "Barokní perly na zámku 27. 9. Barokní perly na zámku 18:30 Zámek Lysice Komorní program z období vrcholného baroka v jedinečných prostorách zámku. Vstupenky ↗" [ref=f28e45] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f28e46]:
+          - img "Barokní perly na zámku" [ref=f28e47]
+          - generic [ref=f28e48]: 27. 9.
+        - generic [ref=f28e49]:
+          - heading "Barokní perly na zámku" [level=3] [ref=f28e50]
+          - list [ref=f28e51]:
+            - listitem [ref=f28e52]:
+              - img [ref=f28e53]
+              - text: 18:30
+            - listitem [ref=f28e55]:
+              - img [ref=f28e56]
+              - text: Zámek Lysice
+          - paragraph [ref=f28e58]: Komorní program z období vrcholného baroka v jedinečných prostorách zámku.
+          - generic [ref=f28e59]:
+            - text: Vstupenky
+            - generic [ref=f28e60]: ↗
+      - link "Dvořák & Smetana 11. 10. Dvořák & Smetana 19:30 Smetanova síň, Praha Symfonické perly dvou velikánů české hudby v podání celého souboru. Vstupenky ↗" [ref=f28e61] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f28e62]:
+          - img "Dvořák & Smetana" [ref=f28e63]
+          - generic [ref=f28e64]: 11. 10.
+        - generic [ref=f28e65]:
+          - heading "Dvořák & Smetana" [level=3] [ref=f28e66]
+          - list [ref=f28e67]:
+            - listitem [ref=f28e68]:
+              - img [ref=f28e69]
+              - text: 19:30
+            - listitem [ref=f28e71]:
+              - img [ref=f28e72]
+              - text: Smetanova síň, Praha
+          - paragraph [ref=f28e74]: Symfonické perly dvou velikánů české hudby v podání celého souboru.
+          - generic [ref=f28e75]:
+            - text: Vstupenky
+            - generic [ref=f28e76]: ↗
+      - link "Podzimní nešpory 25. 10. Podzimní nešpory 19:00 Katedrála sv. Petra a Pavla, Brno Podvečerní program duchovní hudby v majestátní katedrále. Vstupenky ↗" [ref=f28e77] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f28e78]:
+          - img "Podzimní nešpory" [ref=f28e79]
+          - generic [ref=f28e80]: 25. 10.
+        - generic [ref=f28e81]:
+          - heading "Podzimní nešpory" [level=3] [ref=f28e82]
+          - list [ref=f28e83]:
+            - listitem [ref=f28e84]:
+              - img [ref=f28e85]
+              - text: 19:00
+            - listitem [ref=f28e87]:
+              - img [ref=f28e88]
+              - text: Katedrála sv. Petra a Pavla, Brno
+          - paragraph [ref=f28e90]: Podvečerní program duchovní hudby v majestátní katedrále.
+          - generic [ref=f28e91]:
+            - text: Vstupenky
+            - generic [ref=f28e92]: ↗
+      - link "Svatocecilský koncert 8. 11. Svatocecilský koncert 18:00 Chrám sv. Barbory, Kutná Hora Koncert ke svátku patronky hudby svaté Cecílie. Vstupenky ↗" [ref=f28e93] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f28e94]:
+          - img "Svatocecilský koncert" [ref=f28e95]
+          - generic [ref=f28e96]: 8. 11.
+        - generic [ref=f28e97]:
+          - heading "Svatocecilský koncert" [level=3] [ref=f28e98]
+          - list [ref=f28e99]:
+            - listitem [ref=f28e100]:
+              - img [ref=f28e101]
+              - text: 18:00
+            - listitem [ref=f28e103]:
+              - img [ref=f28e104]
+              - text: Chrám sv. Barbory, Kutná Hora
+          - paragraph [ref=f28e106]: Koncert ke svátku patronky hudby svaté Cecílie.
+          - generic [ref=f28e107]:
+            - text: Vstupenky
+            - generic [ref=f28e108]: ↗
+      - 'link "Mozart: Requiem 22. 11. Mozart: Requiem 19:00 Rudolfinum, Praha Mozartovo Requiem v podání souboru, sboru a sólistů. Vstupenky ↗" [ref=f28e109] [cursor=pointer]':
+        - /url: "#"
+        - generic [ref=f28e110]:
+          - 'img "Mozart: Requiem" [ref=f28e111]'
+          - generic [ref=f28e112]: 22. 11.
+        - generic [ref=f28e113]:
+          - 'heading "Mozart: Requiem" [level=3] [ref=f28e114]'
+          - list [ref=f28e115]:
+            - listitem [ref=f28e116]:
+              - img [ref=f28e117]
+              - text: 19:00
+            - listitem [ref=f28e119]:
+              - img [ref=f28e120]
+              - text: Rudolfinum, Praha
+          - paragraph [ref=f28e122]: Mozartovo Requiem v podání souboru, sboru a sólistů.
+          - generic [ref=f28e123]:
+            - text: Vstupenky
+            - generic [ref=f28e124]: ↗
+      - link "Adventní koncert 6. 12. Adventní koncert 17:00 Obecní dům, Praha Adventní písně a koledy ve slavnostním hávu. Vstupenky ↗" [ref=f28e125] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f28e126]:
+          - img "Adventní koncert" [ref=f28e127]
+          - generic [ref=f28e128]: 6. 12.
+        - generic [ref=f28e129]:
+          - heading "Adventní koncert" [level=3] [ref=f28e130]
+          - list [ref=f28e131]:
+            - listitem [ref=f28e132]:
+              - img [ref=f28e133]
+              - text: 17:00
+            - listitem [ref=f28e135]:
+              - img [ref=f28e136]
+              - text: Obecní dům, Praha
+          - paragraph [ref=f28e138]: Adventní písně a koledy ve slavnostním hávu.
+          - generic [ref=f28e139]:
+            - text: Vstupenky
+            - generic [ref=f28e140]: ↗
+    - button "Načíst další koncerty ↓" [ref=f28e142] [cursor=pointer]:
+      - text: Načíst další koncerty
+      - generic [ref=f28e143]: ↓
+  - generic [ref=f28e145]:
+    - generic [ref=f28e146]:
+      - generic [ref=f28e147]:
+        - paragraph [ref=f28e148]: Proběhlé koncerty
+        - heading "Z archivu souboru" [level=2] [ref=f28e149]
+      - link "Plná fotodokumentace v Galerii →" [ref=f28e150] [cursor=pointer]:
+        - /url: galerie.html
+        - text: Plná fotodokumentace v Galerii
+        - generic [ref=f28e151]: →
+    - generic [ref=f28e152]:
+      - link "Jarní koncert proběhlo Květen 2026 Jarní koncert" [ref=f28e153] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e154]:
+          - img "Jarní koncert" [ref=f28e155]
+          - generic [ref=f28e156]:
+            - img [ref=f28e157]
+            - text: proběhlo
+        - paragraph [ref=f28e159]: Květen 2026
+        - heading "Jarní koncert" [level=3] [ref=f28e160]
+      - link "Velikonoční nešpory proběhlo Duben 2026 Velikonoční nešpory" [ref=f28e161] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e162]:
+          - img "Velikonoční nešpory" [ref=f28e163]
+          - generic [ref=f28e164]:
+            - img [ref=f28e165]
+            - text: proběhlo
+        - paragraph [ref=f28e167]: Duben 2026
+        - heading "Velikonoční nešpory" [level=3] [ref=f28e168]
+      - link "Barokní večer proběhlo Březen 2026 Barokní večer" [ref=f28e169] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e170]:
+          - img "Barokní večer" [ref=f28e171]
+          - generic [ref=f28e172]:
+            - img [ref=f28e173]
+            - text: proběhlo
+        - paragraph [ref=f28e175]: Březen 2026
+        - heading "Barokní večer" [level=3] [ref=f28e176]
+      - link "Vánoční koncert proběhlo Prosinec 2025 Vánoční koncert" [ref=f28e177] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e178]:
+          - img "Vánoční koncert" [ref=f28e179]
+          - generic [ref=f28e180]:
+            - img [ref=f28e181]
+            - text: proběhlo
+        - paragraph [ref=f28e183]: Prosinec 2025
+        - heading "Vánoční koncert" [level=3] [ref=f28e184]
+      - link "Svatomartinský koncert proběhlo Listopad 2025 Svatomartinský koncert" [ref=f28e185] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e186]:
+          - img "Svatomartinský koncert" [ref=f28e187]
+          - generic [ref=f28e188]:
+            - img [ref=f28e189]
+            - text: proběhlo
+        - paragraph [ref=f28e191]: Listopad 2025
+        - heading "Svatomartinský koncert" [level=3] [ref=f28e192]
+      - link "Podzimní serenáda proběhlo Říjen 2025 Podzimní serenáda" [ref=f28e193] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e194]:
+          - img "Podzimní serenáda" [ref=f28e195]
+          - generic [ref=f28e196]:
+            - img [ref=f28e197]
+            - text: proběhlo
+        - paragraph [ref=f28e199]: Říjen 2025
+        - heading "Podzimní serenáda" [level=3] [ref=f28e200]
+      - link "Zahajovací koncert sezóny proběhlo Září 2025 Zahajovací koncert sezóny" [ref=f28e201] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e202]:
+          - img "Zahajovací koncert sezóny" [ref=f28e203]
+          - generic [ref=f28e204]:
+            - img [ref=f28e205]
+            - text: proběhlo
+        - paragraph [ref=f28e207]: Září 2025
+        - heading "Zahajovací koncert sezóny" [level=3] [ref=f28e208]
+      - link "Letní serenáda na zámku proběhlo Červen 2025 Letní serenáda na zámku" [ref=f28e209] [cursor=pointer]:
+        - /url: galerie.html
+        - generic [ref=f28e210]:
+          - img "Letní serenáda na zámku" [ref=f28e211]
+          - generic [ref=f28e212]:
+            - img [ref=f28e213]
+            - text: proběhlo
+        - paragraph [ref=f28e215]: Červen 2025
+        - heading "Letní serenáda na zámku" [level=3] [ref=f28e216]
+  - generic [ref=f28e217]:
+    - img
+    - generic [ref=f28e218]:
+      - paragraph [ref=f28e219]: POPTÁVKA
+      - heading "Chcete Capellu Nostra na své akci?" [level=2] [ref=f28e220]
+      - paragraph [ref=f28e221]: Koncert, slavnostní událost nebo firemní akce — rádi pro vás připravíme program na míru. Ozvěte se a domluvíme termín i repertoár.
+      - link "Poptat koncert →" [ref=f28e222] [cursor=pointer]:
+        - /url: kontakt.html#poptavka
+        - text: Poptat koncert
+        - generic [ref=f28e223]: →
+  - contentinfo [ref=f28e224]:
+    - generic [ref=f28e225]:
+      - heading "Capella Nostra" [level=2] [ref=f28e226]
+      - paragraph [ref=f28e227]: Hudba, která spojuje.
+      - generic [ref=f28e228]:
+        - link "Instagram" [ref=f28e229] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=f28e230]
+        - link "Facebook" [ref=f28e232] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=f28e233]
+      - list [ref=f28e235]:
+        - listitem [ref=f28e236]:
+          - link "Domů" [ref=f28e237] [cursor=pointer]:
+            - /url: index.html
+        - listitem [ref=f28e238]:
+          - link "Koncerty" [ref=f28e239] [cursor=pointer]:
+            - /url: koncerty.html
+        - listitem [ref=f28e240]:
+          - link "O nás" [ref=f28e241] [cursor=pointer]:
+            - /url: o-nas.html
+        - listitem [ref=f28e242]:
+          - link "Členové" [ref=f28e243] [cursor=pointer]:
+            - /url: clenove.html
+        - listitem [ref=f28e244]:
+          - link "Galerie" [ref=f28e245] [cursor=pointer]:
+            - /url: galerie.html
+        - listitem [ref=f28e246]:
+          - link "Kontakt" [ref=f28e247] [cursor=pointer]:
+            - /url: kontakt.html
+      - generic [ref=f28e248]:
+        - link "info@capellanostra.cz" [ref=f28e249] [cursor=pointer]:
+          - /url: mailto:info@capellanostra.cz
+        - generic [ref=f28e250]: ·
+        - link "+420 777 123 456" [ref=f28e251] [cursor=pointer]:
+          - /url: tel:+420777123456
+      - separator [ref=f28e252]
+      - generic [ref=f28e253]:
+        - generic [ref=f28e254]: Capella Nostra © 2026
+        - link "Zásady ochrany osobních údajů" [ref=f28e256] [cursor=pointer]:
+          - /url: zasady-ochrany-osobnich-udaju.html
+        - 'link "Realizace webu: FuxaStudio" [ref=f28e257] [cursor=pointer]':
+          - /url: "#"
+          - text: "Realizace webu:"
+          - strong [ref=f28e258]: FuxaStudio
