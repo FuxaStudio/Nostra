@@ -34,10 +34,24 @@
     '</div>';
   }).join('');
 
-  /* ---- Genre / gallery teaser ---- */
-  document.getElementById('genreRow').innerHTML = CN.GENRES.map(function (g) {
-    return '<a href="galerie.html" class="genre-card"><div class="thumb"><img src="' + g.img + '" alt="' + g.label + '" loading="lazy"></div><p>' + g.label + '</p></a>';
-  }).join('');
+  /* ---- Gallery teaser (autoscroll marquee) ---- */
+  var TEASER_IDS = ['jarni', 'advent', 'serenada', 'film', 'zakulisi', 'general'];
+  var teaserAlbums = TEASER_IDS.map(function (id) {
+    return CN.ALBUMS.filter(function (a) { return a.id === id; })[0];
+  }).filter(Boolean);
+
+  function teaserCard(a, dup) {
+    return '<a href="galerie.html#album/' + a.id + '" class="genre-card"' +
+      (dup ? ' aria-hidden="true" tabindex="-1"' : '') + '>' +
+      '<div class="thumb"><img src="' + a.photos[0] + '" alt="' + a.name + '" loading="lazy"></div>' +
+      '<p>' + a.name + '</p></a>';
+  }
+
+  var teaserSet = function (dup) {
+    return teaserAlbums.map(function (a) { return teaserCard(a, dup); }).join('');
+  };
+  document.getElementById('genreRow').innerHTML =
+    '<div class="genre-track">' + teaserSet(false) + teaserSet(true) + '</div>';
 
   /* ---- Hero carousel ---- */
   var row = document.getElementById('heroRow');
