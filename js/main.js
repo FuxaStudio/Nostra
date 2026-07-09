@@ -68,6 +68,7 @@
     var SINGLES = [
       '.section-head', '.copy', '.photo-wrap',
       '.mission .head', '.venues .head', '.genre-section .head',
+      '.genre-row',
       '.inquiry .inner',
       '.members-intro .eyebrow', '.members-intro .h1', '.members-intro .lede',
       '.gallery-head .eyebrow', '.gallery-head .h1', '.gallery-head .lede',
@@ -82,7 +83,7 @@
     var GROUPS = [
       '.featured-list', '.grid-concerts', '.grid-archive', '.grid-albums',
       '.grid-videos', '.grid-photos', '.grid-musicians', '.mission-grid',
-      '.venues-grid', '.stats-strip', '.timeline-items', '.genre-row',
+      '.venues-grid', '.stats-strip', '.timeline-items',
       '.repertoire .tags', '.avatar-row', '.leaders-row'
     ].join(',');
 
