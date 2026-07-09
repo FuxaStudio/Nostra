@@ -34,7 +34,7 @@
     '</div>';
   }).join('');
 
-  /* ---- Gallery teaser (autoscroll marquee) ---- */
+  /* ---- Gallery teaser (drag-scroll marquee) ---- */
   var TEASER_IDS = ['jarni', 'advent', 'serenada', 'film', 'zakulisi', 'general'];
   var teaserAlbums = TEASER_IDS.map(function (id) {
     return CN.ALBUMS.filter(function (a) { return a.id === id; })[0];
@@ -43,15 +43,112 @@
   function teaserCard(a, dup) {
     return '<a href="galerie.html#album/' + a.id + '" class="genre-card"' +
       (dup ? ' aria-hidden="true" tabindex="-1"' : '') + '>' +
-      '<div class="thumb"><img src="' + a.photos[0] + '" alt="' + a.name + '" loading="lazy"></div>' +
+      '<div class="thumb"><img src="' + a.photos[0] + '" alt="' + a.name + '" loading="lazy" draggable="false"></div>' +
       '<p>' + a.name + '</p></a>';
   }
 
   var teaserSet = function (dup) {
     return teaserAlbums.map(function (a) { return teaserCard(a, dup); }).join('');
   };
-  document.getElementById('genreRow').innerHTML =
+  var genreRow = document.getElementById('genreRow');
+  genreRow.innerHTML =
     '<div class="genre-track">' + teaserSet(false) + teaserSet(true) + '</div>';
+
+  /* Auto-scrolling marquee that the user can also grab and fling.
+     Two identical card sets → seamless infinite wrap in both directions.
+     Flick has momentum; when it eases back to marquee speed, auto-scroll
+     resumes immediately (no pause). Hover pauses on mouse. */
+  (function initGenreMarquee() {
+    var track = genreRow.querySelector('.genre-track');
+    if (!track) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return; /* CSS shows a static wrapped grid instead */
+    }
+
+    var setWidth = 0, speed = 0;
+    function measure() {
+      setWidth = track.scrollWidth / 2;           /* width of one card set */
+      speed = setWidth ? setWidth / 48000 : 0;    /* px per ms → ~48s per loop */
+    }
+    measure();
+    window.addEventListener('load', measure);
+
+    var offset = 0;        /* px scrolled left, kept in [0, setWidth) */
+    var state = 'auto';    /* 'auto' | 'drag' | 'inertia' */
+    var hovering = false;
+    var dragId = null, startX = 0, startOffset = 0, moved = 0;
+    var lastX = 0, lastT = 0, vel = 0;   /* vel: offset-px per ms */
+
+    function wrap(v) { return setWidth ? ((v % setWidth) + setWidth) % setWidth : 0; }
+    function apply() { track.style.transform = 'translateX(' + (-offset) + 'px)'; }
+
+    window.addEventListener('resize', function () {
+      var ratio = setWidth ? offset / setWidth : 0;
+      measure();
+      offset = wrap(ratio * setWidth);
+      apply();
+    });
+
+    genreRow.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hovering = true; });
+    genreRow.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hovering = false; });
+
+    genreRow.addEventListener('pointerdown', function (e) {
+      dragId = e.pointerId;
+      try { genreRow.setPointerCapture(dragId); } catch (err) {}
+      state = 'drag';
+      genreRow.classList.add('dragging');
+      startX = e.clientX; startOffset = offset; moved = 0;
+      lastX = e.clientX; lastT = e.timeStamp; vel = 0;
+    });
+
+    genreRow.addEventListener('pointermove', function (e) {
+      if (state !== 'drag' || e.pointerId !== dragId) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > moved) moved = Math.abs(dx);
+      offset = wrap(startOffset - dx);            /* drag right → earlier cards */
+      apply();
+      var dt = e.timeStamp - lastT;
+      if (dt > 0) {
+        var inst = -(e.clientX - lastX) / dt;
+        vel = vel * 0.7 + inst * 0.3;             /* smoothed velocity */
+        lastX = e.clientX; lastT = e.timeStamp;
+      }
+    });
+
+    function endDrag(e) {
+      if (e.pointerId !== dragId) return;
+      genreRow.classList.remove('dragging');
+      try { genreRow.releasePointerCapture(dragId); } catch (err) {}
+      dragId = null;
+      state = (Math.abs(vel) > 0.02) ? 'inertia' : 'auto';
+    }
+    genreRow.addEventListener('pointerup', endDrag);
+    genreRow.addEventListener('pointercancel', endDrag);
+
+    /* A real drag must not also trigger the card's link. */
+    genreRow.addEventListener('click', function (e) {
+      if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+    genreRow.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    var prev = null;
+    function frame(now) {
+      if (prev == null) prev = now;
+      var dt = now - prev; if (dt > 48) dt = 48; prev = now;
+      if (!setWidth) measure();
+      if (setWidth) {
+        if (state === 'auto') {
+          if (!hovering) { offset = wrap(offset + speed * dt); apply(); }
+        } else if (state === 'inertia') {
+          offset = wrap(offset + vel * dt); apply();
+          vel *= Math.pow(0.94, dt / 16);         /* friction (framerate-independent) */
+          if (Math.abs(vel) <= speed) state = 'auto';   /* resume immediately, seamless */
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
 
   /* ---- Hero carousel ---- */
   var row = document.getElementById('heroRow');

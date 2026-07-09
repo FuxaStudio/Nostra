@@ -351,20 +351,19 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .genre-section .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,19,48,.72),rgba(10,19,48,.86));}
 .genre-section .head{position:relative;text-align:center;margin-bottom:48px;}
 .genre-section .head h2{color:#fff;}
-.genre-row{position:relative;overflow:hidden;padding:6px 0 18px;}
-.genre-track{display:flex;width:max-content;animation:genre-marquee 48s linear infinite;}
-.genre-row:hover .genre-track{animation-play-state:paused;}
-.genre-card{flex:0 0 300px;margin-right:26px;text-align:center;}
+.genre-row{position:relative;overflow:hidden;padding:6px 0 18px;cursor:grab;touch-action:pan-y;}
+.genre-row.dragging{cursor:grabbing;}
+.genre-track{display:flex;width:max-content;will-change:transform;}
+.genre-card{flex:0 0 300px;margin-right:26px;text-align:center;user-select:none;-webkit-user-select:none;}
+.genre-row.dragging .genre-card{cursor:grabbing;}
 .genre-card .thumb{width:300px;height:300px;border-radius:18px;overflow:hidden;margin-bottom:16px;background:#1a2550;}
 .genre-card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease;}
 .genre-card:hover .thumb img{transform:scale(1.05);}
 .genre-card p{font-size:20px;font-weight:700;color:#fff;}
 .genre-cta{position:relative;display:flex;justify-content:center;margin-top:12px;}
 
-@keyframes genre-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
 @media (prefers-reduced-motion: reduce){
-  .genre-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto;}
+  .genre-track{flex-wrap:wrap;justify-content:center;width:auto;transform:none;}
   .genre-card[aria-hidden="true"]{display:none;}
 }
 
