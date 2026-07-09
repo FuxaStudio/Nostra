@@ -1,22 +1,7 @@
 (function () {
   var CN = window.CN;
 
-  var ALBUMS = [
-    { id: 'jarni', name: 'Jarní koncert', date: '6. 7. 2026', cat: 'Koncerty', group: 'koncerty', count: 12, off: 0 },
-    { id: 'advent', name: 'Adventní koncert v katedrále', date: '15. 12. 2025', cat: 'Koncerty', group: 'koncerty', count: 9, off: 7 },
-    { id: 'serenada', name: 'Letní serenáda na zámku', date: '2. 8. 2025', cat: 'Koncerty', group: 'koncerty', count: 8, off: 13 },
-    { id: 'film', name: 'Filmová hudba LIVE', date: '19. 4. 2025', cat: 'Koncerty', group: 'koncerty', count: 11, off: 9 },
-    { id: 'novorocni', name: 'Novoroční koncert', date: '1. 1. 2025', cat: 'Koncerty', group: 'koncerty', count: 10, off: 10 },
-    { id: 'komorni', name: 'Komorní večer', date: '14. 2. 2025', cat: 'Koncerty', group: 'koncerty', count: 7, off: 6 },
-    { id: 'general', name: 'Generální zkouška: Dvořák', date: '28. 6. 2025', cat: 'Zkoušky', group: 'zkousky', count: 6, off: 16 },
-    { id: 'zakulisi', name: 'Zákulisí jarního turné', date: 'květen 2025', cat: 'Zákulisí', group: 'zkousky', count: 9, off: 18 },
-    { id: 'zkousky2526', name: 'Zkoušky na sezónu 25/26', date: 'září 2025', cat: 'Zkoušky', group: 'zkousky', count: 8, off: 4 }
-  ];
-  ALBUMS.forEach(function (a) {
-    a.cover = CN.galleryImg(a.off, 700, 525);
-    a.photos = [];
-    for (var k = 0; k < a.count; k++) a.photos.push(CN.galleryImg(a.off + k, 800, 800));
-  });
+  var ALBUMS = CN.ALBUMS;
   function albumById(id) {
     for (var i = 0; i < ALBUMS.length; i++) if (ALBUMS[i].id === id) return ALBUMS[i];
     return null;
