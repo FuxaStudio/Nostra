@@ -155,7 +155,19 @@ button{cursor:pointer;}
 /* ===================================================================
    Wave motif (decorative background on blue sections)
 =================================================================== */
-.wave-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9;}
+.wave-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9;--wave-period:700px;}
+/* Nekonečné plynutí vln doprava (bezešvá smyčka – vlna je pravidelná, posun o jednu periodu) */
+.wave-bg g{animation:waveFlow 24s linear infinite;will-change:transform;}
+@keyframes waveFlow{from{transform:translateX(calc(var(--wave-period) * -1));}to{transform:translateX(0);}}
+/* Jemné svislé vlnění jednotlivých linek, fázově posunuté */
+.wave-bg path{animation:waveBob 9s ease-in-out infinite;will-change:transform;}
+.wave-bg path:nth-child(1){animation-delay:0s;}
+.wave-bg path:nth-child(2){animation-delay:-1.08s;}
+.wave-bg path:nth-child(3){animation-delay:-2.16s;}
+.wave-bg path:nth-child(4){animation-delay:-3.24s;}
+.wave-bg path:nth-child(5){animation-delay:-4.32s;}
+.wave-bg path:nth-child(6){animation-delay:-5.4s;}
+@keyframes waveBob{0%,100%{transform:translateY(5px);}50%{transform:translateY(-5px);}}
 
 /* ===================================================================
    Footer (shared, all pages)
@@ -224,6 +236,10 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .hero-card ul{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
 .hero-card li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--navy);}
 
+/* Big photo + carousel arrows — only used in the stacked mobile hero. */
+.hero-card .hero-shot{display:none;}
+.hero-arrows{display:none;}
+
 .hero-peek{width:100%;text-align:left;cursor:pointer;font-family:inherit;background:rgba(12,16,38,.42);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:15px;display:flex;gap:13px;align-items:center;transition:background .2s ease;}
 .hero-peek:hover{background:rgba(12,16,38,.6);}
 .hero-peek img{flex:none;width:48px;height:48px;border-radius:9px;object-fit:cover;}
@@ -233,17 +249,48 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 @keyframes heroFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
 @media (max-width:860px){
-  .hero-home{min-height:auto;padding-top:120px;}
-  .hero-home .hero-row{flex-direction:column;align-items:stretch;}
-  .hero-peek p{-webkit-line-clamp:1;overflow:hidden;}
+  /* Stacked hero: navy background, contained photo, carousel arrows,
+     then centred title / date / venue / CTA (like the reference layout). */
+  .hero-home{min-height:auto;padding-top:140px;background:var(--dark-navy);}
+  .hero-home .hero-bg,
+  .hero-home .hero-scrim{display:none;}
+  .hero-home .hero-inner{padding:0 22px 46px;}
+  .hero-home .hero-row{flex-direction:column;align-items:stretch;gap:0;max-width:520px;}
+  .hero-slide.is-peek{display:none;}
+
+  .hero-card{background:transparent;box-shadow:none;border-radius:0;padding:0;animation:none;
+    display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .hero-card .progress,
+  .hero-card > .row{display:none;}
+
+  .hero-card .hero-shot{display:block;width:100%;}
+  .hero-card .hero-shot img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;
+    box-shadow:0 20px 46px rgba(0,0,0,.38);}
+
+  .hero-arrows{display:flex;justify-content:center;gap:16px;margin:24px 0 2px;}
+  .hero-arrow{width:50px;height:50px;border-radius:50%;background:#fff;color:var(--blue);
+    border:none;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);transition:transform .15s ease,background .15s ease;}
+  .hero-arrow:hover{background:#eef2ff;}
+  .hero-arrow:active{transform:scale(.93);}
+
+  .hero-card h2{color:#fff;font-size:27px;margin:18px 0 14px;}
+  .hero-card ul{align-items:center;gap:10px;margin-bottom:24px;}
+  .hero-card li{justify-content:center;color:rgba(255,255,255,.85);font-size:15px;}
+  .hero-card li svg{color:#8ea2ff !important;}
+  .hero-card .btn-blue{background:#fff;color:var(--blue);}
+  .hero-card .btn-blue:hover{background:#eef2ff;}
 }
 
 .section-pad{padding:100px 0 110px;}
 .section-pad--tight{padding:88px 0;}
 
 .featured{background:var(--cream);padding:100px 0 110px;}
-.featured-grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;}
-.featured-photo{flex:1 1 520px;position:sticky;top:100px;height:663px;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;background:#cdd3da;}
+/* Explicitní dvousloupcová mřížka — na rozdíl od flex-wrap se nezalomí
+   při implicitní šířce, ale přepne na jeden sloupec až v media query níže.
+   Díky tomu se breakpoint zalomení a odepnutí sticky obrázku shodují. */
+.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;}
+.featured-photo{position:sticky;top:100px;height:663px;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;background:#cdd3da;}
 .featured-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .featured-photo .panel{position:relative;margin:20px;background:#fff;border-radius:14px;padding:22px 24px;max-width:430px;}
 .featured-photo .panel h3{font-size:24px;font-weight:700;color:var(--navy);line-height:1.12;margin-bottom:8px;}
@@ -251,7 +298,7 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .featured-photo .panel ul{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
 .featured-photo .panel li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--navy-gray);font-weight:600;}
 
-.featured-list{flex:1 1 520px;display:flex;flex-direction:column;gap:14px;}
+.featured-list{display:flex;flex-direction:column;gap:14px;}
 .event-row{position:relative;background:#fff;border-radius:14px;padding:16px;display:flex;gap:18px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.05);}
 .event-row img{flex:none;width:104px;height:104px;border-radius:10px;object-fit:cover;background:#e7e4dd;}
 .event-row .body{flex:1;min-width:0;padding-right:10px;}
@@ -260,8 +307,23 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .event-row ul{display:flex;flex-wrap:wrap;gap:8px 22px;}
 .event-row li{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--navy-gray);}
 
-@media (max-width:860px){
-  .featured-photo{position:static;height:380px;}
+@media (max-width:1040px){
+  /* Jeden sloupec: velký obrázek nad seznamem koncertů. */
+  .featured-grid{grid-template-columns:1fr;}
+  /* position:relative (ne static) — jinak se absolutní obrázek uvnitř
+     (inset:0) umístí vůči viewportu a překryje celou stránku.
+     Zrušíme sticky i pevnou výšku: obrázek už není postranní sloupec,
+     takže by připnutý přejížděl přes karty. Výška roste podle panelu
+     (min-height), aby se tlačítko "Detail koncertu" neořízlo. */
+  .featured-photo{position:relative;top:auto;height:auto;min-height:400px;}
+}
+
+/* Úzké telefony — karta koncertu se z vodorovné přeskládá na svislou
+   (obrázek nahoře, text pod ním), jinak se text mačká vedle náhledu. */
+@media (max-width:480px){
+  .event-row{flex-direction:column;align-items:stretch;gap:14px;}
+  .event-row img{width:100%;height:170px;}
+  .event-row .body{padding-right:0;}
 }
 
 .season{position:relative;background:var(--blue);padding:104px 0;overflow:hidden;}
@@ -687,6 +749,7 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
   .hero-card{animation:none;}
   .hero-home .hero-bg{transition:none;}
   .btn span,.nav-cta span,.ticket-pill span{transition:none;}
+  .wave-bg path,.wave-bg g{animation:none;}
 }
 
 /* ===================================================================

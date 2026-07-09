@@ -54,10 +54,15 @@
     row.innerHTML = '';
     slides.forEach(function (s, i) {
       var wrap = document.createElement('div');
-      wrap.className = 'hero-slide';
+      wrap.className = 'hero-slide' + (i === active ? '' : ' is-peek');
       if (i === active) {
         wrap.innerHTML =
           '<div class="hero-card">' +
+            '<div class="hero-shot"><img src="' + s.imgWide + '" alt="' + s.title + '"></div>' +
+            '<div class="hero-arrows">' +
+              '<button type="button" class="hero-arrow" data-dir="prev" aria-label="Předchozí koncert"><svg class="icon" width="20" height="20"><use href="#i-chevron-left"></use></svg></button>' +
+              '<button type="button" class="hero-arrow" data-dir="next" aria-label="Další koncert"><svg class="icon" width="20" height="20"><use href="#i-chevron-right"></use></svg></button>' +
+            '</div>' +
             '<div class="progress"><span></span></div>' +
             '<div class="row"><img src="' + s.thumb + '" alt="' + s.title + '"><p>' + s.desc + '</p></div>' +
             '<h2>' + s.title + '</h2>' +
@@ -67,6 +72,10 @@
             '</ul>' +
             '<a href="koncerty.html" class="btn btn-blue">Detail koncertu <span>→</span></a>' +
           '</div>';
+        var prev = wrap.querySelector('.hero-arrow[data-dir="prev"]');
+        var next = wrap.querySelector('.hero-arrow[data-dir="next"]');
+        prev.addEventListener('click', function () { go((active - 1 + slides.length) % slides.length); });
+        next.addEventListener('click', function () { go((active + 1) % slides.length); });
       } else {
         var btn = document.createElement('button');
         btn.type = 'button';
