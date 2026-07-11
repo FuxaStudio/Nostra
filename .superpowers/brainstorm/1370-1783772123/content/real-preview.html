@@ -1,0 +1,49 @@
+<style>
+  .rp{--blue:#003FFF;--blue-hover:#0030c4;--navy:#111a44;--navy-gray:#3a4366;--muted:#5b6a9a;--cream:#f7f5f2;
+    font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;border-radius:16px;overflow:hidden;
+    box-shadow:0 20px 50px rgba(17,26,68,.14);}
+  /* --- přesně nasazené styly (zkopírované ze style.css) --- */
+  .rp .members-teaser{background:var(--cream);padding:64px 44px;}
+  .rp .section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:38px;}
+  .rp .section-head > div{max-width:560px;}
+  .rp .section-head p{font-size:18px;line-height:1.6;color:var(--navy-gray);margin-top:14px;}
+  .rp .eyebrow{font-size:14px;font-weight:700;color:var(--blue);letter-spacing:.16em;margin:0 0 16px;}
+  .rp .h2{font-size:clamp(28px,3.2vw,44px);color:var(--navy);font-weight:800;margin:0;line-height:1.05;letter-spacing:-.01em;}
+  .rp .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;line-height:1;
+    padding:13px 24px;border-radius:40px;border:none;white-space:nowrap;}
+  .rp .btn-blue{background:var(--blue);color:#fff;}
+  .rp .members-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;}
+  .rp .m-card{margin:0;}
+  .rp .m-photo{aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:#e3ddd0;box-shadow:0 6px 18px rgba(17,26,68,.10);}
+  .rp .m-photo img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease;}
+  .rp .m-card:hover .m-photo img{transform:scale(1.05);}
+  .rp .m-card figcaption{display:flex;flex-direction:column;margin-top:12px;}
+  .rp .m-name{font-size:14.5px;font-weight:800;color:var(--navy);line-height:1.2;}
+  .rp .m-role{font-size:12.5px;font-weight:600;color:var(--muted);margin-top:3px;}
+</style>
+
+<h2>Nasazený výsledek na o-nas.html</h2>
+<p class="subtitle">Tohle je přesně to HTML + CSS, které jsem právě uložil do souborů (dlaždice tu jsou už „odhalené", na webu naskáčou při odscrollování). Desktopová podoba:</p>
+
+<div class="rp">
+  <section class="members-teaser">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">ČLENOVÉ</p>
+          <h2 class="h2" style="margin-bottom:14px;">Lidé za hudbou</h2>
+          <p>Za jménem souboru je čtyřiadvacet muzikantů — pár z nich hned poznáte.</p>
+        </div>
+        <a href="#" class="btn btn-blue" style="white-space:nowrap;">Poznat členy <span>→</span></a>
+      </div>
+      <div class="members-strip">
+        <figure class="m-card"><div class="m-photo"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Eliška Marešová"></div><figcaption><span class="m-name">Eliška Marešová</span><span class="m-role">Koncertní mistryně</span></figcaption></figure>
+        <figure class="m-card"><div class="m-photo"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Jakub Svoboda"></div><figcaption><span class="m-name">Jakub Svoboda</span><span class="m-role">1. housle</span></figcaption></figure>
+        <figure class="m-card"><div class="m-photo"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Veronika Krejčí"></div><figcaption><span class="m-name">Veronika Krejčí</span><span class="m-role">Viola</span></figcaption></figure>
+        <figure class="m-card"><div class="m-photo"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Lukáš Fiala"></div><figcaption><span class="m-name">Lukáš Fiala</span><span class="m-role">Violoncello</span></figcaption></figure>
+        <figure class="m-card"><div class="m-photo"><img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Lucie Veselá"></div><figcaption><span class="m-name">Lucie Veselá</span><span class="m-role">Hoboj</span></figcaption></figure>
+        <figure class="m-card"><div class="m-photo"><img src="https://images.unsplash.com/photo-1626913634123-2457b43792c1?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Jan Šťastný"></div><figcaption><span class="m-name">Jan Šťastný</span><span class="m-role">Lesní roh</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+</div>

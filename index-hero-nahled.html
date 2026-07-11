@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Náhled hero — Capella Nostra + text</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ==== NÁHLEDOVÉ STYLY (jen tento soubor, nejdou do produkce) ==== */
+
+.hp-toolbar{background:#0a1330;color:#fff;padding:12px 22px;
+  display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;}
+.hp-toolbar b{font-size:14px;letter-spacing:.02em;}
+.hp-toolbar span{font-size:13px;color:rgba(255,255,255,.72);}
+.hp-toolbar code{color:#9fb1ff;}
+
+/* Značkový text v horní části hera + čitelnostní scrim nahoře */
+.hp-topscrim{position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,
+    rgba(6,10,32,.74) 0%,
+    rgba(6,10,32,.52) 22%,
+    rgba(6,10,32,.36) 40%,
+    rgba(6,10,32,.14) 56%,
+    rgba(6,10,32,0) 72%);}
+.hp-brand{position:absolute;left:0;right:0;top:0;z-index:6;pointer-events:none;
+  padding:calc(var(--nav-pull) + 120px) 36px 0;}
+.hp-brand .wrap{max-width:calc(var(--container) - 80px);margin:0 auto;text-align:center;}
+.hp-name{font-size:clamp(42px,6vw,78px);line-height:1;font-weight:800;
+  letter-spacing:-.02em;color:#fff;margin:0 0 14px;text-shadow:0 2px 26px rgba(0,0,0,.6);}
+.hp-sub{font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:#fff;
+  max-width:42ch;margin:0 auto;text-shadow:0 1px 16px rgba(0,0,0,.66);}
+
+@media (max-width:860px){
+  .hero-home{flex-direction:column;align-items:stretch;}
+  .hp-topscrim{display:none;}
+  .hp-brand{position:static;padding:0 22px;text-align:center;margin-bottom:14px;}
+  .hp-brand .wrap{max-width:520px;margin:0 auto;}
+  .hp-name{font-size:33px;}
+  .hp-sub{font-size:15.5px;margin:0 auto;}
+}
+</style>
+</head>
+<body>
+<script src="js/icons.js"></script>
+
+<div class="hp-toolbar">
+  <b>NÁHLED HERO</b>
+  <span>Current hero beze změny + „Capella Nostra“ a menší text. Nezasahuje do <code>index.html</code>. Nejlépe posuzovat na šířce desktopu.</span>
+</div>
+
+<header class="site-header home-header">
+  <div class="bar">
+    <a href="index.html" class="brand" aria-label="Capella Nostra — domů">
+      <img src="assets/logo.png" alt="Capella Nostra logo" width="46" height="46">
+      <span>Capella Nostra</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="is-active">Domů</a>
+      <a href="koncerty.html">Koncerty</a>
+      <a href="o-nas.html">O nás</a>
+      <a href="clenove.html">Členové</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="kontakt.html#poptavka" class="nav-cta">Poptat koncert <span>→</span></a>
+      <button class="lang-toggle" type="button" aria-label="Jazyk / Language">
+        <svg class="flag-cs" width="22" height="15" viewBox="0 0 60 30"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg>
+        <span class="lang-label">CZ</span>
+      </button>
+    </nav>
+    <button class="nav-toggle" type="button" aria-label="Otevřít menu">
+      <svg class="icon" width="18" height="18"><use href="#i-menu"></use></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero-home" id="hero">
+  <img class="hero-bg" id="heroBg0" alt="">
+  <img class="hero-bg" id="heroBg1" alt="">
+  <img class="hero-bg" id="heroBg2" alt="">
+  <div class="hero-scrim"></div>
+  <div class="hp-topscrim"></div>
+
+  <div class="hp-brand">
+    <div class="wrap">
+      <h1 class="hp-name">Capella Nostra</h1>
+      <p class="hp-sub">Hudba, která spojuje tradici, vášeň a společné zážitky.</p>
+    </div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-row" id="heroRow"></div>
+  </div>
+</section>
+
+<div style="max-width:var(--container);margin:40px auto 80px;padding:0 40px;color:var(--muted);font-size:14px;line-height:1.6;">
+  <strong style="color:var(--navy);">Poznámka:</strong> „Capella Nostra“ je teď velký nadpis (H1) a pod ním menší tagline. Znění, velikost i umístění (vlevo / na střed) se dá doladit. Koncertní carousel dole je 1:1 jako na ostrém webu.
+</div>
+
+<script src="js/data.js"></script>
+<script>
+/* Kopie hero-carouselu z js/home.js (jen pro tento náhled). */
+(function () {
+  var CN = window.CN, CONCERTS = CN.CONCERTS;
+  var row = document.getElementById('heroRow');
+  var bgs = [document.getElementById('heroBg0'), document.getElementById('heroBg1'), document.getElementById('heroBg2')];
+  var slides = CONCERTS.slice(0, 3);
+  var active = 0, timer = null;
+
+  function renderHero() {
+    bgs.forEach(function (img, i) {
+      img.src = slides[i].imgWide;
+      img.style.opacity = i === active ? '1' : '0';
+    });
+    row.innerHTML = '';
+    slides.forEach(function (s, i) {
+      var wrap = document.createElement('div');
+      wrap.className = 'hero-slide' + (i === active ? '' : ' is-peek');
+      if (i === active) {
+        wrap.innerHTML =
+          '<div class="hero-card">' +
+            '<div class="hero-shot"><img src="' + s.imgWide + '" alt="' + s.title + '"></div>' +
+            '<div class="hero-arrows">' +
+              '<button type="button" class="hero-arrow" data-dir="prev" aria-label="Předchozí koncert"><svg class="icon" width="20" height="20"><use href="#i-chevron-left"></use></svg></button>' +
+              '<button type="button" class="hero-arrow" data-dir="next" aria-label="Další koncert"><svg class="icon" width="20" height="20"><use href="#i-chevron-right"></use></svg></button>' +
+            '</div>' +
+            '<div class="progress"><span></span></div>' +
+            '<div class="row"><img src="' + s.thumb + '" alt="' + s.title + '"><p>' + s.desc + '</p></div>' +
+            '<h2>' + s.title + '</h2>' +
+            '<ul>' +
+              '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + s.dateFull + '</li>' +
+              '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-pin"></use></svg>' + s.venue + '</li>' +
+            '</ul>' +
+            '<a href="koncerty.html" class="btn btn-blue">Detail koncertu <span>→</span></a>' +
+          '</div>';
+        var prev = wrap.querySelector('.hero-arrow[data-dir="prev"]');
+        var next = wrap.querySelector('.hero-arrow[data-dir="next"]');
+        prev.addEventListener('click', function () { go((active - 1 + slides.length) % slides.length); });
+        next.addEventListener('click', function () { go((active + 1) % slides.length); });
+      } else {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'hero-peek';
+        btn.innerHTML = '<img src="' + s.thumb + '" alt="' + s.title + '"><p>' + s.desc + '</p>';
+        btn.addEventListener('click', function () { go(i); });
+        wrap.appendChild(btn);
+      }
+      row.appendChild(wrap);
+    });
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function () {
+      active = (active + 1) % slides.length;
+      renderHero();
+    }, 7000);
+  }
+
+  function go(i) { active = i; renderHero(); startTimer(); }
+
+  renderHero();
+  startTimer();
+})();
+</script>
+</body>
+</html>

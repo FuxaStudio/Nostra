@@ -1,0 +1,152 @@
+<style>
+  .cn-wrap{--blue:#003FFF;--navy:#111a44;--navy-gray:#3a4366;--muted:#5b6a9a;--cream:#f7f5f2;
+    font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;}
+  .cn-opt{margin:0 0 30px;border:1px solid rgba(120,134,168,.28);border-radius:16px;overflow:hidden;
+    background:#fff;cursor:pointer;transition:box-shadow .15s,border-color .15s,transform .12s;}
+  .cn-opt:hover{border-color:var(--blue);box-shadow:0 14px 34px rgba(17,26,68,.14);}
+  .cn-opt.selected{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 14px 34px rgba(17,26,68,.16);}
+  .cn-head{display:flex;gap:14px;align-items:flex-start;padding:16px 20px;border-bottom:1px solid #eceef4;}
+  .cn-badge{flex:none;background:var(--navy);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;
+    padding:6px 10px;border-radius:8px;margin-top:2px;}
+  .cn-name{margin:0;font-size:18px;color:var(--navy);font-weight:800;}
+  .cn-desc{margin:3px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted);}
+  .cn-view{background:var(--cream);padding:38px 40px;}
+  .cn-inner{max-width:980px;margin:0 auto;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--blue);margin:0 0 12px;}
+  .cn-title{font-size:34px;line-height:1.05;font-weight:800;color:var(--navy);margin:0 0 12px;letter-spacing:-.01em;}
+  .cn-lead{font-size:15px;line-height:1.6;color:var(--navy-gray);margin:0;max-width:340px;}
+  .cn-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;
+    font-size:14px;padding:12px 20px;border-radius:999px;margin-top:20px;}
+  .cn-btn .ar{transition:transform .15s;}
+  /* A — sekce */
+  .A-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .A-list{display:flex;flex-direction:column;}
+  .A-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+    padding:16px 0;border-top:1px solid #dfe2ee;}
+  .A-row:last-child{border-bottom:1px solid #dfe2ee;}
+  .A-sec{font-size:19px;font-weight:800;color:var(--navy);}
+  .A-instr{display:block;font-size:12.5px;font-weight:500;color:var(--muted);margin-top:3px;letter-spacing:.01em;}
+  .A-num{font-size:30px;font-weight:800;color:var(--blue);line-height:1;font-variant-numeric:tabular-nums;}
+  /* B — mozaika */
+  .B-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;gap:24px;}
+  .B-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:118px;gap:12px;}
+  .B-t{border-radius:14px;overflow:hidden;position:relative;background:#e3ddd0;}
+  .B-t img{width:100%;height:100%;object-fit:cover;}
+  .B-t.big{grid-column:span 2;grid-row:span 2;}
+  .B-lab{position:absolute;left:0;right:0;bottom:0;padding:14px 12px 10px;color:#fff;
+    background:linear-gradient(180deg,transparent,rgba(10,15,40,.72));font-size:12px;font-weight:700;}
+  .B-lab small{display:block;font-weight:500;opacity:.8;font-size:10.5px;margin-top:1px;}
+  .B-more{background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:2px;}
+  .B-more b{font-size:24px;font-weight:800;}
+  .B-more span{font-size:11px;opacity:.8;}
+  /* C — osobnosti */
+  .C-head{text-align:center;max-width:520px;margin:0 auto 30px;}
+  .C-head .cn-lead{margin:0 auto;}
+  .C-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .C-card{background:#fff;border:1px solid #e7eaf4;border-radius:16px;overflow:hidden;
+    box-shadow:0 1px 3px rgba(17,26,68,.07);}
+  .C-photo{height:190px;background:#e3ddd0;overflow:hidden;}
+  .C-photo img{width:100%;height:100%;object-fit:cover;}
+  .C-body{padding:16px 18px 18px;}
+  .C-body h4{margin:0;font-size:17px;font-weight:800;color:var(--navy);}
+  .C-body p{margin:4px 0 0;font-size:13px;color:var(--muted);font-weight:600;}
+  .C-foot{text-align:center;margin-top:26px;}
+  .C-foot .note{font-size:14px;color:var(--navy-gray);margin:0 0 4px;}
+  @media(max-width:720px){.A-grid{grid-template-columns:1fr;gap:28px;}.B-grid{grid-auto-rows:96px;}
+    .C-cards{grid-template-columns:1fr;}.cn-view{padding:26px 20px;}.cn-title{font-size:27px;}}
+</style>
+
+<div class="cn-wrap">
+  <h2>Sekce „Členové" na o‑nás — tři směry</h2>
+  <p class="subtitle">Každý je náhled celé sekce v reálných barvách a s reálnými daty souboru (24 muzikantů). Klikni na ten, který ti sedí — nebo mi napiš do terminálu, co upravit. Jde o layout, ne finální fotky.</p>
+
+  <!-- ================= SMĚR A ================= -->
+  <div class="cn-opt option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="cn-head">
+      <span class="cn-badge">SMĚR A</span>
+      <div>
+        <h3 class="cn-name">Sekce orchestru — editorial, střídmý</h3>
+        <p class="cn-desc">Žádná řada koleček. Vpravo elegantní „program" rozdělení souboru podle nástrojových rodin s počty. Klidné, typograficky silné, prestižní. Nejmíň fotek.</p>
+      </div>
+    </div>
+    <div class="cn-view">
+      <div class="cn-inner">
+        <div class="A-grid">
+          <div>
+            <p class="eyebrow">ČLENOVÉ</p>
+            <h3 class="cn-title">Lidé za hudbou</h3>
+            <p class="cn-lead">Za jménem souboru je čtyřiadvacet muzikantů — od prvních houslí po tympány.</p>
+            <span class="cn-btn">Poznat členy <span class="ar">→</span></span>
+          </div>
+          <div class="A-list">
+            <div class="A-row"><div><span class="A-sec">Smyčce</span><span class="A-instr">housle · violy · violoncella · kontrabas</span></div><span class="A-num">14</span></div>
+            <div class="A-row"><div><span class="A-sec">Dřevěné dechové</span><span class="A-instr">flétna · hoboj · klarinet · fagot</span></div><span class="A-num">4</span></div>
+            <div class="A-row"><div><span class="A-sec">Žesťové</span><span class="A-instr">lesní roh · trubka · pozoun</span></div><span class="A-num">3</span></div>
+            <div class="A-row"><div><span class="A-sec">Harfa · klavír · bicí</span><span class="A-instr">harfa · klavír & cembalo · tympány</span></div><span class="A-num">3</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SMĚR B ================= -->
+  <div class="cn-opt option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="cn-head">
+      <span class="cn-badge">SMĚR B</span>
+      <div>
+        <h3 class="cn-name">Portrétní mozaika — fotky napřed</h3>
+        <p class="cn-desc">Místo koleček „stěna souboru": bento z hranatých portrétů různých velikostí. Živé, lidské, plné tváří. Na webu na tuto stránku úplně nový prvek (jinde mozaiku nemáš).</p>
+      </div>
+    </div>
+    <div class="cn-view">
+      <div class="cn-inner">
+        <div class="B-top">
+          <div>
+            <p class="eyebrow">ČLENOVÉ</p>
+            <h3 class="cn-title">Lidé za hudbou</h3>
+          </div>
+          <span class="cn-btn" style="margin-top:0;">Poznat všech 24 <span class="ar">→</span></span>
+        </div>
+        <div class="B-grid">
+          <div class="B-t big"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=460&h=460&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="B-lab">Eliška Marešová<small>Koncertní mistryně</small></span></div>
+          <div class="B-t"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=260&h=260&fit=crop&crop=faces&q=78&auto=format" alt=""></div>
+          <div class="B-t"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=260&h=260&fit=crop&crop=faces&q=78&auto=format" alt=""></div>
+          <div class="B-t"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=260&h=260&fit=crop&crop=faces&q=78&auto=format" alt=""></div>
+          <div class="B-t"><img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=260&h=260&fit=crop&crop=faces&q=78&auto=format" alt=""></div>
+          <div class="B-t"><img src="https://images.unsplash.com/photo-1586351011807-b79c8ef43057?w=260&h=260&fit=crop&crop=faces&q=78&auto=format" alt=""></div>
+          <div class="B-t B-more"><b>+19</b><span>dalších</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SMĚR C ================= -->
+  <div class="cn-opt option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="cn-head">
+      <span class="cn-badge">SMĚR C</span>
+      <div>
+        <h3 class="cn-name">Klíčové osobnosti — lidé se jmény</h3>
+        <p class="cn-desc">Vyzvedne pár tváří, které dávají smysl: dirigent, koncertní mistryně, sbormistr — se jmény a rolemi. Nejdůvěryhodnější a nejosobnější, zbytek souboru „+ 21 dalších" → proklik.</p>
+      </div>
+    </div>
+    <div class="cn-view">
+      <div class="cn-inner">
+        <div class="C-head">
+          <p class="eyebrow">ČLENOVÉ</p>
+          <h3 class="cn-title">Lidé za hudbou</h3>
+          <p class="cn-lead">Za jménem souboru je čtyřiadvacet muzikantů. Tři z nich udávají tón.</p>
+        </div>
+        <div class="C-cards">
+          <div class="C-card"><div class="C-photo"><img src="https://images.unsplash.com/photo-1653071999858-b54e6aa411f2?w=420&h=380&fit=crop&crop=faces&q=78&auto=format" alt=""></div><div class="C-body"><h4>Jan Kohout</h4><p>Dirigent & umělecký vedoucí</p></div></div>
+          <div class="C-card"><div class="C-photo"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=420&h=380&fit=crop&crop=faces&q=78&auto=format" alt=""></div><div class="C-body"><h4>Eliška Marešová</h4><p>Koncertní mistryně · 1. housle</p></div></div>
+          <div class="C-card"><div class="C-photo"><img src="https://images.unsplash.com/photo-1484972759836-b93f9ef2b293?w=420&h=380&fit=crop&crop=faces&q=78&auto=format" alt=""></div><div class="C-body"><h4>Martin Beneš</h4><p>Sbormistr & asistent dirigenta</p></div></div>
+        </div>
+        <div class="C-foot">
+          <p class="note">…a dalších 21 muzikantů od houslí po tympány.</p>
+          <span class="cn-btn">Poznat celý soubor <span class="ar">→</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

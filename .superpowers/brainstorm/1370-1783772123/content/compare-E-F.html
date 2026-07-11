@@ -1,0 +1,151 @@
+<style>
+  .cn-wrap{--blue:#003FFF;--navy:#111a44;--dark-navy:#0a1330;--navy-gray:#3a4366;--muted:#5b6a9a;--cream:#f7f5f2;
+    font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--blue);margin:0 0 8px;}
+  .cn-title{font-size:22px;line-height:1.05;font-weight:800;color:var(--navy);margin:0 0 8px;letter-spacing:-.01em;}
+  .cn-lead{font-size:12.5px;line-height:1.5;color:var(--navy-gray);margin:0;}
+  .cn-btn{display:inline-flex;align-items:center;gap:6px;background:var(--blue);color:#fff;font-weight:700;
+    font-size:12px;padding:9px 15px;border-radius:999px;}
+
+  /* srovnávací tabulka */
+  .tbl{width:100%;border-collapse:collapse;margin:0 0 34px;background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 1px 3px rgba(17,26,68,.08);border:1px solid #eceef4;}
+  .tbl th,.tbl td{padding:13px 16px;text-align:left;font-size:13.5px;border-bottom:1px solid #f0f1f6;vertical-align:top;}
+  .tbl th{background:#f7f8fc;font-size:12px;letter-spacing:.02em;color:var(--navy);font-weight:800;}
+  .tbl td:first-child{font-weight:700;color:var(--navy-gray);width:200px;}
+  .tbl .win{color:#1a7f4b;font-weight:700;}
+  .tbl tr:last-child td{border-bottom:none;}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  .col{border:1px solid rgba(120,134,168,.28);border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;
+    transition:box-shadow .15s,border-color .15s;}
+  .col:hover{border-color:var(--blue);box-shadow:0 14px 34px rgba(17,26,68,.14);}
+  .col.selected{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 14px 34px rgba(17,26,68,.16);}
+  .col-h{display:flex;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid #eceef4;}
+  .col-badge{flex:none;background:var(--navy);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;padding:6px 10px;border-radius:8px;}
+  .col-nm{font-size:15px;font-weight:800;color:var(--navy);}
+  .stage{background:var(--cream);padding:22px;}
+  .stage h5{margin:0 0 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+
+  /* E desktop */
+  .E-top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:16px;}
+  .E-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .E-ph{height:96px;border-radius:11px;overflow:hidden;background:#e3ddd0;box-shadow:0 5px 14px rgba(17,26,68,.1);}
+  .E-ph img{width:100%;height:100%;object-fit:cover;}
+  .E-nm{font-size:11px;font-weight:800;color:var(--navy);margin:7px 0 0;line-height:1.15;}
+  .E-ro{font-size:10px;color:var(--muted);font-weight:600;margin:1px 0 0;}
+  .E-more{display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--navy);color:#fff;height:96px;}
+  .E-more b{font-size:17px;font-weight:800;}.E-more span{font-size:9.5px;opacity:.8;}
+
+  /* F desktop koláž */
+  .F-collage{position:relative;height:250px;}
+  .F-c{position:absolute;border-radius:12px;overflow:hidden;box-shadow:0 12px 28px rgba(17,26,68,.18);
+    background:#e3ddd0;border:3px solid #fff;}
+  .F-c img{width:100%;height:100%;object-fit:cover;}
+  .F-c .tag{position:absolute;left:0;right:0;bottom:0;padding:8px 8px 6px;color:#fff;font-size:9.5px;font-weight:700;
+    background:linear-gradient(180deg,transparent,rgba(10,15,40,.72));line-height:1.15;}
+  .F-c1{width:120px;height:150px;left:0;top:20px;z-index:3;}
+  .F-c2{width:96px;height:120px;left:112px;top:0;z-index:2;}
+  .F-c3{width:104px;height:128px;left:96px;top:118px;z-index:4;}
+  .F-c4{width:84px;height:104px;left:210px;top:96px;z-index:1;}
+  .F-head{position:absolute;right:0;top:70px;width:150px;}
+
+  /* telefon */
+  .phones{display:flex;gap:18px;align-items:flex-start;margin-top:20px;flex-wrap:wrap;}
+  .phone{width:186px;flex:none;}
+  .phone .scr{border:7px solid #0a1330;border-radius:26px;overflow:hidden;background:var(--cream);height:340px;
+    box-shadow:0 14px 30px rgba(17,26,68,.2);}
+  .phone .pad{padding:16px 12px;}
+  .phone .cap{text-align:center;font-size:11px;color:var(--muted);margin-top:8px;font-weight:600;}
+  .pe-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .pe-ph{height:78px;border-radius:9px;overflow:hidden;background:#e3ddd0;}
+  .pe-ph img{width:100%;height:100%;object-fit:cover;}
+  .pe-nm{font-size:9px;font-weight:800;color:var(--navy);margin:4px 0 0;}
+  .pe-more{display:flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;height:78px;border-radius:9px;font-weight:800;font-size:13px;}
+  .cn-title.sm{font-size:17px;margin-bottom:4px;}
+
+  @media(max-width:760px){.cols{grid-template-columns:1fr;}.tbl td:first-child{width:auto;}}
+</style>
+
+<div class="cn-wrap">
+  <h2>E vs F — jak se rozhodnout</h2>
+  <p class="subtitle">Oba jsou dobré a oba „lidé se jmény". Liší se hlavně osobitostí a chováním na mobilu. Níže srovnání + náhled desktopu i telefonu u každého. Klikni na ten, do kterého jdeme.</p>
+
+  <table class="tbl">
+    <tr><th>Kritérium</th><th>E — Portrétní páska</th><th>F — Kolážová sestava</th></tr>
+    <tr><td>Charakter</td><td>Čistý, řádný, přehledný</td><td>Výrazný, editorial, „ruční"</td></tr>
+    <tr><td>Soulad s tónem webu<br><span style="font-weight:400;font-size:11.5px;color:var(--muted)">(jemné & profesionální)</span></td><td class="win">Sedí přímo — klid a řád ✓</td><td>Odvážnější, o něco méně „klidné"</td></tr>
+    <tr><td>Mobil do 390 px</td><td class="win">Drží se, jen se zúží na 2 sloupce ✓</td><td>Koláž se musí narovnat do gridu (efekt zmizí)</td></tr>
+    <tr><td>Kolik lidí ukáže</td><td>5 pojmenovaných + počet</td><td>4 pojmenovaní + počet</td></tr>
+    <tr><td>Riziko / údržba</td><td class="win">Nízké ✓</td><td>Střední (2 layouty, křehčí)</td></tr>
+    <tr><td>Kdy zvolit</td><td>Chci jistotu, čistotu, snadné rozšíření</td><td>Chci, aby to zaujalo a bylo jiné</td></tr>
+  </table>
+
+  <div class="cols">
+    <!-- ===== E ===== -->
+    <div class="col option" data-choice="e" onclick="toggleSelect(this)">
+      <div class="col-h"><span class="col-badge">E</span><span class="col-nm">Portrétní páska se jmény</span></div>
+      <div class="stage">
+        <h5>Desktop</h5>
+        <div class="E-top">
+          <div><p class="eyebrow">ČLENOVÉ</p><h3 class="cn-title sm">Lidé za hudbou</h3></div>
+          <span class="cn-btn">Poznat členy →</span>
+        </div>
+        <div class="E-strip">
+          <div><div class="E-ph"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=240&h=240&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Eliška Marešová</p><p class="E-ro">Koncertní mistryně</p></div>
+          <div><div class="E-ph"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=240&h=240&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Jakub Svoboda</p><p class="E-ro">1. housle</p></div>
+          <div><div class="E-ph"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=240&h=240&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Veronika Krejčí</p><p class="E-ro">Viola</p></div>
+          <div><div class="E-ph E-more"><b>+21</b><span>dalších</span></div></div>
+        </div>
+        <div class="phones">
+          <div class="phone">
+            <div class="scr"><div class="pad">
+              <p class="eyebrow" style="text-align:center">ČLENOVÉ</p>
+              <h3 class="cn-title sm" style="text-align:center">Lidé za hudbou</h3>
+              <div class="pe-grid">
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Eliška M.</p></div>
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Jakub S.</p></div>
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Veronika K.</p></div>
+                <div><div class="pe-more">+21</div></div>
+              </div>
+            </div></div>
+            <p class="cap">Mobil: úhledný 2‑sloupcový grid ✓</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== F ===== -->
+    <div class="col option" data-choice="f" onclick="toggleSelect(this)">
+      <div class="col-h"><span class="col-badge">F</span><span class="col-nm">Kolážová sestava</span></div>
+      <div class="stage">
+        <h5>Desktop</h5>
+        <div class="F-collage">
+          <div class="F-head">
+            <p class="eyebrow">ČLENOVÉ</p><h3 class="cn-title sm">Lidé za hudbou</h3>
+            <span class="cn-btn" style="margin-top:6px;">Poznat členy →</span>
+          </div>
+          <div class="F-c F-c1"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=260&h=320&fit=crop&crop=faces&q=80&auto=format" alt=""><span class="tag">Eliška Marešová</span></div>
+          <div class="F-c F-c2"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=220&h=280&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="tag">Jakub Svoboda</span></div>
+          <div class="F-c F-c3"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=220&h=280&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="tag">Lukáš Fiala</span></div>
+          <div class="F-c F-c4"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=200&h=240&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="tag">Veronika K.</span></div>
+        </div>
+        <div class="phones">
+          <div class="phone">
+            <div class="scr"><div class="pad">
+              <p class="eyebrow" style="text-align:center">ČLENOVÉ</p>
+              <h3 class="cn-title sm" style="text-align:center">Lidé za hudbou</h3>
+              <div class="pe-grid">
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Eliška M.</p></div>
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Jakub S.</p></div>
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Lukáš F.</p></div>
+                <div><div class="pe-ph"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=200&h=200&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="pe-nm">Veronika K.</p></div>
+              </div>
+            </div></div>
+            <p class="cap">Mobil: koláž se narovná → běžný grid</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

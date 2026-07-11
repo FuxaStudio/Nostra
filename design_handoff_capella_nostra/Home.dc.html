@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;color:#111a44;background:#fff;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3,p{margin:0;}
+@keyframes heroProgress{from{width:0%;}to{width:100%;}}
+@keyframes heroFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</helmet>
+<div style="position:relative;background:#fff;overflow-x:clip;">
+
+<header style="position:sticky;top:0;z-index:60;padding:18px 22px 0;">
+  <div style="max-width:1860px;margin:0 auto;background:#003FFF;border-radius:48px;display:flex;align-items:center;gap:30px;padding:13px 22px 13px 26px;box-shadow:0 6px 30px rgba(0,20,90,.18);">
+    <a href="#" aria-label="Homepage" style="display:flex;align-items:center;gap:14px;flex:none;">
+      
+        
+        
+        
+        
+      
+      <img src="./logo-nostra-mqy3vj7u.png" alt="Capella Nostra logo" style="width:46px;height:46px;object-fit:cover;border-radius:8px;flex:none;"><span style="color: #fff; font-weight: 800; font-size: 13px; line-height: 1.02; letter-spacing: .02em">Capella Nostra</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:26px;margin-left:auto;">
+      <a href="#" style="color:#fff;font-size:15px;font-weight:700;white-space:nowrap;background:rgba(255,255,255,.18);padding:8px 15px;border-radius:30px;">Domů</a>
+      <a href="Koncerty.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Koncerty</a><a href="O%20n%C3%A1s.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">O nás</a>
+      <a href="Členové.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Členové</a>
+      
+      <a href="Galerie.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Galerie</a>
+      <a href="Kontakt.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Kontakt</a>
+      <a href="Kontakt.dc.html#poptavka" style="margin-left:6px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:11px 22px;border-radius:40px;white-space:nowrap;">Poptat koncert <span style="font-size:15px;">→</span></a><button onClick="{{ toggleLang }}" aria-label="Language" style="margin-left:4px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;font-family:inherit;font-weight:600;font-size:14px;padding:8px 13px;border-radius:40px;cursor:pointer;white-space:nowrap;"><sc-if value="{{ isCs }}" hint-placeholder-val="{{ true }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius: 2px; display: block; flex: none; width: 23px; height: 19px"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg></sc-if><sc-if value="{{ isEn }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg></sc-if><span>{{ langLabel }}</span></button>
+      
+    </nav>
+  </div>
+</header>
+
+<section data-screen-label="Hero" style="position:relative;margin-top:-94px;min-height:760px;display:flex;align-items:flex-end;overflow:hidden;background:#0a1330;">
+  <sc-for list="{{ heroBg }}" as="b">
+    <img src="{{ b.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.1s ease;opacity:{{ b.opacity }};">
+  </sc-for>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,40,0) 45%,rgba(8,12,40,.5) 100%);pointer-events:none;"></div>
+  <div style="position:relative;width:100%;padding:0 36px 34px;">
+    <div style="max-width:1820px;margin:0 auto;display:flex;align-items:flex-end;gap:18px;">
+      <sc-for list="{{ heroSlides }}" as="s">
+        <div style="flex:1;min-width:0;">
+          <sc-if value="{{ s.isActive }}" hint-placeholder-val="{{ true }}">
+            <div style="width:100%;background:#fff;border-radius:18px;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.24);">
+              <div style="height:4px;border-radius:4px;background:#d6def9;overflow:hidden;margin-bottom:16px;"><div style="height:100%;background:#003FFF;border-radius:4px;animation:heroProgress 7s linear forwards;"></div></div>
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <img alt="{{ s.title }}" style="flex:none;width:52px;height:52px;border-radius:10px;object-fit:cover;">
+                <p style="font-size:13.5px;line-height:1.34;color:#3a4366;">{{ s.subline }}</p>
+              </div>
+              <h2 style="font-size:23px;font-weight:700;color:#111a44;margin:16px 0 13px;line-height:1.12;">{{ s.title }}</h2>
+              <ul style="display:flex;flex-direction:column;gap:7px;margin-bottom:18px;">
+                <li style="display:flex;align-items:center;gap:9px;font-size:14px;color:#111a44;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" style="flex:none;"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>{{ s.date }}</li>
+                <li style="display:flex;align-items:center;gap:9px;font-size:14px;color:#111a44;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" style="flex:none;"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>{{ s.location }}</li>
+              </ul>
+              <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#003FFF;color:#fff;font-weight:600;font-size:15px;padding:13px 22px;border-radius:40px;">Detail koncertu<span style="font-size: 15px;">→</span></a>
+            </div>
+          </sc-if>
+          <sc-if value="{{ s.isPeek }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ s.activate }}" style="width:100%;text-align:left;cursor:pointer;font-family:inherit;background:rgba(12,16,38,.42);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:15px;display:flex;gap:13px;align-items:center;">
+              <img src="{{ s.thumb }}" alt="{{ s.title }}" style="flex:none;width:48px;height:48px;border-radius:9px;object-fit:cover;">
+              <p style="font-size:13.5px;line-height:1.34;color:#fff;font-weight:600;margin:0;">{{ s.subline }}</p>
+            </button>
+          </sc-if>
+        </div>
+      </sc-for>
+      
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Featured events" style="background:#f7f5f2;padding:100px 0 110px;">
+  <div style="max-width:1300px;margin:0 auto;padding:0 40px;">
+    <p style="font-size:15px;font-weight:700;color:#111a44;margin-bottom:18px;">Nadcházející koncerty</p>
+    <h2 style="font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.01em;line-height:1.08;color:#111a44;margin-bottom:52px;">Přijďte si poslechnout Capellu Nostra naživo</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;">
+      <div style="flex:1 1 520px;position:sticky;top:100px;height:663px;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;background:#cdd3da;">
+        <img src="https://www.rpo.co.uk/uploads/images/Event-headers/RPCO/_square_m/180151/2026-08-02-BST-Hyde-Park-RPCO-credit-Ellie-Keopke.webp?v=1779898508" alt="Myleene Klass on stage with the Orchestra at BST Hyde Park" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        
+        <div style="position:relative;margin:20px;background:#fff;border-radius:14px;padding:22px 24px;max-width:430px;">
+          <h3 style="font-size:24px;font-weight:700;color:#111a44;line-height:1.12;margin-bottom:8px;">Jarní koncert Capella Nostra</h3>
+          <p style="font-size:15px;font-weight:600;color:#3a4366;margin-bottom:16px;">Večer klasické hudby s díly českých i světových skladatelů.</p>
+          <ul style="display:flex;flex-direction:column;gap:7px;margin-bottom:18px;">
+            <li style="display:flex;align-items:center;gap:9px;font-size:14px;color:#3a4366;font-weight:600;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" style="flex:none;"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>Po 6. července 2026</li>
+            <li style="display:flex;align-items:center;gap:9px;font-size:14px;color:#3a4366;font-weight:600;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" style="flex:none;"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Lukavice</li>
+          </ul>
+          <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#003FFF;color:#fff;font-weight:600;font-size:15px;padding:12px 22px;border-radius:40px;">Detail koncertu →</a>
+        </div>
+      </div>
+      <div style="flex:1 1 520px;display:flex;flex-direction:column;gap:14px;">
+        <sc-for list="{{ events }}" as="item" hint-placeholder-count="6">
+          <div style="position:relative;background:#fff;border-radius:14px;padding:16px;display:flex;gap:18px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.05);">
+            <img src="{{ item.img }}" alt="{{ item.title }}" style="flex:none;width:104px;height:104px;border-radius:10px;object-fit:cover;background:#e7e4dd;">
+            <div style="flex:1;min-width:0;padding-right:34px;">
+              <h3 style="font-size:18px;font-weight:700;color:#003FFF;line-height:1.18;margin-bottom:6px;">{{ item.title }}</h3>
+              <sc-if value="{{ item.subline }}" hint-placeholder-val="{{ true }}"><p style="font-size:14px;font-weight:600;color:#111a44;line-height:1.34;margin-bottom:10px;">{{ item.subline }}</p></sc-if>
+              <ul style="display:flex;flex-wrap:wrap;gap:8px 22px;">
+                <li style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#3a4366;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" style="flex:none;"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>{{ item.date }}</li>
+                <li style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#3a4366;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" style="flex:none;"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>{{ item.location }}</li>
+              </ul>
+            </div>
+            
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:14px;margin-top:46px;">
+      <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#003FFF;color:#fff;font-weight:600;font-size:15px;padding:13px 24px;border-radius:40px;">Všechny koncerty →</a>
+      
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Season" style="position:relative;background:#003FFF;padding:104px 0;overflow:hidden;">
+  <svg viewBox="0 0 1200 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9;"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2">
+    <path d="M-60,86 C260,16 520,176 780,96 S1160,28 1320,108"></path>
+    <path d="M-60,108 C260,38 520,198 780,118 S1160,50 1320,130"></path>
+    <path d="M-60,130 C260,60 520,220 780,140 S1160,72 1320,152"></path>
+    <path d="M-60,152 C260,82 520,242 780,162 S1160,94 1320,174"></path>
+    <path d="M-60,174 C260,104 520,264 780,184 S1160,116 1320,196"></path>
+    <path d="M-60,196 C260,126 520,286 780,206 S1160,138 1320,218"></path>
+  </g></svg>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 40px;">
+    <div style="display:flex;flex-wrap:wrap;flex-direction:row-reverse;align-items:center;justify-content:space-between;gap:56px;">
+      <div style="flex:1 1 440px;max-width:480px;">
+        <p style="font-size:15px;font-weight:700;color:#fff;margin-bottom:16px;">O nás</p>
+        <h2 style="font-size:clamp(30px,3.2vw,44px);font-weight:700;letter-spacing:-.01em;line-height:1.1;color:#fff;margin-bottom:22px;">Hudba, která spojuje tradici, vášeň a společné zážitky</h2>
+        <p style="font-size:18px;line-height:1.55;color:#e7ecff;margin-bottom:30px;">Capella Nostra je komorní soubor sdružující hudebníky se společnou vášní pro kvalitní interpretaci klasické hudby. Naším cílem je přinášet posluchačům jedinečné koncertní zážitky, ať už v historických prostorách, koncertních sálech nebo na kulturních akcích.</p>
+        <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:14px 24px;border-radius:40px;"><span>Více o souboru →</span></a>
+      </div>
+      <div style="flex:1 1 480px;display:flex;justify-content:center;">
+        <div style="width:100%;max-width:540px;aspect-ratio:1;border-radius:50%;overflow:hidden;"><img src="https://www.rpo.co.uk/uploads/images/Series-pages/2026-27/_square_m/127781/RPO-x-VP-Season-VP-Image-c-Frances-Marshall.webp?v=1776418512%2C0.5105%2C0.3287" alt="Vasily Petrenko conducting the Orchestra" style="width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Recommendations" style="background:#f7f5f2;padding:104px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:56px;">
+      <div style="flex:1 1 420px;max-width:520px;">
+        <p style="font-size:15px;font-weight:700;color:#111a44;margin-bottom:16px;">Členové souboru</p>
+        <h2 style="font-size:clamp(30px,3.2vw,44px);font-weight:700;letter-spacing:-.01em;line-height:1.1;color:#111a44;margin-bottom:22px;">Hudebníci, kteří dávají hudbě život</h2>
+        <p style="font-size:18px;line-height:1.55;color:#3a4366;margin-bottom:30px;">Každý člen Capelly Nostry přispívá svými zkušenostmi, talentem a vášní k jedinečnému zvuku našeho souboru. Společně vytváříme koncerty plné emocí a nezapomenutelných okamžiků.</p>
+        <div style="display:flex;gap:14px;">
+          <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#003FFF;color:#fff;font-weight:600;font-size:15px;padding:13px 24px;border-radius:40px;">Poznat členy <span>→</span></a>
+          
+        </div>
+      </div>
+      <div style="flex:1 1 460px;display:flex;justify-content:center;">
+        <div style="position:relative;width:100%;max-width:470px;aspect-ratio:1;">
+          <div style="position:absolute;inset:0;border-radius:50%;border:2px solid #003FFF;"></div>
+          <div style="position:absolute;inset:20px;border-radius:50%;border:2px solid #003FFF;"></div>
+          <div style="position:absolute;inset:42px;border-radius:50%;overflow:hidden;"><img src="https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/400/rpo-perform-mahler-at-rah.webp?v=1781624695" alt="RPO perform Mahler at Royal Albert Hall" style="width:100%;height:100%;object-fit:cover;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Choose a genre" style="position:relative;background:#0a1330;padding:104px 0;overflow:hidden;">
+  <img src="https://www.rpo.co.uk/uploads/images/Venues/Cadogan-Hall/_landscape_l/424/scheherzade-tim-lutton.webp?v=1781623288%2C0.4641%2C0.3999" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,19,48,.72),rgba(10,19,48,.86));"></div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 40px;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p style="font-size:15px;font-weight:700;color:#fff;margin-bottom:16px;">Galerie</p>
+      <h2 style="font-size:clamp(30px,3.2vw,44px);font-weight:700;letter-spacing:-.01em;line-height:1.12;color:#fff;">Zachycené okamžiky z našich koncertů</h2>
+    </div>
+    <div style="display:flex;gap:26px;overflow-x:auto;padding:6px 2px 18px;justify-content:center;">
+      <sc-for list="{{ genres }}" as="g" hint-placeholder-count="6">
+        <a href="#" style="flex:0 0 300px;text-align:center;">
+          <div style="width:300px;height:300px;border-radius:18px;overflow:hidden;margin-bottom:16px;background:#1a2550;"><img src="{{ g.img }}" alt="{{ g.label }}" style="width:100%;height:100%;object-fit:cover;"></div>
+          <p style="font-size:20px;font-weight:700;color:#fff;">{{ g.label }}</p>
+        </a>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:12px;">
+      <a href="./Galerie.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:13px 24px;border-radius:40px;">Celá galerie <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+
+
+<section data-screen-label="The Orchestra" style="position: relative; background: #003FFF; padding: 104px 0; overflow: hidden; display: none">
+  <svg viewBox="0 0 1200 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9;"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2">
+    <path d="M-60,210 C260,150 540,250 800,170 S1160,90 1320,150"></path>
+    <path d="M-60,188 C260,128 540,228 800,148 S1160,68 1320,128"></path>
+    <path d="M-60,166 C260,106 540,206 800,126 S1160,46 1320,106"></path>
+    <path d="M-60,144 C260,84 540,184 800,104 S1160,24 1320,84"></path>
+    <path d="M-60,122 C260,62 540,162 800,82 S1160,2 1320,62"></path>
+    <path d="M-60,100 C260,40 540,140 800,60 S1160,-20 1320,40"></path>
+  </g></svg>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 40px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:56px;">
+      <div style="flex:1 1 420px;max-width:480px;">
+        <p style="font-size:15px;font-weight:700;color:#fff;margin-bottom:16px;">The Orchestra</p>
+        <h2 style="font-size:clamp(30px,3.2vw,44px);font-weight:700;letter-spacing:-.01em;line-height:1.1;color:#fff;margin-bottom:22px;">The world’s most versatile symphony orchestra</h2>
+        <p style="font-size:18px;line-height:1.55;color:#e7ecff;margin-bottom:30px;">At the Royal Philharmonic Orchestra (RPO), we believe music should be a part of everyone’s life. It’s our mission to make that happen by bringing the thrill of live orchestral performance to as many people as possible, wherever and whoever they are.</p>
+        <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:14px 24px;border-radius:40px;">About The Orchestra <span>→</span></a>
+      </div>
+      <div style="flex:1 1 480px;display:flex;justify-content:center;">
+        <div style="position:relative;width:100%;max-width:540px;aspect-ratio:1;border-radius:50%;overflow:hidden;">
+          <img src="https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_m/118221/2026-04-09-Cadogan-Hall-harp-credit-Frances-Marshall.webp?v=1775928668%2C0.4407%2C0.638" alt="A close-up of someone playing the harp at Cadogan Hall" style="width:100%;height:100%;object-fit:cover;">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section data-screen-label="Support" style="background: #f7f5f2; padding: 104px 0; display: none">
+  <div style="max-width:1300px;margin:0 auto;padding:0 40px;">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:46px;">
+      <div style="flex:1 1 420px;">
+        <p style="font-size:15px;font-weight:700;color:#111a44;margin-bottom:16px;">Support RPO</p>
+        <h2 style="font-size:clamp(28px,3vw,42px);font-weight:700;letter-spacing:-.01em;line-height:1.1;color:#111a44;">Help us share music with every community</h2>
+      </div>
+      <a href="#" style="display:inline-flex;align-items:center;gap:9px;background:#003FFF;color:#fff;font-weight:600;font-size:15px;padding:13px 24px;border-radius:40px;">Ways to support RPO <span>→</span></a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+      <sc-for list="{{ supportCards }}" as="c" hint-placeholder-count="4">
+        <a href="#" style="display:block;">
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:3/2;margin-bottom:16px;background:#e7e4dd;"><img src="{{ c.img }}" alt="{{ c.title }}" style="width:100%;height:100%;object-fit:cover;"></div>
+          <h3 style="font-size:20px;font-weight:700;color:#111a44;line-height:1.16;margin-bottom:6px;">{{ c.title }}</h3>
+          <sc-if value="{{ c.text }}" hint-placeholder-val="{{ true }}"><p style="font-size:15px;color:#3a4366;line-height:1.4;">{{ c.text }}</p></sc-if>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+
+
+<footer data-screen-label="Patička" style="background:#003FFF;color:#fff;padding:56px 0 36px;">
+  <div style="max-width:1180px;margin:0 auto;padding:74px 44px 28px;text-align:center;">
+    <h2 style="font-size:clamp(46px,8.4vw,132px);font-weight:800;letter-spacing:-.025em;line-height:.9;margin:0 0 18px;">Capella Nostra</h2>
+    <p style="font-size:clamp(17px,2vw,22px);color:#cdd7ff;margin:0 auto 30px;max-width:520px;">Hudba, která spojuje.</p>
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:38px;">
+      <a href="#" aria-label="Instagram" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"></circle></svg></a>
+      <a href="#" aria-label="Facebook" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.5V5.5c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2H8.2V14h2.5v7h2.8z"></path></svg></a>
+    </div>
+    <ul style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin:0 0 36px;list-style:none;padding:0;">
+      <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Domů</a></li>
+      <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Koncerty</a></li>
+      <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">O nás</a></li>
+      <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Členové</a></li>
+      <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Galerie</a></li>
+      <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Kontakt</a></li>
+    </ul>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px;font-size:14.5px;color:#e7ecff;margin-bottom:34px;">
+      <a href="mailto:info@capellanostra.cz" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">info@capellanostra.cz</a>
+      <span aria-hidden="true" style="color:rgba(255,255,255,.4);">·</span>
+      <a href="tel:+420777123456" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">+420 777 123 456</a>
+    </div>
+    <hr style="border:none;border-top:1px solid rgba(255,255,255,.22);margin:0 0 22px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:#cdd7ff;flex-wrap:wrap;">
+      <span style="color:#fff;font-weight:600;">Capella Nostra © 2026</span>
+      <div style="display:flex;gap:22px;">
+        <a href="#" style="color:#cdd7ff;text-decoration:underline;text-underline-offset:3px;">Zásady ochrany osobních údajů</a>
+      </div>
+      <a href="#" style="color:#cdd7ff;white-space:nowrap;">Realizace webu: <strong style="color:#fff;text-decoration:underline;text-underline-offset:3px;">FuxaStudio</strong></a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#003FFF"></rect><g fill="none" stroke="#fff" stroke-width="2.4"><circle cx="50" cy="50" r="24"></circle><circle cx="50" cy="50" r="17"></circle><circle cx="50" cy="50" r="10"></circle></g><circle cx="50" cy="50" r="3" fill="#fff"></circle></svg>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 0, lang: 'cs' };
+  componentDidMount() { this._startTimer(); }
+  componentWillUnmount() { clearInterval(this._t); }
+  _startTimer() { clearInterval(this._t); this._t = setInterval(() => this.setState(s => ({ active: (s.active + 1) % 3 })), 7000); }
+  _go(i) { this.setState({ active: i }); this._startTimer(); }
+  _toggleLang() { this.setState(s => ({ lang: s.lang === 'cs' ? 'en' : 'cs' })); }
+  renderVals() {
+    const active = this.state.active;
+    const lang = this.state.lang;
+    const hero = [
+      { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", thumb: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=300&fit=crop", bg: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&h=800&fit=crop" },
+      { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", thumb: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=300&fit=crop", bg: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=1200&h=800&fit=crop" },
+      { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", thumb: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop", bg: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=800&fit=crop" }
+    ];
+    return {
+      lang: lang, isCs: lang === 'cs', isEn: lang === 'en', langLabel: lang === 'cs' ? 'CZ' : 'EN', toggleLang: () => this._toggleLang(),
+      heroBg: hero.map((h, i) => ({ img: h.bg, opacity: i === active ? 1 : 0 })),
+      heroSlides: hero.map((h, i) => Object.assign({}, h, { isActive: i === active, isPeek: i !== active, activate: () => this._go(i) })),
+      events: [
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/RPCO/_thumb_l/158852/What-the-World-Needs-Now-Burt-Bacharach-3000x2000.webp?v=1779116695" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Artist-images/Emilia-Hoving/_thumb_l/56474/Emilia-Hoving.webp?v=1781698932" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/Principal-residencies-and-partner-venues/PV-26-27/_thumb_l/56484/ABBAphonic.webp?v=1781862561" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/Misc-engagements/_thumb_l/86776/2021-09-04_Leeds-Castle.webp?v=1776969084" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/RPCO/_thumb_l/127766/2026-07-11-Shanay-Holmes-Cadogan-Hall-RPCO-3000x200.webp?v=1776418441%2C0.3868%2C0.2234" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/London-OP-26-27/RAH-26-27/_thumb_l/103700/RPO-at-80-3000x2000.webp?v=1780320640" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/London-OP-26-27/CH-26-27/_thumb_l/160381/Mozart-Revealed-3000x2000-2.webp?v=1780320418" },
+        { title: "Jarní koncert Capella Nostra", subline: "Večer klasické hudby s díly českých i světových skladatelů.", date: "Po 6. července 2026", location: "Lukavice", img: "https://www.rpo.co.uk/uploads/images/Event-headers/London-OP-26-27/RAH-26-27/_thumb_l/56436/Symphonic-Soul-Listing-2000-x-2000-px.webp?v=1780320657" }
+      ],
+      genres: [
+        { label: "Chamber Music", img: "https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_s/118510/26-03-12-Brass-Quintet-RPO-Gala-Andy-Paradise.webp?v=1775930695" },
+        { label: "Choral", img: "https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/118499/2025-10-21-Mahler-Bernstein-Royal-Albert-Hall-Philharmonia-Chorus-Andy-Paradise.webp?v=1775930432" },
+        { label: "Experimental", img: "https://www.rpo.co.uk/uploads/images/Venues/Royal-Festival-Hall/_square_s/52763/RPO-and-Vasily-Petrenko-at-RFH-Multitudes-27-April-2025-credit-Mark-Allan-9.webp?v=1775931495" },
+        { label: "Film & Video Music", img: "https://www.rpo.co.uk/uploads/images/RPCO/_square_s/105238/RPCO-Interstellar-in-concert-Royal-Albert-Hall-April-2026-c-Suzy-Red-5.webp?v=1775930749%2C0.6539%2C0.4069" },
+        { label: "Musicals & Big Band", img: "https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/52737/Music-of-Bond-RAH-26-11-25-c-Danny-Kaan-45.webp?v=1775930973%2C0.4399%2C0.2927" },
+        { label: "Orchestral Classics", img: "https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_s/53679/Joe-Hisaishi-RPO-Royal-Albert-Hall-24-Nov-24-c-Tim-Lutton-44.webp?v=1775931422" }
+      ],
+      supportCards: [
+        { title: "How your support helps", text: "Join a group of dedicated supporters", img: "https://www.rpo.co.uk/uploads/images/RPO-Resound/Relaxed-Performances/_landscape_3_x_2_m/119609/2026-02-07-Relaxed-Performance-Brent-breakout-session-credit-Jasmine-Waterfield.webp?v=1776078088" },
+        { title: "Supporters' Circle", text: "", img: "https://www.rpo.co.uk/uploads/images/Receptions-Galas/Patron-reception-Southbank-2026/_landscape_3_x_2_m/51372/2026-02-03-Chapel-Down-reception-Southbank-Centre-c-Jasmine-Waterfield-37.webp?v=1775924288" },
+        { title: "Leave a legacy", text: "Enrich the lives of future generations.", img: "https://www.rpo.co.uk/uploads/images/RPO-Resound/Relaxed-Performances/_landscape_3_x_2_m/119576/2026-02-07-Relaxed-Performance-Brent-credit-Jasmine-Waterfield.webp?v=1776077066%2C0.5357%2C0.5545" },
+        { title: "Corporate support", text: "", img: "https://www.rpo.co.uk/uploads/images/Orchestra-general/_landscape_3_x_2_m/119569/2023-03-30-Royal-Albert-Hall-box-credit-Andy-Paradise.webp?v=1776076574%2C0.5821%2C0.6502" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

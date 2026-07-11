@@ -1,0 +1,159 @@
+<style>
+  .cn-wrap{--blue:#003FFF;--navy:#111a44;--dark-navy:#0a1330;--navy-gray:#3a4366;--muted:#5b6a9a;--cream:#f7f5f2;
+    font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;}
+  .cn-opt{margin:0 0 30px;border:1px solid rgba(120,134,168,.28);border-radius:16px;overflow:hidden;
+    background:#fff;cursor:pointer;transition:box-shadow .15s,border-color .15s;}
+  .cn-opt:hover{border-color:var(--blue);box-shadow:0 14px 34px rgba(17,26,68,.14);}
+  .cn-opt.selected{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 14px 34px rgba(17,26,68,.16);}
+  .cn-head{display:flex;gap:14px;align-items:flex-start;padding:16px 20px;border-bottom:1px solid #eceef4;}
+  .cn-badge{flex:none;background:var(--navy);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;
+    padding:6px 10px;border-radius:8px;margin-top:2px;}
+  .cn-name{margin:0;font-size:18px;color:var(--navy);font-weight:800;}
+  .cn-desc{margin:3px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted);}
+  .cn-view{background:var(--cream);padding:38px 40px;}
+  .cn-inner{max-width:1000px;margin:0 auto;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--blue);margin:0 0 12px;}
+  .eyebrow.on-dark{color:#8ea2ff;}
+  .cn-title{font-size:33px;line-height:1.05;font-weight:800;color:var(--navy);margin:0 0 12px;letter-spacing:-.01em;}
+  .cn-lead{font-size:15px;line-height:1.6;color:var(--navy-gray);margin:0;}
+  .cn-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;
+    font-size:14px;padding:12px 20px;border-radius:999px;}
+  .cn-btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);}
+
+  /* D — kinematický split */
+  .D-frame{display:grid;grid-template-columns:1.02fr .98fr;min-height:420px;border-radius:18px;overflow:hidden;
+    box-shadow:0 20px 50px rgba(17,26,68,.16);}
+  .D-shot{position:relative;background:var(--dark-navy);}
+  .D-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .D-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,12,40,.15),rgba(8,12,40,.5));}
+  .D-cap{position:absolute;left:22px;bottom:20px;z-index:2;color:#fff;font-size:13px;font-weight:700;}
+  .D-cap small{display:block;font-weight:500;opacity:.82;font-size:11.5px;margin-top:2px;}
+  .D-panel{background:var(--dark-navy);color:#fff;padding:46px 44px;display:flex;flex-direction:column;justify-content:center;}
+  .D-panel .cn-title{color:#fff;}
+  .D-quote{font-size:20px;line-height:1.4;font-weight:600;font-style:italic;color:#fff;margin:0 0 8px;}
+  .D-cite{font-size:12.5px;font-weight:600;color:#8ea2ff;letter-spacing:.02em;margin:0 0 26px;}
+  .D-panel .cn-lead{color:rgba(255,255,255,.72);margin-bottom:26px;}
+
+  /* E — portrétní páska se jmény */
+  .E-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:24px;}
+  .E-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  .E-cell{text-align:left;}
+  .E-ph{height:150px;border-radius:14px;overflow:hidden;background:#e3ddd0;box-shadow:0 6px 18px rgba(17,26,68,.1);}
+  .E-ph img{width:100%;height:100%;object-fit:cover;}
+  .E-nm{font-size:13px;font-weight:800;color:var(--navy);margin:10px 0 0;line-height:1.2;}
+  .E-ro{font-size:11.5px;color:var(--muted);font-weight:600;margin:2px 0 0;}
+  .E-more{display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--navy);color:#fff;height:150px;}
+  .E-more b{font-size:22px;font-weight:800;}
+  .E-more span{font-size:11px;opacity:.8;}
+
+  /* F — kolážová sestava */
+  .F-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .F-collage{position:relative;height:400px;}
+  .F-c{position:absolute;border-radius:16px;overflow:hidden;box-shadow:0 16px 36px rgba(17,26,68,.18);background:#e3ddd0;border:4px solid #fff;}
+  .F-c img{width:100%;height:100%;object-fit:cover;}
+  .F-c .tag{position:absolute;left:0;right:0;bottom:0;padding:12px 12px 9px;color:#fff;font-size:11.5px;font-weight:700;
+    background:linear-gradient(180deg,transparent,rgba(10,15,40,.72));}
+  .F-c .tag small{display:block;font-weight:500;opacity:.82;font-size:10px;}
+  .F-c1{width:190px;height:240px;left:0;top:24px;z-index:3;}
+  .F-c2{width:150px;height:190px;left:180px;top:0;z-index:2;}
+  .F-c3{width:160px;height:200px;left:150px;top:180px;z-index:4;}
+  .F-c4{width:130px;height:160px;left:330px;top:150px;z-index:1;}
+  @media(max-width:760px){
+    .D-frame{grid-template-columns:1fr;}.D-shot{min-height:220px;}.D-panel{padding:30px 24px;}
+    .E-strip{grid-template-columns:repeat(3,1fr);}.F-grid{grid-template-columns:1fr;}
+    .F-collage{height:330px;}.cn-view{padding:26px 20px;}.cn-title{font-size:26px;}
+  }
+</style>
+
+<div class="cn-wrap">
+  <h2>Směr „lidé se jmény" — tři nové varianty</h2>
+  <p class="subtitle">Vycházím z toho, co ti sedělo na C (reálné tváře + jména), ale pryč od klasické trojice karet. Klikni na favorita nebo napiš do terminálu, co doladit. Fotky i citát jsou placeholder.</p>
+
+  <!-- ================= SMĚR D ================= -->
+  <div class="cn-opt option" data-choice="d" onclick="toggleSelect(this)">
+    <div class="cn-head">
+      <span class="cn-badge">SMĚR D</span>
+      <div>
+        <h3 class="cn-name">Kinematický split — jedna osobnost + slovo</h3>
+        <p class="cn-desc">Velký portrét vlevo, tmavý navy panel vpravo s titulkem, krátkou větou a citátem dirigenta. Prestižní, filmové, jedna silná tvář místo galerie. (Pozor: split už na stránce jednou je u „Kde a co hrajeme".)</p>
+      </div>
+    </div>
+    <div class="cn-view">
+      <div class="cn-inner">
+        <div class="D-frame">
+          <div class="D-shot">
+            <img src="https://images.unsplash.com/photo-1653071999858-b54e6aa411f2?w=640&h=760&fit=crop&crop=faces&q=80&auto=format" alt="">
+            <span class="D-cap">Jan Kohout<small>Dirigent & umělecký vedoucí</small></span>
+          </div>
+          <div class="D-panel">
+            <p class="eyebrow on-dark">ČLENOVÉ</p>
+            <p class="D-quote">„Komorní orchestr je čtyřiadvacet lidí, kteří dýchají v jednom tempu."</p>
+            <p class="D-cite">— Jan Kohout, dirigent</p>
+            <p class="cn-lead">Poznejte muzikanty, kteří stojí za každým koncertem — od koncertní mistryně po poslední pult.</p>
+            <div><span class="cn-btn ghost">Poznat všech 24 členů →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SMĚR E ================= -->
+  <div class="cn-opt option" data-choice="e" onclick="toggleSelect(this)">
+    <div class="cn-head">
+      <span class="cn-badge">SMĚR E</span>
+      <div>
+        <h3 class="cn-name">Portrétní páska se jmény — víc tváří</h3>
+        <p class="cn-desc">Hranaté portréty v jedné řadě, každý s jménem a nástrojem pod fotkou, na konci „+18 dalších" → proklik. Víc lidí než C, všichni pojmenovaní, čitelný a živý pás. Na desktopu se může jemně posouvat.</p>
+      </div>
+    </div>
+    <div class="cn-view">
+      <div class="cn-inner">
+        <div class="E-top">
+          <div>
+            <p class="eyebrow">ČLENOVÉ</p>
+            <h3 class="cn-title">Lidé za hudbou</h3>
+            <p class="cn-lead">Čtyřiadvacet muzikantů — pár z nich hned poznáte.</p>
+          </div>
+          <span class="cn-btn">Poznat členy →</span>
+        </div>
+        <div class="E-strip">
+          <div class="E-cell"><div class="E-ph"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=280&h=300&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Eliška Marešová</p><p class="E-ro">Koncertní mistryně</p></div>
+          <div class="E-cell"><div class="E-ph"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=280&h=300&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Jakub Svoboda</p><p class="E-ro">1. housle</p></div>
+          <div class="E-cell"><div class="E-ph"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=280&h=300&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Veronika Krejčí</p><p class="E-ro">Viola</p></div>
+          <div class="E-cell"><div class="E-ph"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=280&h=300&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Lukáš Fiala</p><p class="E-ro">Violoncello</p></div>
+          <div class="E-cell"><div class="E-ph"><img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=280&h=300&fit=crop&crop=faces&q=78&auto=format" alt=""></div><p class="E-nm">Lucie Veselá</p><p class="E-ro">Hoboj</p></div>
+          <div class="E-cell"><div class="E-ph E-more"><b>+19</b><span>dalších</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SMĚR F ================= -->
+  <div class="cn-opt option" data-choice="f" onclick="toggleSelect(this)">
+    <div class="cn-head">
+      <span class="cn-badge">SMĚR F</span>
+      <div>
+        <h3 class="cn-name">Kolážová sestava — vrstvené portréty</h3>
+        <p class="cn-desc">Několik portrétů v překrývané koláži různých velikostí (jmenovky na fotkách), text v protějším sloupci. Designově nejvýraznější, „ne‑šablonovité", pořád lidské a se jmény.</p>
+      </div>
+    </div>
+    <div class="cn-view">
+      <div class="cn-inner">
+        <div class="F-grid">
+          <div>
+            <p class="eyebrow">ČLENOVÉ</p>
+            <h3 class="cn-title">Lidé za hudbou</h3>
+            <p class="cn-lead" style="max-width:360px;">Za jménem souboru je čtyřiadvacet muzikantů. Sešli se z různých koutů, aby hráli jako jeden nástroj.</p>
+            <div style="margin-top:22px;"><span class="cn-btn">Poznat členy →</span></div>
+          </div>
+          <div class="F-collage">
+            <div class="F-c F-c1"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=380&h=480&fit=crop&crop=faces&q=80&auto=format" alt=""><span class="tag">Eliška Marešová<small>Koncertní mistryně</small></span></div>
+            <div class="F-c F-c2"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=300&h=380&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="tag">Jakub Svoboda<small>1. housle</small></span></div>
+            <div class="F-c F-c3"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=320&h=400&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="tag">Lukáš Fiala<small>Violoncello</small></span></div>
+            <div class="F-c F-c4"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=260&h=320&fit=crop&crop=faces&q=78&auto=format" alt=""><span class="tag">Veronika Krejčí<small>Viola</small></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

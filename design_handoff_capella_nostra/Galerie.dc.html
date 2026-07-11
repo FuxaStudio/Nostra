@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Schibsted Grotesk',system-ui,-apple-system,sans-serif;color:#111a44;background:#fff;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+ul{margin:0;padding:0;list-style:none;}
+h1,h2,h3,p{margin:0;}
+@keyframes lbIn{from{opacity:0;}to{opacity:1;}}
+@keyframes lbPop{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:scale(1);}}
+::-webkit-scrollbar{height:8px;width:8px;}
+::-webkit-scrollbar-thumb{background:rgba(120,134,168,.4);border-radius:8px;}
+</style>
+</helmet>
+
+<div style="position:relative;background:#fff;overflow-x:clip;min-height:100vh;">
+
+  <header style="position:sticky;top:0;z-index:60;padding:18px 22px 0;background:#fff;">
+    <div style="max-width:1320px;margin:0 auto;background:#003FFF;border-radius:48px;display:flex;align-items:center;gap:30px;padding:13px 22px 13px 26px;box-shadow:0 6px 30px rgba(0,20,90,.18);">
+      <a href="Home%20-%20Royal%20Philharmonic%20Orchestra.dc.html" onClick="{{ goGallery }}" aria-label="Capella Nostra — domů" style="display:flex;align-items:center;gap:14px;flex:none;">
+        <img src="./logo-nostra-mqy3vj7u.png" alt="Capella Nostra logo" style="width:46px;height:46px;object-fit:cover;border-radius:8px;flex:none;">
+        <span style="color:#fff;font-weight:800;font-size:13px;line-height:1.02;letter-spacing:.02em;">Capella Nostra</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:26px;margin-left:auto;">
+        <a href="Home%20-%20Royal%20Philharmonic%20Orchestra.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Domů</a>
+        <a href="Koncerty.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Koncerty</a>
+        <a href="#" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">O nás</a>
+        <a href="Členové.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Členové</a>
+        <a href="#" onClick="{{ goGallery }}" style="color:#fff;font-size:15px;font-weight:700;white-space:nowrap;background:rgba(255,255,255,.18);padding:8px 15px;border-radius:30px;">Galerie</a>
+        <a href="Kontakt.dc.html" style="color:#fff;font-size:15px;font-weight:500;white-space:nowrap;">Kontakt</a>
+        <a href="Kontakt.dc.html#poptavka" style="margin-left:6px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#003FFF;font-weight:600;font-size:15px;padding:11px 22px;border-radius:40px;white-space:nowrap;">Poptat koncert <span style="font-size:15px;">→</span></a>
+        <button onClick="{{ toggleLang }}" aria-label="Language" style="margin-left:4px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;font-family:inherit;font-weight:600;font-size:14px;padding:8px 13px;border-radius:40px;cursor:pointer;white-space:nowrap;"><sc-if value="{{ isCs }}" hint-placeholder-val="{{ true }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;width:23px;height:19px"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg></sc-if><sc-if value="{{ isEn }}"><svg width="22" height="15" viewBox="0 0 60 30" style="border-radius:2px;display:block;flex:none;"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg></sc-if><span>{{ langLabel }}</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <sc-if value="{{ isGallery }}" hint-placeholder-val="{{ true }}">
+
+    <section data-screen-label="Galerie – hlavička" style="background:#f7f5f2;padding:64px 0 40px;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+        <p style="font-size:14px;font-weight:700;color:#003FFF;letter-spacing:.02em;margin-bottom:14px;">Galerie</p>
+        <h1 style="font-size:clamp(38px,4.4vw,56px);font-weight:700;letter-spacing:-.012em;line-height:1.04;margin-bottom:18px;">Okamžiky z našich koncertů</h1>
+        <p style="font-size:19px;line-height:1.55;color:#3a4366;max-width:660px;">Prohlédněte si atmosféru našich koncertů, zkoušek i zákulisí. Fotografie jsou řazené do alb podle jednotlivých akcí.</p>
+      </div>
+    </section>
+
+    <section data-screen-label="Galerie – filtry" style="background:#fff;padding:30px 0 6px;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+            <button onClick="{{ f.select }}" style="cursor:pointer;font-family:inherit;border:1.5px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};font-size:14px;font-weight:600;padding:9px 18px;border-radius:30px;transition:background .15s ease,color .15s ease,border-color .15s ease;">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Galerie – mřížka" style="background:#fff;padding:24px 0 64px;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+
+        <sc-if value="{{ showAlbums }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px;">
+            <sc-for list="{{ filteredAlbums }}" as="a" hint-placeholder-count="9">
+              <a href="#" onClick="{{ a.open }}" style="display:block;background:#fff;border-radius:18px;overflow:hidden;border:1px solid #ececf4;box-shadow:0 1px 3px rgba(17,26,68,.07);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;" style-hover="transform:translateY(-4px);box-shadow:0 14px 30px rgba(17,26,68,.14);">
+                <div style="position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(152deg,#eef1f8,#dde6fa);">
+                  <img src="{{ a.cover }}" alt="{{ a.name }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+                  <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.94);color:#003FFF;font-size:11px;font-weight:800;padding:4px 10px;border-radius:18px;">{{ a.cat }}</span>
+                  <span style="position:absolute;bottom:12px;right:12px;background:rgba(10,19,48,.62);color:#fff;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:14px;">{{ a.count }} fotek</span>
+                </div>
+                <div style="padding:15px 17px 18px;">
+                  <h3 style="font-size:17px;font-weight:700;color:#111a44;line-height:1.2;margin-bottom:5px;">{{ a.name }}</h3>
+                  <p style="font-size:13.5px;font-weight:600;color:#5b6a9a;">{{ a.date }}</p>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+          <sc-if value="{{ showMore }}">
+            <div style="display:flex;justify-content:center;margin-top:44px;">
+              <button onClick="{{ loadMore }}" style="cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.6px solid #003FFF;color:#003FFF;font-weight:600;font-size:15px;padding:12px 24px;border-radius:34px;transition:background .15s ease,color .15s ease;" style-hover="background:#003FFF;color:#fff;">Načíst další alba</button>
+            </div>
+          </sc-if>
+        </sc-if>
+
+        <sc-if value="{{ isVidea }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px;">
+            <sc-for list="{{ videos }}" as="v" hint-placeholder-count="3">
+              <a href="#" onClick="{{ v.play }}" style="display:block;cursor:pointer;">
+                <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:linear-gradient(152deg,#eef1f8,#dde6fa);">
+                  <img src="{{ v.thumb }}" alt="{{ v.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,40,0) 42%,rgba(8,12,40,.5));"></div>
+                  <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);"><svg width="20" height="20" viewBox="0 0 24 24" fill="#003FFF"><path d="M8 5v14l11-7z"></path></svg></span>
+                  <span style="position:absolute;bottom:10px;right:10px;background:rgba(10,19,48,.78);color:#fff;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:12px;">{{ v.dur }}</span>
+                </div>
+                <h3 style="font-size:16px;font-weight:700;color:#111a44;margin-top:12px;line-height:1.25;">{{ v.title }}</h3>
+              </a>
+            </sc-for>
+          </div>
+        </sc-if>
+
+      </div>
+    </section>
+
+    <sc-if value="{{ showVideoSection }}">
+      <section data-screen-label="Galerie – videa" style="background:#f7f5f2;border-top:1px solid #ececf4;padding:54px 0 64px;">
+        <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+          <p style="font-size:14px;font-weight:700;color:#003FFF;letter-spacing:.02em;margin-bottom:12px;">Videa</p>
+          <h2 style="font-size:clamp(26px,2.6vw,34px);font-weight:700;letter-spacing:-.01em;line-height:1.05;margin-bottom:6px;">Videa z vystoupení</h2>
+          <p style="font-size:16px;color:#5b6a9a;margin-bottom:28px;">Sestřihy z koncertů a zkoušek</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px;">
+            <sc-for list="{{ videos }}" as="v" hint-placeholder-count="3">
+              <a href="#" onClick="{{ v.play }}" style="display:block;cursor:pointer;">
+                <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:linear-gradient(152deg,#e7ecfb,#d4def7);">
+                  <img src="{{ v.thumb }}" alt="{{ v.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,40,0) 42%,rgba(8,12,40,.5));"></div>
+                  <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);"><svg width="20" height="20" viewBox="0 0 24 24" fill="#003FFF"><path d="M8 5v14l11-7z"></path></svg></span>
+                  <span style="position:absolute;bottom:10px;right:10px;background:rgba(10,19,48,.78);color:#fff;font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:12px;">{{ v.dur }}</span>
+                </div>
+                <h3 style="font-size:16px;font-weight:700;color:#111a44;margin-top:12px;line-height:1.25;">{{ v.title }}</h3>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+  </sc-if>
+
+  <sc-if value="{{ isAlbum }}">
+
+    <section data-screen-label="Detail alba – hlavička" style="background:#f7f5f2;padding:32px 0 38px;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+        <a href="#" onClick="{{ goGallery }}" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#5b6a9a;margin-bottom:22px;cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg>Zpět na galerii</a>
+        <p style="font-size:14px;font-weight:700;color:#003FFF;letter-spacing:.02em;margin-bottom:10px;">Album · {{ album.cat }}</p>
+        <h1 style="font-size:clamp(32px,3.6vw,46px);font-weight:700;letter-spacing:-.012em;line-height:1.05;margin-bottom:14px;">{{ album.name }}</h1>
+        <p style="font-size:17px;line-height:1.55;color:#3a4366;max-width:680px;margin-bottom:22px;">Výběr fotografií z vystoupení — atmosféra večera, hudebníci i publikum.</p>
+        <ul style="display:flex;flex-wrap:wrap;gap:10px 28px;">
+          <li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#3a4366;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>{{ album.date }}</li>
+          <li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#3a4366;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Lukavice</li>
+          <li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#3a4366;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.7"></circle><path d="M21 16l-5-5-9 8"></path></svg>{{ album.count }} fotek</li>
+        </ul>
+      </div>
+    </section>
+
+    <section data-screen-label="Detail alba – fotky" style="background:#fff;padding:30px 0 72px;">
+      <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;">
+          <sc-for list="{{ albumPhotos }}" as="p" hint-placeholder-count="12">
+            <a href="#" onClick="{{ p.open }}" style="position:relative;display:block;border-radius:14px;overflow:hidden;aspect-ratio:1;background:linear-gradient(152deg,#eef1f8,#dde6fa);cursor:pointer;transition:transform .18s ease;" style-hover="transform:scale(1.015);">
+              <img src="{{ p.src }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+  </sc-if>
+
+  <footer data-screen-label="Patička" style="background: #003FFF; color: #fff">
+    <div style="max-width:1180px;margin:0 auto;padding:74px 44px 28px;text-align:center;">
+      <h2 style="font-size:clamp(46px,8.4vw,132px);font-weight:800;letter-spacing:-.025em;line-height:.9;margin:0 0 18px;">Capella Nostra</h2>
+      <p style="font-size:clamp(17px,2vw,22px);color:#cdd7ff;margin:0 auto 30px;max-width:520px;">Hudba, která spojuje.</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-bottom:38px;">
+        <a href="#" aria-label="Instagram" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"></circle></svg></a>
+        <a href="#" aria-label="Facebook" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.5V5.5c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2H8.2V14h2.5v7h2.8z"></path></svg></a>
+      </div>
+      <ul style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin:0 0 36px;list-style:none;padding:0;">
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Domů</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Koncerty</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">O nás</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Členové</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Galerie</a></li>
+        <li><a href="#" style="font-size:16px;font-weight:600;color:#fff;text-decoration:none;">Kontakt</a></li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px;font-size:14.5px;color:#e7ecff;margin-bottom:34px;">
+        <a href="mailto:info@capellanostra.cz" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">info@capellanostra.cz</a>
+        <span aria-hidden="true" style="color:rgba(255,255,255,.4);">·</span>
+        <a href="tel:+420777123456" style="color:#fff;text-decoration:underline;text-underline-offset:3px;">+420 777 123 456</a>
+      </div>
+      <hr style="border:none;border-top:1px solid rgba(255,255,255,.22);margin:0 0 22px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:#cdd7ff;flex-wrap:wrap;">
+        <span style="color:#fff;font-weight:600;">Capella Nostra © 2026</span>
+        <div style="display:flex;gap:22px;">
+          <a href="#" style="color:#cdd7ff;text-decoration:underline;text-underline-offset:3px;">Zásady ochrany osobních údajů</a>
+        </div>
+        <a href="#" style="color:#cdd7ff;white-space:nowrap;">Realizace webu: <strong style="color:#fff;text-decoration:underline;text-underline-offset:3px;">FuxaStudio</strong></a>
+      </div>
+    </div>
+  </footer></div>
+
+
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ lbClose }}" style="position:fixed;inset:0;z-index:200;background:rgba(7,11,28,.95);display:flex;animation:lbIn .2s ease;">
+
+      <sc-if value="{{ lbIsPhoto }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ lbStop }}" style="display:flex;flex-direction:column;height:100%;width:100%;max-width:1280px;margin:0 auto;padding:18px 24px 20px;">
+          <div style="display:flex;align-items:center;gap:16px;flex:none;">
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+              <span style="font-size:16px;font-weight:700;color:#fff;line-height:1.2;">{{ lbTitle }}</span>
+              <span style="font-size:13px;color:#9fb0e0;">{{ lbDate }}</span>
+            </div>
+            <span style="margin-left:auto;font-size:14px;font-weight:600;color:#cdd9ff;white-space:nowrap;">{{ lbCounter }}</span>
+            <button onClick="{{ lbClose }}" aria-label="Zavřít" style="flex:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;gap:16px;padding:18px 0;min-height:0;">
+            <button onClick="{{ lbPrev }}" aria-label="Předchozí" style="flex:none;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div style="flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0;">{{ lbPhotoEl }}</div>
+            <button onClick="{{ lbNext }}" aria-label="Další" style="flex:none;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+          <div style="flex:none;display:flex;gap:8px;justify-content:center;overflow-x:auto;padding:4px 2px 2px;">{{ lbThumbsRow }}</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ lbIsVideo }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ lbStop }}" style="display:flex;flex-direction:column;height:100%;width:100%;max-width:1100px;margin:0 auto;padding:22px 26px;">
+          <div style="display:flex;align-items:center;gap:16px;flex:none;">
+            <span style="font-size:16px;font-weight:700;color:#fff;">{{ lbVideoTitle }}</span>
+            <button onClick="{{ lbClose }}" aria-label="Zavřít" style="margin-left:auto;flex:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:18px 0;min-height:0;">
+            <div style="width:100%;max-width:980px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;position:relative;background:linear-gradient(150deg,#101a40,#0a1330);display:flex;align-items:center;justify-content:center;animation:lbPop .25s ease;">
+              <span style="width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(0,0,0,.45);"><svg width="26" height="26" viewBox="0 0 24 24" fill="#003FFF"><path d="M8 5v14l11-7z"></path></svg></span>
+              <span style="position:absolute;bottom:12px;left:14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7);">YouTube · placeholder</span>
+            </div>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:14px;max-width:980px;width:100%;margin:0 auto;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M6 5v14l11-7z"></path></svg>
+            <div style="flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.22);"><div style="width:34%;height:100%;border-radius:4px;background:#fff;"></div></div>
+            <span style="font-size:13px;color:#cdd9ff;font-weight:600;white-space:nowrap;">1:24 / {{ lbDur }}</span>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </sc-if>
+
+
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#003FFF"></rect><g fill="none" stroke="#fff" stroke-width="3"><rect x="24" y="28" width="52" height="40" rx="4"></rect><circle cx="38" cy="42" r="5"></circle><path d="M28 64l16-16 12 10 8-7 8 9"></path></g></svg>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;initialFilter&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;koncerty&quot;,&quot;zkousky&quot;,&quot;videa&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Galerie&quot;},&quot;showVideos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Galerie&quot;}}">
+class Component extends DCLogic {
+  state = { view: 'gallery', filter: (this.props && this.props.initialFilter) || 'all', albumId: null, lb: null, expanded: false, lang: 'cs' };
+
+  _toggleLang() { this.setState((s) => ({ lang: s.lang === 'cs' ? 'en' : 'cs' })); }
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (!this.state.lb) return;
+      if (e.key === 'Escape') { this.closeLb(); return; }
+      if (this.state.lb.kind === 'photo') {
+        if (e.key === 'ArrowLeft') this.lbPrev();
+        else if (e.key === 'ArrowRight') this.lbNext();
+      }
+    };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() { if (this._onKey) window.removeEventListener('keydown', this._onKey); }
+
+  _pool() {
+    return [
+      'https://www.rpo.co.uk/uploads/images/Event-headers/London-OP-26-27/RAH-26-27/_landscape_3_x_2_xl/103700/RPO-at-80-3000x2000.webp?v=1780320640',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/London-OP-26-27/CH-26-27/_landscape_3_x_2_xl/160381/Mozart-Revealed-3000x2000-2.webp?v=1780321606',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/London-OP-26-27/SBC-26-27/_landscape_3_x_2_xl/105331/Stravinsky-The-Firebird-3000x2000.webp?v=1780338080',
+      'https://www.rpo.co.uk/uploads/images/Venues/Cadogan-Hall/_landscape_l/424/scheherzade-tim-lutton.webp?v=1781623288%2C0.4641%2C0.3999',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_m/118221/2026-04-09-Cadogan-Hall-harp-credit-Frances-Marshall.webp?v=1775928668%2C0.4407%2C0.638',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/400/rpo-perform-mahler-at-rah.webp?v=1781624695',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_s/118510/26-03-12-Brass-Quintet-RPO-Gala-Andy-Paradise.webp?v=1775930695',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/118499/2025-10-21-Mahler-Bernstein-Royal-Albert-Hall-Philharmonia-Chorus-Andy-Paradise.webp?v=1775930432',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Festival-Hall/_square_s/52763/RPO-and-Vasily-Petrenko-at-RFH-Multitudes-27-April-2025-credit-Mark-Allan-9.webp?v=1775931495',
+      'https://www.rpo.co.uk/uploads/images/RPCO/_square_s/105238/RPCO-Interstellar-in-concert-Royal-Albert-Hall-April-2026-c-Suzy-Red-5.webp?v=1775930749%2C0.6539%2C0.4069',
+      'https://www.rpo.co.uk/uploads/images/Venues/Royal-Albert-Hall/_square_s/52737/Music-of-Bond-RAH-26-11-25-c-Danny-Kaan-45.webp?v=1775930973%2C0.4399%2C0.2927',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_square_s/53679/Joe-Hisaishi-RPO-Royal-Albert-Hall-24-Nov-24-c-Tim-Lutton-44.webp?v=1775931422',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/RPCO/_thumb_l/158852/What-the-World-Needs-Now-Burt-Bacharach-3000x2000.webp?v=1779116695',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/Misc-engagements/_thumb_l/86776/2021-09-04_Leeds-Castle.webp?v=1776969084',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/Principal-residencies-and-partner-venues/PV-26-27/_thumb_l/56484/ABBAphonic.webp?v=1781862561',
+      'https://www.rpo.co.uk/uploads/images/Event-headers/RPCO/_thumb_l/127766/2026-07-11-Shanay-Holmes-Cadogan-Hall-RPCO-3000x200.webp?v=1776418441%2C0.3868%2C0.2234',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_thumb_l/53681/Royal-Philharmonic-Orchestra-players-credit-Ben-Wright-1.webp?v=1775831370%2C0.3943%2C0.2867',
+      'https://www.rpo.co.uk/uploads/images/RPO-Resound/Relaxed-Performances/_landscape_3_x_2_m/119609/2026-02-07-Relaxed-Performance-Brent-breakout-session-credit-Jasmine-Waterfield.webp?v=1776078088',
+      'https://www.rpo.co.uk/uploads/images/Receptions-Galas/Patron-reception-Southbank-2026/_landscape_3_x_2_m/51372/2026-02-03-Chapel-Down-reception-Southbank-Centre-c-Jasmine-Waterfield-37.webp?v=1775924288',
+      'https://www.rpo.co.uk/uploads/images/Orchestra-general/_landscape_3_x_2_m/119569/2023-03-30-Royal-Albert-Hall-box-credit-Andy-Paradise.webp?v=1776076574%2C0.5821%2C0.6502',
+      'https://www.rpo.co.uk/uploads/images/Series-pages/2026-27/_square_m/127781/RPO-x-VP-Season-VP-Image-c-Frances-Marshall.webp?v=1776418512%2C0.5105%2C0.3287',
+      'https://www.rpo.co.uk/uploads/images/RPO-Resound/Relaxed-Performances/_landscape_3_x_2_m/119576/2026-02-07-Relaxed-Performance-Brent-credit-Jasmine-Waterfield.webp?v=1776077066%2C0.5357%2C0.5545'
+    ];
+  }
+
+  _albums() {
+    if (this.__a) return this.__a;
+    const P = this._pool();
+    const cfg = [
+      { id: 'jarni', name: 'Jarní koncert', date: '6. 7. 2026', cat: 'Koncerty', group: 'koncerty', count: 12, off: 0 },
+      { id: 'advent', name: 'Adventní koncert v katedrále', date: '15. 12. 2025', cat: 'Koncerty', group: 'koncerty', count: 9, off: 7 },
+      { id: 'serenada', name: 'Letní serenáda na zámku', date: '2. 8. 2025', cat: 'Koncerty', group: 'koncerty', count: 8, off: 13 },
+      { id: 'film', name: 'Filmová hudba LIVE', date: '19. 4. 2025', cat: 'Koncerty', group: 'koncerty', count: 11, off: 9 },
+      { id: 'novorocni', name: 'Novoroční koncert', date: '1. 1. 2025', cat: 'Koncerty', group: 'koncerty', count: 10, off: 10 },
+      { id: 'komorni', name: 'Komorní večer', date: '14. 2. 2025', cat: 'Koncerty', group: 'koncerty', count: 7, off: 6 },
+      { id: 'general', name: 'Generální zkouška: Dvořák', date: '28. 6. 2025', cat: 'Zkoušky', group: 'zkousky', count: 6, off: 16 },
+      { id: 'zakulisi', name: 'Zákulisí jarního turné', date: 'květen 2025', cat: 'Zákulisí', group: 'zkousky', count: 9, off: 18 },
+      { id: 'zkousky2526', name: 'Zkoušky na sezónu 25/26', date: 'září 2025', cat: 'Zkoušky', group: 'zkousky', count: 8, off: 4 }
+    ];
+    this.__a = cfg.map((c) => {
+      const photos = [];
+      for (let k = 0; k < c.count; k++) photos.push(P[(c.off + k) % P.length]);
+      return Object.assign({}, c, { cover: P[c.off], photos: photos });
+    });
+    return this.__a;
+  }
+
+  _videos() {
+    if (this.__v) return this.__v;
+    const P = this._pool();
+    this.__v = [
+      { id: 'vltava', title: 'Smetana — Vltava (živě z katedrály)', dur: '4:12', thumb: P[3] },
+      { id: 'priprava', title: 'Zákulisí: příprava na jarní koncert', dur: '2:45', thumb: P[16] },
+      { id: 'novosvetska', title: 'Dvořák — Novosvětská, finále', dur: '6:30', thumb: P[5] }
+    ];
+    return this.__v;
+  }
+
+  setFilter(f) { this.setState({ filter: f, expanded: false }); }
+  loadMore() { this.setState({ expanded: true }); }
+  openAlbum(id) { this.setState({ view: 'album', albumId: id }); this._top(); }
+  backToGallery() { this.setState({ view: 'gallery' }); this._top(); }
+  openPhoto(id, i) { this.setState({ lb: { kind: 'photo', albumId: id, i: i } }); }
+  openVideo(v) { this.setState({ lb: { kind: 'video', video: v } }); }
+  closeLb() { this.setState({ lb: null }); }
+  lbPrev() {
+    this.setState((s) => {
+      if (!s.lb || s.lb.kind !== 'photo') return {};
+      const al = this._albums().filter((a) => a.id === s.lb.albumId)[0];
+      if (!al) return {};
+      const n = al.photos.length;
+      return { lb: Object.assign({}, s.lb, { i: (s.lb.i - 1 + n) % n }) };
+    });
+  }
+  lbNext() {
+    this.setState((s) => {
+      if (!s.lb || s.lb.kind !== 'photo') return {};
+      const al = this._albums().filter((a) => a.id === s.lb.albumId)[0];
+      if (!al) return {};
+      const n = al.photos.length;
+      return { lb: Object.assign({}, s.lb, { i: (s.lb.i + 1) % n }) };
+    });
+  }
+  lbGo(i) { this.setState((s) => (s.lb ? { lb: Object.assign({}, s.lb, { i: i }) } : {})); }
+  _top() { try { if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0); } catch (e) {} }
+
+  renderVals() {
+    const p = this.props || {};
+    const st = this.state;
+    const lang = st.lang;
+    const showVideos = p.showVideos !== false;
+    let filter = st.filter;
+    if (filter === 'videa' && !showVideos) filter = 'all';
+
+    const albums = this._albums();
+
+    const fdefs = [
+      { key: 'all', label: 'Vše' },
+      { key: 'koncerty', label: 'Koncerty' },
+      { key: 'zkousky', label: 'Zkoušky & zákulisí' }
+    ];
+    if (showVideos) fdefs.push({ key: 'videa', label: 'Videa' });
+    const filters = fdefs.map((f) => {
+      const active = filter === f.key;
+      return {
+        label: f.label,
+        bg: active ? '#003FFF' : '#fff',
+        color: active ? '#fff' : '#3a4366',
+        border: active ? '#003FFF' : '#d9dcea',
+        select: () => this.setFilter(f.key)
+      };
+    });
+
+    let fa = albums;
+    if (filter === 'koncerty' || filter === 'zkousky') fa = albums.filter((a) => a.group === filter);
+    const visibleCount = 6;
+    const showAll = st.expanded || fa.length <= visibleCount;
+    const visibleAlbums = showAll ? fa : fa.slice(0, visibleCount);
+    const filteredAlbums = visibleAlbums.map((a) => ({
+      name: a.name, date: a.date, count: a.count, cat: a.cat, cover: a.cover,
+      open: (e) => { if (e && e.preventDefault) e.preventDefault(); this.openAlbum(a.id); }
+    }));
+
+    const videos = this._videos().map((v) => ({
+      title: v.title, dur: v.dur, thumb: v.thumb,
+      play: (e) => { if (e && e.preventDefault) e.preventDefault(); this.openVideo(v); }
+    }));
+
+    const isGallery = st.view === 'gallery';
+    const isAlbum = st.view === 'album';
+
+    const cur = albums.filter((a) => a.id === st.albumId)[0] || albums[0];
+    const album = { name: cur.name, date: cur.date, cat: cur.cat, count: cur.count };
+    const albumPhotos = cur.photos.map((src, i) => ({
+      src: src,
+      open: (e) => { if (e && e.preventDefault) e.preventDefault(); this.openPhoto(cur.id, i); }
+    }));
+
+    const h = React.createElement;
+    const lb = st.lb;
+    const lbIsPhoto = !!lb && lb.kind === 'photo';
+    const lbIsVideo = !!lb && lb.kind === 'video';
+    let lbCounter = '', lbTitle = '', lbDate = '', lbVideoTitle = '', lbDur = '';
+    let lbPhotoEl = null, lbThumbsRow = null;
+    if (lbIsPhoto) {
+      const al = albums.filter((a) => a.id === lb.albumId)[0] || cur;
+      const ph = al.photos;
+      const idx = Math.max(0, Math.min(lb.i, ph.length - 1));
+      lbCounter = (idx + 1) + ' / ' + ph.length;
+      lbTitle = al.name;
+      lbDate = al.date + ' · Lukavice';
+      lbPhotoEl = h('img', {
+        src: ph[idx], alt: '', key: 'p' + idx,
+        style: { maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '14px', boxShadow: '0 18px 60px rgba(0,0,0,.5)', animation: 'lbPop .25s ease' }
+      });
+      lbThumbsRow = ph.map((src, i) => h('button', {
+        key: 't' + i,
+        onClick: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.lbGo(i); },
+        style: { flex: 'none', width: '66px', height: '46px', borderRadius: '7px', overflow: 'hidden', padding: 0, cursor: 'pointer', border: '2px solid ' + (i === idx ? '#fff' : 'rgba(255,255,255,.15)'), background: '#0e1838' }
+      }, h('img', { src: src, alt: '', style: { width: '100%', height: '100%', objectFit: 'cover', opacity: i === idx ? 1 : 0.5 } })));
+    }
+    if (lbIsVideo) { lbVideoTitle = lb.video.title; lbDur = lb.video.dur; }
+
+    return {
+      isCs: lang === 'cs', isEn: lang === 'en', langLabel: lang === 'cs' ? 'CZ' : 'EN', toggleLang: () => this._toggleLang(),
+      filters: filters,
+      filteredAlbums: filteredAlbums,
+      videos: videos,
+      isGallery: isGallery,
+      isAlbum: isAlbum,
+      showAlbums: isGallery && filter !== 'videa',
+      isVidea: isGallery && filter === 'videa',
+      showVideoSection: isGallery && showVideos && filter === 'all',
+      showMore: !showAll,
+      loadMore: (e) => { if (e && e.preventDefault) e.preventDefault(); this.loadMore(); },
+      album: album,
+      albumPhotos: albumPhotos,
+      goGallery: (e) => { if (e && e.preventDefault) e.preventDefault(); this.backToGallery(); },
+      lbOpen: !!lb,
+      lbIsPhoto: lbIsPhoto,
+      lbIsVideo: lbIsVideo,
+      lbPhotoEl: lbPhotoEl,
+      lbThumbsRow: lbThumbsRow,
+      lbCounter: lbCounter,
+      lbTitle: lbTitle,
+      lbDate: lbDate,
+      lbVideoTitle: lbVideoTitle,
+      lbDur: lbDur,
+      lbPrev: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.lbPrev(); },
+      lbNext: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.lbNext(); },
+      lbClose: (e) => { if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); } this.closeLb(); },
+      lbStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
+    };
+  }
+}
+</script>
+</body>
+</html>
