@@ -17,21 +17,21 @@
         '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + featured.dateFull + '</li>' +
         '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-pin"></use></svg>' + featured.venue + '</li>' +
       '</ul>' +
-      '<a href="koncerty.html" class="btn btn-blue" style="padding:12px 22px;">Detail koncertu →</a>' +
+      '<a href="' + CN.url('concerts') + '" class="btn btn-blue" style="padding:12px 22px;">' + CN.t('concertDetail') + ' →</a>' +
     '</div>';
 
   document.getElementById('eventList').innerHTML = CONCERTS.slice(1, 9).map(function (item) {
-    return '<div class="event-row">' +
+    return '<a href="' + item.ticketUrl + '" class="event-row" aria-label="' + item.title + ' – ' + CN.t('buyTicketsAria') + '">' +
       '<img src="' + item.img + '" alt="' + item.title + '">' +
       '<div class="body">' +
         '<h3>' + item.title + '</h3>' +
         '<p class="sub">' + item.desc + '</p>' +
         '<ul>' +
-          '<li><svg class="icon" width="14" height="14" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + item.dateFull + '</li>' +
-          '<li><svg class="icon" width="14" height="14" style="color:#003FFF"><use href="#i-pin"></use></svg>' + item.venue + '</li>' +
+          '<li><svg class="icon" width="14" height="14"><use href="#i-calendar"></use></svg>' + item.dateFull + '</li>' +
+          '<li><svg class="icon" width="14" height="14"><use href="#i-pin"></use></svg>' + item.venue + '</li>' +
         '</ul>' +
       '</div>' +
-    '</div>';
+    '</a>';
   }).join('');
 
   /* ---- Gallery teaser (drag-scroll marquee) ---- */
@@ -41,7 +41,7 @@
   }).filter(Boolean);
 
   function teaserCard(a, dup) {
-    return '<a href="galerie.html#album/' + a.id + '" class="genre-card"' +
+    return '<a href="' + CN.url('gallery') + '#album/' + a.id + '" class="genre-card"' +
       (dup ? ' aria-hidden="true" tabindex="-1"' : '') + '>' +
       '<div class="thumb"><img src="' + a.photos[0] + '" alt="' + a.name + '" loading="lazy" draggable="false"></div>' +
       '<p>' + a.name + '</p></a>';
@@ -171,8 +171,8 @@
           '<div class="hero-card">' +
             '<div class="hero-shot"><img src="' + s.imgWide + '" alt="' + s.title + '"></div>' +
             '<div class="hero-arrows">' +
-              '<button type="button" class="hero-arrow" data-dir="prev" aria-label="Předchozí koncert"><svg class="icon" width="20" height="20"><use href="#i-chevron-left"></use></svg></button>' +
-              '<button type="button" class="hero-arrow" data-dir="next" aria-label="Další koncert"><svg class="icon" width="20" height="20"><use href="#i-chevron-right"></use></svg></button>' +
+              '<button type="button" class="hero-arrow" data-dir="prev" aria-label="' + CN.t('heroPrev') + '"><svg class="icon" width="20" height="20"><use href="#i-chevron-left"></use></svg></button>' +
+              '<button type="button" class="hero-arrow" data-dir="next" aria-label="' + CN.t('heroNext') + '"><svg class="icon" width="20" height="20"><use href="#i-chevron-right"></use></svg></button>' +
             '</div>' +
             '<div class="progress"><span></span></div>' +
             '<div class="row"><img src="' + s.thumb + '" alt="' + s.title + '"><p>' + s.desc + '</p></div>' +
@@ -181,7 +181,7 @@
               '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + s.dateFull + '</li>' +
               '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-pin"></use></svg>' + s.venue + '</li>' +
             '</ul>' +
-            '<a href="koncerty.html" class="btn btn-blue">Detail koncertu <span>→</span></a>' +
+            '<a href="' + CN.url('concerts') + '" class="btn btn-blue">' + CN.t('concertDetail') + ' <span>→</span></a>' +
           '</div>';
         var prev = wrap.querySelector('.hero-arrow[data-dir="prev"]');
         var next = wrap.querySelector('.hero-arrow[data-dir="next"]');

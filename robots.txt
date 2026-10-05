@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://capellanostra.cz/sitemap.xml

@@ -1,37 +1,27 @@
 (function () {
   var CN = window.CN;
   var upcoming = CN.CONCERTS;
-  var hero = upcoming[0];
-  var grid = upcoming.slice(1);
+  var grid = upcoming;
   var INITIAL_COUNT = 6;
   var expanded = false;
 
-  document.getElementById('heroImg').src = hero.imgWide;
-
-  document.getElementById('heroCard').innerHTML =
-    '<h1>' + hero.title + '</h1>' +
-    '<p class="desc">' + hero.desc + '</p>' +
-    '<ul>' +
-      '<li><svg class="icon" width="18" height="18" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + hero.dateFull + ' · ' + hero.time + '</li>' +
-      '<li><svg class="icon" width="18" height="18" style="color:#003FFF"><use href="#i-pin"></use></svg>' + hero.venue + '</li>' +
-    '</ul>' +
-    '<a href="#" class="btn btn-blue">Vstupenky <span>↗</span></a>';
+  document.getElementById('heroImg').src = CN.img('orchestra', 9, 1920, 1080);
 
   function cardHtml(c) {
     return (
-      '<a href="#" class="concert-card">' +
+      '<a href="' + c.ticketUrl + '" class="concert-card">' +
         '<div class="thumb">' +
           '<img src="' + c.img + '" alt="' + c.title + '" loading="lazy">' +
-          '<span class="date-pill">' + c.date + '</span>' +
         '</div>' +
         '<div class="body">' +
           '<h3>' + c.title + '</h3>' +
           '<ul>' +
+            '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + c.dateFull + '</li>' +
             '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-clock"></use></svg>' + c.time + '</li>' +
             '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-pin"></use></svg>' + c.venue + '</li>' +
           '</ul>' +
           '<p class="desc">' + c.desc + '</p>' +
-          '<span class="ticket-pill">Vstupenky <span>↗</span></span>' +
+          '<span class="ticket-pill">' + CN.t('tickets') + ' <span>↗</span></span>' +
         '</div>' +
       '</a>'
     );
@@ -52,11 +42,10 @@
   /* ---- Archive ---- */
   document.getElementById('archiveGrid').innerHTML = CN.PAST.map(function (p) {
     return (
-      '<a href="galerie.html" class="archive-card">' +
+      '<a href="' + CN.url('gallery') + '" class="archive-card">' +
         '<div class="thumb">' +
           '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy">' +
           '<div class="tint"></div>' +
-          '<span class="done-badge"><svg class="icon" width="11" height="11"><use href="#i-check"></use></svg>proběhlo</span>' +
         '</div>' +
         '<p class="date">' + p.date + '</p>' +
         '<h3>' + p.title + '</h3>' +

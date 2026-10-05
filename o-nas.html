@@ -4,17 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>O nás — Capella Nostra</title>
-<meta name="description" content="Capella Nostra je komorní soubor s vášní pro klasickou hudbu. Poznejte náš příběh, poslání a uměleckého vedoucího Jana Kohouta.">
+<meta name="description" content="Capella Nostra je komorní soubor. Kdo jsme, jak jsme začínali, co a kde hrajeme — a kdo za naší hudbou stojí.">
 <meta name="theme-color" content="#003FFF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Capella Nostra">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:title" content="O nás — Capella Nostra">
-<meta property="og:description" content="Capella Nostra je komorní soubor s vášní pro klasickou hudbu. Poznejte náš příběh, poslání a uměleckého vedoucího Jana Kohouta.">
-<!-- Po nasazení nahraďte relativní cestu absolutní URL (https://domena.cz/assets/og-cover.jpg) a doplňte og:url. -->
-<meta property="og:image" content="assets/og-cover.jpg">
+<meta property="og:description" content="Capella Nostra je komorní soubor. Kdo jsme, jak jsme začínali, co a kde hrajeme — a kdo za naší hudbou stojí.">
+<!-- Absolutní adresy počítají s doménou capellanostra.cz. Poběží-li web jinde, nahraďte „https://capellanostra.cz“ ve všech HTML souborech, v sitemap.xml a robots.txt. -->
+<link rel="canonical" href="https://capellanostra.cz/o-nas.html">
+<meta property="og:url" content="https://capellanostra.cz/o-nas.html">
+<meta property="og:image" content="https://capellanostra.cz/assets/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="alternate" hreflang="cs" href="https://capellanostra.cz/o-nas.html">
+<link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/about.html">
+<link rel="alternate" hreflang="x-default" href="https://capellanostra.cz/o-nas.html">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,26 +33,29 @@
 <header class="site-header">
   <div class="bar">
     <a href="index.html" class="brand" aria-label="Capella Nostra — domů">
-      <img src="assets/logo.png" alt="Capella Nostra logo" width="46" height="46">
+      <img src="assets/logo-nav.png" alt="Capella Nostra logo" width="46" height="46">
       <span>Capella Nostra</span>
     </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html">Domů</a>
-      <a href="koncerty.html">Koncerty</a>
-      <a href="o-nas.html" class="is-active">O nás</a>
-      <a href="clenove.html">Členové</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="kontakt.html#poptavka" class="nav-cta">Poptat koncert <span>→</span></a>
-      <button class="lang-toggle" id="langToggle" type="button" aria-label="Jazyk / Language">
-        <svg class="flag-cs" width="22" height="15" viewBox="0 0 60 30"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg>
-        <svg class="flag-en" width="22" height="15" viewBox="0 0 60 30" hidden><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg>
-        <span class="lang-label">CZ</span>
-      </button>
+    <div class="nav-panel" id="navLinks">
+      <nav class="nav-links">
+        <a href="index.html">Domů</a>
+        <a href="koncerty.html">Koncerty</a>
+        <a href="o-nas.html" class="is-active">O nás</a>
+        <a href="clenove.html">Členové</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="lang-toggle" href="en/about.html" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
+          <svg class="flag-en" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg>
+          <span class="lang-label">EN</span>
+        </a>
+        <a href="kontakt.html#poptavka" class="nav-cta">Poptat koncert <span>→</span></a>
+      </div>
       <button class="nav-close" id="navClose" type="button" aria-label="Zavřít menu">
         <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
       </button>
-    </nav>
+    </div>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Otevřít menu" aria-expanded="false">
       <svg class="icon" width="18" height="18"><use href="#i-menu"></use></svg>
     </button>
@@ -53,17 +63,27 @@
   </div>
 </header>
 
+<!-- HERO — stejná komponenta jako koncerty / galerie -->
+<section class="page-hero" id="onasHero">
+  <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=1920&h=1080&fit=crop&q=75&auto=format" alt="Capella Nostra při koncertě">
+  <div class="scrim"></div>
+  <div class="inner">
+    <div class="container-lg">
+      <p class="eyebrow">O nás</p>
+      <h1>Komorní soubor Capella Nostra</h1>
+      <p class="hero-sub">Klasická hudba naživo — poctivě nazkoušená a zahraná tam, kde nejlíp vyzní.</p>
+    </div>
+  </div>
+</section>
+
+<!-- O NÁS — kdo jsme -->
 <section class="about-intro">
   <div class="container">
     <div class="row">
       <div class="copy">
-        <p class="eyebrow">O NÁS</p>
-        <h1 class="h1" style="text-wrap:balance;margin-bottom:22px;">Komorní soubor s vášní pro klasickou hudbu</h1>
-        <p class="lede">Capella Nostra sdružuje hudebníky se společnou vášní pro poctivou interpretaci klasické hudby. Přinášíme posluchačům jedinečné koncertní zážitky — v historických kostelech, koncertních sálech i na kulturních akcích po celé zemi.</p>
-        <div class="actions">
-          <a href="clenove.html" class="btn btn-blue">Poznat členy <span>→</span></a>
-          <a href="koncerty.html" class="btn btn-outline">Naše koncerty</a>
-        </div>
+        <p class="eyebrow">Kdo jsme</p>
+        <h2 class="h2" style="text-wrap:balance;margin-bottom:22px;">Hrajeme klasiku pro lidi v sále, ne pro vitrínu</h2>
+        <p class="lede">Jsme Capella Nostra — komorní soubor, který vznikl z chuti hrát klasickou hudbu naplno. Držíme se not, ale hrajeme je živě a s emocí. Věříme, že dobře zahraná klasika promluví ke každému, kdo si sedne do sálu.</p>
       </div>
       <div class="photo-wrap">
         <div class="ring-frame">
@@ -73,16 +93,10 @@
         </div>
       </div>
     </div>
-
-    <div class="stats-strip">
-      <div><div class="num">2014</div><div class="label">rok založení</div></div>
-      <div><div class="num">120+</div><div class="label">koncertů</div></div>
-      <div><div class="num">24</div><div class="label">členů</div></div>
-      <div><div class="num">30+</div><div class="label">míst</div></div>
-    </div>
   </div>
 </section>
 
+<!-- NÁŠ PŘÍBĚH -->
 <section class="story">
   <div class="container">
     <div class="row">
@@ -90,154 +104,80 @@
         <div class="frame"><img src="https://images.unsplash.com/photo-1615414046707-3d7d91938aa4?w=1000&h=800&fit=crop&q=80&auto=format" alt="Hudebníci Capelly Nostry při zkoušce"></div>
       </div>
       <div class="copy">
-        <p class="eyebrow">NÁŠ PŘÍBĚH</p>
-        <h2 class="h2" style="text-wrap:balance;margin-bottom:20px;">Cesta, která začala mezi přáteli</h2>
-        <p>Capella Nostra vznikla z přátelství několika hudebníků, které spojovala touha hrát klasickou hudbu naplno a bez kompromisů. Z komorních zkoušek v malém sále se postupně stal soubor, který dnes vystupuje na desítkách koncertů ročně.</p>
-        <p>Za roky společné hry jsme si vytvořili vlastní zvuk — spojení preciznosti, pokory k notovému zápisu a upřímné radosti ze společného muzicírování.</p>
-      </div>
-    </div>
-
-    <div class="timeline">
-      <div class="timeline-track">
-        <div class="rail"></div>
-        <div class="timeline-items">
-          <div class="timeline-item"><div class="dot"></div><div class="year">2014</div><div class="desc">Založení souboru</div></div>
-          <div class="timeline-item"><div class="dot"></div><div class="year">2017</div><div class="desc">První abonentní řada</div></div>
-          <div class="timeline-item"><div class="dot"></div><div class="year">2020</div><div class="desc">Debutové album</div></div>
-          <div class="timeline-item"><div class="dot"></div><div class="year">2024</div><div class="desc">Jubilejní koncert</div></div>
-        </div>
+        <p class="eyebrow">Náš příběh</p>
+        <h2 class="h2" style="text-wrap:balance;margin-bottom:20px;">Začínalo to po večerech ve zkušebně</h2>
+        <p>Na začátku nás byla jen hrstka. Scházeli jsme se po večerech v jedné zkušebně, hráli hlavně pro sebe a časem zjistili, že by byla škoda nechat si to jen pro nás.</p>
+        <p>Soubor od začátku vede dirigent a zakladatel Jan Kohout. Z komorních zkoušek pod jeho taktovkou vyrostla první koncertní řada, po pár letech i vlastní album. Dnes odehrajeme desítky koncertů ročně.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="mission">
-  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M-700,72c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
-    <path d="M-700,94c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
-    <path d="M-700,116c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
-    <path d="M-700,138c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
-    <path d="M-700,160c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
-  </g></svg>
-  <div class="container">
-    <div class="head">
-      <p class="eyebrow eyebrow--onblue">POSLÁNÍ</p>
-      <h2 class="h2" style="text-wrap:balance;">Hudba, která spojuje tradici a lidi</h2>
-      <p>Věříme, že klasická hudba patří všem. Naším posláním je pečovat o odkaz velkých skladatelů a zároveň ho přinášet živě, srozumitelně a s emocí dnešnímu publiku.</p>
+<!-- KDE A CO HRAJEME — kinematický split přes celou šířku -->
+<section class="kc-full">
+  <div class="kc-frame">
+    <div class="kc-shot">
+      <img src="https://images.unsplash.com/photo-1571299803548-831c31e293e7?w=1300&h=1500&fit=crop&q=80&auto=format" alt="Capella Nostra při koncertě">
     </div>
-    <div class="mission-grid">
-      <div class="mission-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-columns"></use></svg></span>
-        <h3>Tradice</h3>
-        <p>Pečujeme o odkaz klasické hudby a s pokorou ho předáváme dalším posluchačům.</p>
-      </div>
-      <div class="mission-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-target"></use></svg></span>
-        <h3>Preciznost</h3>
-        <p>Poctivá interpretace a věrnost notovému zápisu jsou pro nás samozřejmostí.</p>
-      </div>
-      <div class="mission-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-star"></use></svg></span>
-        <h3>Zážitek</h3>
-        <p>Sdílíme emoce s publikem a vytváříme večery, na které se nezapomíná.</p>
+    <div class="kc-panel">
+      <div class="inner">
+        <p class="eyebrow">Kde a co hrajeme</p>
+        <h2>Od baroka po filmovou hudbu</h2>
+        <ol class="kc-tracks">
+          <li><span class="no">01</span><span class="nm">Baroko</span><span class="cm">Bach · Vivaldi</span></li>
+          <li><span class="no">02</span><span class="nm">Klasicismus</span><span class="cm">Mozart · Haydn</span></li>
+          <li><span class="no">03</span><span class="nm">Romantismus</span><span class="cm">Dvořák · Brahms</span></li>
+          <li><span class="no">04</span><span class="nm">Sakrální hudba</span><span class="cm">Fauré · Rutter</span></li>
+          <li><span class="no">05</span><span class="nm">Filmová hudba</span><span class="cm">Williams · Zimmer</span></li>
+          <li><span class="no">06</span><span class="nm">Soudobá tvorba</span><span class="cm">premiéry</span></li>
+        </ol>
+        <p class="kc-where">Hrajeme v kostelech, koncertních sálech, na zámcích i na festivalech — tam, kde hudba nejlíp vyzní.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="director">
-  <div class="container">
-    <div class="row">
-      <div class="photo-wrap">
-        <div class="photo-ring"><img src="https://images.unsplash.com/photo-1675859427928-fe41277572b4?w=720&h=720&fit=crop&crop=faces&q=80&auto=format" alt="Jan Kohout, dirigent a umělecký vedoucí"></div>
-      </div>
-      <div class="copy">
-        <p class="eyebrow">UMĚLECKÝ VEDOUCÍ</p>
-        <h2>Jan Kohout</h2>
-        <p class="role">Dirigent &amp; zakladatel souboru</p>
-        <p class="bio">Zakladatel a umělecký vedoucí Capelly Nostry. Pod jeho taktovkou spojuje soubor preciznost s radostí ze společné hry. Vede dramaturgii i zkoušky a dbá na to, aby každý koncert měl jasný charakter a vnitřní příběh.</p>
-        <blockquote><p>„Nejde nám o dokonalost samu o sobě — jde nám o okamžik, kdy hudba osloví člověka v sále.“</p></blockquote>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="repertoire">
-  <div class="container">
-    <div class="row">
-      <div class="copy">
-        <p class="eyebrow">REPERTOÁR</p>
-        <h2 class="h2" style="text-wrap:balance;margin-bottom:20px;">Od baroka po filmovou hudbu</h2>
-        <p>Náš repertoár sahá od barokních mistrů přes velká romantická díla až po soudobou a filmovou tvorbu. Program vždy sestavujeme na míru prostoru i příležitosti.</p>
-      </div>
-      <div class="tags">
-        <span class="tag-pill"><span class="dot"></span>Klasicismus</span>
-        <span class="tag-pill"><span class="dot"></span>Romantismus</span>
-        <span class="tag-pill"><span class="dot"></span>Baroko</span>
-        <span class="tag-pill"><span class="dot"></span>Sakrální hudba</span>
-        <span class="tag-pill"><span class="dot"></span>Filmová hudba</span>
-        <span class="tag-pill"><span class="dot"></span>Soudobá tvorba</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="venues">
-  <div class="container">
-    <div class="head">
-      <p class="eyebrow">KDE VYSTUPUJEME</p>
-      <h2 class="h2" style="text-wrap:balance;margin-bottom:18px;">Prostory, které umocňují hudbu</h2>
-      <p>Hrajeme tam, kde hudba nejlépe vyzní — od historických kostelů s výjimečnou akustikou po koncertní sály a slavnostní zámecké večery.</p>
-    </div>
-    <div class="venues-grid">
-      <div class="venue-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-church"></use></svg></span>
-        <h3>Historické kostely</h3>
-        <p>Akustika a atmosféra</p>
-      </div>
-      <div class="venue-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-columns"></use></svg></span>
-        <h3>Koncertní sály</h3>
-        <p>Abonentní řady</p>
-      </div>
-      <div class="venue-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-castle"></use></svg></span>
-        <h3>Zámky a paláce</h3>
-        <p>Slavnostní večery</p>
-      </div>
-      <div class="venue-card">
-        <span class="badge"><svg class="icon" width="24" height="24"><use href="#i-festival"></use></svg></span>
-        <h3>Kulturní festivaly</h3>
-        <p>Letní scéna</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ČLENOVÉ — proklik na stránku Členové -->
 <section class="members-teaser">
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="eyebrow">ČLENOVÉ</p>
+        <p class="eyebrow">Členové</p>
         <h2 class="h2" style="margin-bottom:14px;">Lidé za hudbou</h2>
-        <p>Čtyřiadvacet hudebníků, kteří svým talentem a souhrou dávají souboru jeho nezaměnitelný zvuk.</p>
+        <p>Za jménem souboru je čtyřiadvacet muzikantů — pár z nich hned poznáte.</p>
       </div>
       <a href="clenove.html" class="btn btn-blue" style="white-space:nowrap;">Poznat členy <span>→</span></a>
     </div>
-    <div class="avatar-row">
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1499442711659-a9566695faed?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1653071999858-b54e6aa411f2?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1586351011807-b79c8ef43057?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <div class="avatar"><img src="https://images.unsplash.com/photo-1631474962645-d8eb9111572d?w=200&h=200&fit=crop&crop=faces&q=75&auto=format" alt="Člen souboru" loading="lazy"></div>
-      <a href="clenove.html" class="avatar-more"><span class="n">+16</span><span class="l">dalších</span></a>
+    <div class="members-strip">
+      <figure class="m-card">
+        <div class="m-photo"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Eliška Marešová" loading="lazy"></div>
+        <figcaption><span class="m-name">Eliška Marešová</span><span class="m-role">Koncertní mistryně</span></figcaption>
+      </figure>
+      <figure class="m-card">
+        <div class="m-photo"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Jakub Svoboda" loading="lazy"></div>
+        <figcaption><span class="m-name">Jakub Svoboda</span><span class="m-role">1. housle</span></figcaption>
+      </figure>
+      <figure class="m-card">
+        <div class="m-photo"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Veronika Krejčí" loading="lazy"></div>
+        <figcaption><span class="m-name">Veronika Krejčí</span><span class="m-role">Viola</span></figcaption>
+      </figure>
+      <figure class="m-card">
+        <div class="m-photo"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Lukáš Fiala" loading="lazy"></div>
+        <figcaption><span class="m-name">Lukáš Fiala</span><span class="m-role">Violoncello</span></figcaption>
+      </figure>
+      <figure class="m-card">
+        <div class="m-photo"><img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Lucie Veselá" loading="lazy"></div>
+        <figcaption><span class="m-name">Lucie Veselá</span><span class="m-role">Hoboj</span></figcaption>
+      </figure>
+      <figure class="m-card">
+        <div class="m-photo"><img src="https://images.unsplash.com/photo-1626913634123-2457b43792c1?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Jan Šťastný" loading="lazy"></div>
+        <figcaption><span class="m-name">Jan Šťastný</span><span class="m-role">Lesní roh</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
+<!-- CTA — poptat koncert -->
 <section class="inquiry">
   <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M-700,72c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
@@ -248,10 +188,10 @@
     <path d="M-700,182c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
   </g></svg>
   <div class="inner">
-    <p class="kicker">POPTÁVKA</p>
-    <h2 class="h2">Chcete Capellu Nostra na své akci?</h2>
+    <p class="eyebrow">Poptávka</p>
+    <h2 class="h2">Chcete Capellu Nostru na své akci?</h2>
     <p>Koncert, slavnostní událost nebo firemní akce — rádi pro vás připravíme program na míru. Ozvěte se a domluvíme termín i repertoár.</p>
-    <a href="kontakt.html#poptavka" class="btn btn-white btn-lg">Poptat koncert <span>→</span></a>
+    <a href="kontakt.html#poptavka" class="btn btn-blue btn-lg">Poptat koncert <span>→</span></a>
   </div>
 </section>
 
@@ -260,8 +200,8 @@
     <h2 class="footer-word">Capella Nostra</h2>
     <p class="footer-tagline">Hudba, která spojuje.</p>
     <div class="footer-social">
-      <a href="#" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
-      <a href="#" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
+      <a href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
     </div>
     <ul class="footer-nav">
       <li><a href="index.html">Domů</a></li>
@@ -280,11 +220,12 @@
     <div class="footer-bottom">
       <span class="copyright">Capella Nostra © 2026</span>
       <div><a href="zasady-ochrany-osobnich-udaju.html" class="privacy">Zásady ochrany osobních údajů</a></div>
-      <a href="#" class="credit">Realizace webu: <strong>FuxaStudio</strong></a>
+      <a href="https://fuxastudio.cz/" target="_blank" rel="noopener" class="credit">Realizace webu: <strong>FuxaStudio</strong></a>
     </div>
   </div>
 </footer>
 
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
