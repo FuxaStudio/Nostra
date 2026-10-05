@@ -1,8 +1,17 @@
 /* Shared placeholder-image pool and content data used across pages.
    All photography is temporary (Unsplash placeholders) — swap for
-   Capella Nostra's own photography before launch, per project handoff. */
+   Capella Nostra's own photography before launch, per project handoff.
+
+   Vyžaduje js/i18n.js (CN.LANG, CN.t) načtené dříve.
+
+   Struktura a texty jsou záměrně oddělené: offsety fotek, počty, id a časy
+   jsou zapsané jednou, jazykovou variantu mají jen slova. Nový koncert nebo
+   album se tak přidává na jednom místě + dva řetězce — obě jazykové verze
+   se nemohou rozejít. */
 window.CN = window.CN || {};
 (function (CN) {
+  var LANG = CN.LANG || 'cs';
+
   var IDS = {
     hero: [
       '1514320291840-2e0a9bf2a9ae',
@@ -69,68 +78,168 @@ window.CN = window.CN || {};
     return url(id, w, h, { q: 75 });
   }
 
+  function pick(table) { return table[LANG] || table.cs; }
+
   /* Upcoming concerts — season 2026/2027 (index 0 = soonest).
      ticketUrl: odkaz na prodej vstupenek pro daný koncert. Zatím placeholder '#'
      (proklik zůstane na stránce). Před spuštěním nahraďte reálnou URL prodejce
      vstupenek pro každý koncert zvlášť, např. 'https://goout.net/...'. */
-  CN.CONCERTS = [
-    { date: '12. 9.', dateFull: '12. září 2026', time: '19:00', venue: 'Kostel sv. Mikuláše, Praha', title: 'Slavnostní zahájení sezóny', desc: 'Slavnostní zahájení nové koncertní sezóny s díly českých i světových mistrů.', ticketUrl: '#' },
-    { date: '27. 9.', dateFull: '27. září 2026', time: '18:30', venue: 'Zámek Lysice', title: 'Barokní perly na zámku', desc: 'Komorní program z období vrcholného baroka v jedinečných prostorách zámku.', ticketUrl: '#' },
-    { date: '11. 10.', dateFull: '11. října 2026', time: '19:30', venue: 'Smetanova síň, Praha', title: 'Dvořák & Smetana', desc: 'Symfonické perly dvou velikánů české hudby v podání celého souboru.', ticketUrl: '#' },
-    { date: '25. 10.', dateFull: '25. října 2026', time: '19:00', venue: 'Katedrála sv. Petra a Pavla, Brno', title: 'Podzimní nešpory', desc: 'Podvečerní program duchovní hudby v majestátní katedrále.', ticketUrl: '#' },
-    { date: '8. 11.', dateFull: '8. listopadu 2026', time: '18:00', venue: 'Chrám sv. Barbory, Kutná Hora', title: 'Svatocecilský koncert', desc: 'Koncert ke svátku patronky hudby svaté Cecílie.', ticketUrl: '#' },
-    { date: '22. 11.', dateFull: '22. listopadu 2026', time: '19:00', venue: 'Rudolfinum, Praha', title: 'Mozart: Requiem', desc: 'Mozartovo Requiem v podání souboru, sboru a sólistů.', ticketUrl: '#' },
-    { date: '6. 12.', dateFull: '6. prosince 2026', time: '17:00', venue: 'Obecní dům, Praha', title: 'Adventní koncert', desc: 'Adventní písně a koledy ve slavnostním hávu.', ticketUrl: '#' },
-    { date: '20. 12.', dateFull: '20. prosince 2026', time: '18:00', venue: 'Bazilika sv. Jakuba, Praha', title: 'Vánoční koncert', desc: 'Tradiční vánoční koncert plný známých melodií.', ticketUrl: '#' },
-    { date: '6. 1.', dateFull: '6. ledna 2027', time: '19:00', venue: 'Zrcadlová kaple, Praha', title: 'Novoroční koncert', desc: 'Slavnostní zahájení nového roku ve znamení Straussových valčíků.', ticketUrl: '#' },
-    { date: '31. 1.', dateFull: '31. ledna 2027', time: '19:00', venue: 'Zámek Český Krumlov', title: 'Komorní večer při svíčkách', desc: 'Intimní komorní program při svíčkách v historických sálech.', ticketUrl: '#' }
-  ].map(function (c, i) {
-    c.img = concertImg(i, 700, 440);
-    c.imgWide = concertImg(i, 1400, 1000);
-    c.thumb = concertImg(i, 200, 200);
-    return c;
+  var CONCERT_BASE = [
+    { time: '19:00', ticketUrl: '#' },
+    { time: '18:30', ticketUrl: '#' },
+    { time: '19:30', ticketUrl: '#' },
+    { time: '19:00', ticketUrl: '#' },
+    { time: '18:00', ticketUrl: '#' },
+    { time: '19:00', ticketUrl: '#' },
+    { time: '17:00', ticketUrl: '#' },
+    { time: '18:00', ticketUrl: '#' },
+    { time: '19:00', ticketUrl: '#' },
+    { time: '19:00', ticketUrl: '#' }
+  ];
+
+  var CONCERT_TEXT = {
+    cs: [
+      { date: '12. 9.', dateFull: '12. září 2026', venue: 'Kostel sv. Mikuláše, Praha', title: 'Slavnostní zahájení sezóny', desc: 'Slavnostní zahájení nové koncertní sezóny s díly českých i světových mistrů.' },
+      { date: '27. 9.', dateFull: '27. září 2026', venue: 'Zámek Lysice', title: 'Barokní perly na zámku', desc: 'Komorní program z období vrcholného baroka v jedinečných prostorách zámku.' },
+      { date: '11. 10.', dateFull: '11. října 2026', venue: 'Smetanova síň, Praha', title: 'Dvořák & Smetana', desc: 'Symfonické perly dvou velikánů české hudby v podání celého souboru.' },
+      { date: '25. 10.', dateFull: '25. října 2026', venue: 'Katedrála sv. Petra a Pavla, Brno', title: 'Podzimní nešpory', desc: 'Podvečerní program duchovní hudby v majestátní katedrále.' },
+      { date: '8. 11.', dateFull: '8. listopadu 2026', venue: 'Chrám sv. Barbory, Kutná Hora', title: 'Svatocecilský koncert', desc: 'Koncert ke svátku patronky hudby svaté Cecílie.' },
+      { date: '22. 11.', dateFull: '22. listopadu 2026', venue: 'Rudolfinum, Praha', title: 'Mozart: Requiem', desc: 'Mozartovo Requiem v podání souboru, sboru a sólistů.' },
+      { date: '6. 12.', dateFull: '6. prosince 2026', venue: 'Obecní dům, Praha', title: 'Adventní koncert', desc: 'Adventní písně a koledy ve slavnostním hávu.' },
+      { date: '20. 12.', dateFull: '20. prosince 2026', venue: 'Bazilika sv. Jakuba, Praha', title: 'Vánoční koncert', desc: 'Tradiční vánoční koncert plný známých melodií.' },
+      { date: '6. 1.', dateFull: '6. ledna 2027', venue: 'Zrcadlová kaple, Praha', title: 'Novoroční koncert', desc: 'Slavnostní zahájení nového roku ve znamení Straussových valčíků.' },
+      { date: '31. 1.', dateFull: '31. ledna 2027', venue: 'Zámek Český Krumlov', title: 'Komorní večer při svíčkách', desc: 'Intimní komorní program při svíčkách v historických sálech.' }
+    ],
+    en: [
+      { date: '12 Sep', dateFull: '12 September 2026', venue: 'St Nicholas Church, Prague', title: 'Season Opening Gala', desc: 'A festive opening of the new concert season with works by Czech and international masters.' },
+      { date: '27 Sep', dateFull: '27 September 2026', venue: 'Lysice Château', title: 'Baroque Gems at the Château', desc: 'A chamber programme from the high Baroque in the remarkable interiors of the château.' },
+      { date: '11 Oct', dateFull: '11 October 2026', venue: 'Smetana Hall, Prague', title: 'Dvořák & Smetana', desc: 'Symphonic gems by two giants of Czech music, performed by the full ensemble.' },
+      { date: '25 Oct', dateFull: '25 October 2026', venue: 'Cathedral of St Peter and Paul, Brno', title: 'Autumn Vespers', desc: 'An early-evening programme of sacred music in a majestic cathedral.' },
+      { date: '8 Nov', dateFull: '8 November 2026', venue: 'St Barbara’s Church, Kutná Hora', title: 'St Cecilia’s Day Concert', desc: 'A concert for the feast of St Cecilia, the patron saint of music.' },
+      { date: '22 Nov', dateFull: '22 November 2026', venue: 'Rudolfinum, Prague', title: 'Mozart: Requiem', desc: 'Mozart’s Requiem performed by the ensemble, choir and soloists.' },
+      { date: '6 Dec', dateFull: '6 December 2026', venue: 'Municipal House, Prague', title: 'Advent Concert', desc: 'Advent songs and carols in festive arrangements.' },
+      { date: '20 Dec', dateFull: '20 December 2026', venue: 'St James’s Basilica, Prague', title: 'Christmas Concert', desc: 'A traditional Christmas concert full of familiar melodies.' },
+      { date: '6 Jan', dateFull: '6 January 2027', venue: 'Mirror Chapel, Prague', title: 'New Year’s Concert', desc: 'A festive start to the new year in the spirit of Strauss waltzes.' },
+      { date: '31 Jan', dateFull: '31 January 2027', venue: 'Český Krumlov Château', title: 'Chamber Evening by Candlelight', desc: 'An intimate candlelit chamber programme in historic halls.' }
+    ]
+  };
+
+  CN.CONCERTS = CONCERT_BASE.map(function (base, i) {
+    var t = pick(CONCERT_TEXT)[i];
+    return {
+      date: t.date,
+      dateFull: t.dateFull,
+      time: base.time,
+      venue: t.venue,
+      title: t.title,
+      desc: t.desc,
+      ticketUrl: base.ticketUrl,
+      img: concertImg(i, 700, 440),
+      imgWide: concertImg(i, 1400, 1000),
+      thumb: concertImg(i, 200, 200)
+    };
   });
 
   /* Past / archive concerts. */
-  CN.PAST = [
-    { date: 'Květen 2026', title: 'Jarní koncert' },
-    { date: 'Duben 2026', title: 'Velikonoční nešpory' },
-    { date: 'Březen 2026', title: 'Barokní večer' },
-    { date: 'Prosinec 2025', title: 'Vánoční koncert' },
-    { date: 'Listopad 2025', title: 'Svatomartinský koncert' },
-    { date: 'Říjen 2025', title: 'Podzimní serenáda' },
-    { date: 'Září 2025', title: 'Zahajovací koncert sezóny' },
-    { date: 'Červen 2025', title: 'Letní serenáda na zámku' }
-  ].map(function (c, i) {
-    c.img = concertImg(i + 10, 500, 375);
-    return c;
+  var PAST_TEXT = {
+    /* Data se píší všude stejně: celé datum „12. září 2026“, jen měsíc
+       „květen 2026“ (měsíce malým písmenem, jak je v češtině správně). */
+    cs: [
+      { date: 'květen 2026', title: 'Jarní koncert' },
+      { date: 'duben 2026', title: 'Velikonoční nešpory' },
+      { date: 'březen 2026', title: 'Barokní večer' },
+      { date: 'prosinec 2025', title: 'Vánoční koncert' },
+      { date: 'listopad 2025', title: 'Svatomartinský koncert' },
+      { date: 'říjen 2025', title: 'Podzimní serenáda' },
+      { date: 'září 2025', title: 'Zahajovací koncert sezóny' },
+      { date: 'červen 2025', title: 'Letní serenáda na zámku' }
+    ],
+    en: [
+      { date: 'May 2026', title: 'Spring Concert' },
+      { date: 'April 2026', title: 'Easter Vespers' },
+      { date: 'March 2026', title: 'Baroque Evening' },
+      { date: 'December 2025', title: 'Christmas Concert' },
+      { date: 'November 2025', title: 'St Martin’s Day Concert' },
+      { date: 'October 2025', title: 'Autumn Serenade' },
+      { date: 'September 2025', title: 'Season Opening Concert' },
+      { date: 'June 2025', title: 'Summer Serenade at the Château' }
+    ]
+  };
+
+  CN.PAST = pick(PAST_TEXT).map(function (t, i) {
+    return { date: t.date, title: t.title, img: concertImg(i + 10, 500, 375) };
   });
 
   /* Repertoire genres (also reused as the Home "gallery teaser" cards). */
-  CN.GENRES = [
-    { label: 'Klasicismus', img: CN.img('strings', 0, 500, 500) },
-    { label: 'Romantismus', img: CN.img('orchestra', 5, 500, 500) },
-    { label: 'Baroko', img: CN.img('cathedral', 2, 500, 500) },
-    { label: 'Sakrální hudba', img: CN.img('cathedral', 7, 500, 500) },
-    { label: 'Filmová hudba', img: CN.img('hall', 3, 500, 500) },
-    { label: 'Soudobá tvorba', img: CN.img('strings', 8, 500, 500) }
+  var GENRE_BASE = [
+    { cat: 'strings', i: 0 },
+    { cat: 'orchestra', i: 5 },
+    { cat: 'cathedral', i: 2 },
+    { cat: 'cathedral', i: 7 },
+    { cat: 'hall', i: 3 },
+    { cat: 'strings', i: 8 }
   ];
+  var GENRE_TEXT = {
+    cs: ['Klasicismus', 'Romantismus', 'Baroko', 'Sakrální hudba', 'Filmová hudba', 'Soudobá tvorba'],
+    en: ['Classical', 'Romantic', 'Baroque', 'Sacred Music', 'Film Music', 'Contemporary Works']
+  };
+  CN.GENRES = GENRE_BASE.map(function (g, i) {
+    return { label: pick(GENRE_TEXT)[i], img: CN.img(g.cat, g.i, 500, 500) };
+  });
 
-  /* Gallery albums (event photo sets) — shared by galerie.html and the Home teaser. */
-  CN.ALBUMS = [
-    { id: 'jarni', name: 'Jarní koncert', date: '6. 7. 2026', cat: 'Koncerty', group: 'koncerty', count: 12, off: 0 },
-    { id: 'advent', name: 'Adventní koncert v katedrále', date: '15. 12. 2025', cat: 'Koncerty', group: 'koncerty', count: 9, off: 7 },
-    { id: 'serenada', name: 'Letní serenáda na zámku', date: '2. 8. 2025', cat: 'Koncerty', group: 'koncerty', count: 8, off: 13 },
-    { id: 'film', name: 'Filmová hudba LIVE', date: '19. 4. 2025', cat: 'Koncerty', group: 'koncerty', count: 11, off: 9 },
-    { id: 'novorocni', name: 'Novoroční koncert', date: '1. 1. 2025', cat: 'Koncerty', group: 'koncerty', count: 10, off: 10 },
-    { id: 'komorni', name: 'Komorní večer', date: '14. 2. 2025', cat: 'Koncerty', group: 'koncerty', count: 7, off: 6 },
-    { id: 'general', name: 'Generální zkouška: Dvořák', date: '28. 6. 2025', cat: 'Zkoušky', group: 'zkousky', count: 6, off: 16 },
-    { id: 'zakulisi', name: 'Zákulisí jarního turné', date: 'květen 2025', cat: 'Zákulisí', group: 'zkousky', count: 9, off: 18 },
-    { id: 'zkousky2526', name: 'Zkoušky na sezónu 25/26', date: 'září 2025', cat: 'Zkoušky', group: 'zkousky', count: 8, off: 4 }
+  /* Gallery albums (event photo sets) — shared by the gallery page and the Home
+     teaser. `id` je klíč hash routy a je v obou jazycích stejný, takže
+     #album/jarni funguje i na /en/gallery.html. */
+  var ALBUM_BASE = [
+    { id: 'jarni', catKey: 'catConcerts', group: 'koncerty', count: 12, off: 0 },
+    { id: 'advent', catKey: 'catConcerts', group: 'koncerty', count: 9, off: 7 },
+    { id: 'serenada', catKey: 'catConcerts', group: 'koncerty', count: 8, off: 13 },
+    { id: 'film', catKey: 'catConcerts', group: 'koncerty', count: 11, off: 9 },
+    { id: 'novorocni', catKey: 'catConcerts', group: 'koncerty', count: 10, off: 10 },
+    { id: 'komorni', catKey: 'catConcerts', group: 'koncerty', count: 7, off: 6 },
+    { id: 'general', catKey: 'catRehearsals', group: 'zkousky', count: 6, off: 16 },
+    { id: 'zakulisi', catKey: 'catBackstage', group: 'zkousky', count: 9, off: 18 },
+    { id: 'zkousky2526', catKey: 'catRehearsals', group: 'zkousky', count: 8, off: 4 }
   ];
-  CN.ALBUMS.forEach(function (a) {
-    a.cover = CN.galleryImg(a.off, 700, 525);
-    a.photos = [];
-    for (var k = 0; k < a.count; k++) a.photos.push(CN.galleryImg(a.off + k, 800, 800));
+  var ALBUM_TEXT = {
+    cs: {
+      jarni: { name: 'Jarní koncert', date: '6. července 2026' },
+      advent: { name: 'Adventní koncert v katedrále', date: '15. prosince 2025' },
+      serenada: { name: 'Letní serenáda na zámku', date: '2. srpna 2025' },
+      film: { name: 'Filmová hudba LIVE', date: '19. dubna 2025' },
+      novorocni: { name: 'Novoroční koncert', date: '1. ledna 2025' },
+      komorni: { name: 'Komorní večer', date: '14. února 2025' },
+      general: { name: 'Generální zkouška: Dvořák', date: '28. června 2025' },
+      zakulisi: { name: 'Zákulisí jarního turné', date: 'květen 2025' },
+      zkousky2526: { name: 'Zkoušky na sezónu 25/26', date: 'září 2025' }
+    },
+    en: {
+      jarni: { name: 'Spring Concert', date: '6 July 2026' },
+      advent: { name: 'Advent Concert at the Cathedral', date: '15 December 2025' },
+      serenada: { name: 'Summer Serenade at the Château', date: '2 August 2025' },
+      film: { name: 'Film Music LIVE', date: '19 April 2025' },
+      novorocni: { name: 'New Year’s Concert', date: '1 January 2025' },
+      komorni: { name: 'Chamber Evening', date: '14 February 2025' },
+      general: { name: 'Dress Rehearsal: Dvořák', date: '28 June 2025' },
+      zakulisi: { name: 'Backstage on the Spring Tour', date: 'May 2025' },
+      zkousky2526: { name: 'Rehearsals for the 25/26 Season', date: 'September 2025' }
+    }
+  };
+
+  CN.ALBUMS = ALBUM_BASE.map(function (base) {
+    var t = pick(ALBUM_TEXT)[base.id];
+    var a = {
+      id: base.id,
+      name: t.name,
+      date: t.date,
+      cat: CN.t(base.catKey),
+      group: base.group,
+      count: base.count,
+      off: base.off,
+      cover: CN.galleryImg(base.off, 700, 525),
+      photos: []
+    };
+    for (var k = 0; k < base.count; k++) a.photos.push(CN.galleryImg(base.off + k, 800, 800));
+    return a;
   });
 })(window.CN);

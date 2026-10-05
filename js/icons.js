@@ -38,10 +38,6 @@
     '<symbol id="i-youtube" viewBox="0 0 24 24" fill="currentColor">' +
     '<path d="M21.6 8.2s-.2-1.4-.8-2c-.7-.8-1.6-.8-2-.9C16 5.1 12 5.1 12 5.1s-4 0-6.8.2c-.4.1-1.3.1-2 .9-.6.6-.8 2-.8 2S2.2 9.8 2.2 11.5v1c0 1.7.2 3.3.2 3.3s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.5.1 6.7.2 6.7.2s4 0 6.8-.2c.4-.1 1.3-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1c0-1.7-.2-3.3-.2-3.3zM9.9 14.6V9.4l5.2 2.6-5.2 2.6z"></path></symbol>' +
 
-    '<symbol id="i-spotify" viewBox="0 0 24 24" fill="none">' +
-    '<circle cx="12" cy="12" r="9" fill="currentColor"></circle>' +
-    '<path d="M7.5 9.8c3-.7 6.2-.4 8.8 1.1M8 12.7c2.4-.5 4.9-.3 7 .9M8.4 15.4c1.9-.4 3.8-.2 5.5.7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path></symbol>' +
-
     '<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' +
     '<rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3.5 7.5l8.5 6 8.5-6"></path></symbol>' +
 
@@ -50,24 +46,6 @@
 
     '<symbol id="i-photos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
     '<rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.7"></circle><path d="M21 16l-5-5-9 8"></path></symbol>' +
-
-    '<symbol id="i-church" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">' +
-    '<path d="M12 2v4M10 4h4"></path><path d="M12 7l6 4v10H6V11l6-4z"></path><rect x="10" y="15" width="4" height="6"></rect></symbol>' +
-
-    '<symbol id="i-columns" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M4 9l8-5 8 5"></path><path d="M6 9v9M18 9v9M10 9v9M14 9v9"></path><path d="M3 21h18"></path></symbol>' +
-
-    '<symbol id="i-castle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">' +
-    '<path d="M4 21V8h2V6h2v2h2V6h2v2h2V6h2v2h2v13z"></path><path d="M4 21h16"></path><rect x="10" y="15" width="4" height="6"></rect></symbol>' +
-
-    '<symbol id="i-festival" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
-    '<circle cx="12" cy="13" r="4"></circle><path d="M12 3v2.5M4.7 7.2l1.7 1.7M19.3 7.2l-1.7 1.7M3 21h18"></path></symbol>' +
-
-    '<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">' +
-    '<circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="4"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"></circle></symbol>' +
-
-    '<symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">' +
-    '<path d="M12 3l2.2 5.6L20 9.3l-4.4 3.7 1.4 5.9L12 15.8 7 18.9l1.4-5.9L4 9.3l5.8-.7z"></path></symbol>' +
 
     '<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">' +
     '<path d="M3 6h18M3 12h18M3 18h18"></path></symbol>' +

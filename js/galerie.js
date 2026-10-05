@@ -8,16 +8,16 @@
   }
 
   var VIDEOS = [
-    { id: 'vltava', title: 'Smetana — Vltava (živě z katedrály)', dur: '4:12', thumb: CN.galleryImg(3, 700, 394) },
-    { id: 'priprava', title: 'Zákulisí: příprava na jarní koncert', dur: '2:45', thumb: CN.galleryImg(16, 700, 394) },
-    { id: 'novosvetska', title: 'Dvořák — Novosvětská, finále', dur: '6:30', thumb: CN.galleryImg(5, 700, 394) }
+    { id: 'vltava', title: CN.t('videoVltava'), dur: '4:12', thumb: CN.galleryImg(3, 700, 394) },
+    { id: 'priprava', title: CN.t('videoBackstage'), dur: '2:45', thumb: CN.galleryImg(16, 700, 394) },
+    { id: 'novosvetska', title: CN.t('videoNewWorld'), dur: '6:30', thumb: CN.galleryImg(5, 700, 394) }
   ];
 
   var FILTERS = [
-    { key: 'all', label: 'Vše' },
-    { key: 'koncerty', label: 'Koncerty' },
-    { key: 'zkousky', label: 'Zkoušky & zákulisí' },
-    { key: 'videa', label: 'Videa' }
+    { key: 'all', label: CN.t('filterAll') },
+    { key: 'koncerty', label: CN.t('filterConcerts') },
+    { key: 'zkousky', label: CN.t('filterRehearsals') },
+    { key: 'videa', label: CN.t('filterVideos') }
   ];
   var VISIBLE_COUNT = 6;
   var state = { filter: 'all', expanded: false, lb: null };
@@ -49,7 +49,7 @@
       '<div class="thumb">' +
         '<img src="' + a.cover + '" alt="' + a.name + '" loading="lazy">' +
         '<span class="cat-badge">' + a.cat + '</span>' +
-        '<span class="count-badge">' + a.count + ' fotek</span>' +
+        '<span class="count-badge">' + a.count + ' ' + CN.t('photosCount') + '</span>' +
       '</div>' +
       '<div class="body"><h3>' + a.name + '</h3><p class="date">' + a.date + '</p></div>' +
     '</a>';
@@ -120,12 +120,12 @@
   /* ---------------- album detail ---------------- */
   function renderAlbum(id) {
     var a = albumById(id) || ALBUMS[0];
-    document.getElementById('albumKicker').textContent = 'Album · ' + a.cat;
+    document.getElementById('albumKicker').textContent = CN.t('albumKicker') + ' · ' + a.cat;
     document.getElementById('albumTitle').textContent = a.name;
     document.getElementById('albumMeta').innerHTML =
       '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + a.date + '</li>' +
-      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-pin"></use></svg>Lukavice</li>' +
-      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-photos"></use></svg>' + a.count + ' fotek</li>';
+      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-pin"></use></svg>' + CN.t('albumPlace') + '</li>' +
+      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-photos"></use></svg>' + a.count + ' ' + CN.t('photosCount') + '</li>';
     document.getElementById('albumPhotosGrid').innerHTML = a.photos.map(function (src, i) {
       return '<a href="#" class="photo-tile" data-photo-i="' + i + '"><img src="' + src + '" alt="" loading="lazy"></a>';
     }).join('');
@@ -174,12 +174,17 @@
     state.lb = { kind: 'video', video: v };
     renderLightbox();
   }
+  /* Prvek, ze kterého se lightbox otevřel — po zavření se na něj vrátí fokus. */
+  var lastFocus = null;
+
   function closeLb() {
     state.lb = null;
     lightbox.classList.remove('is-open');
     lbPhotoEl.hidden = true;
     lbVideoEl.hidden = true;
     document.body.style.overflow = '';
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+    lastFocus = null;
   }
   function lbPrev() {
     if (!state.lb || state.lb.kind !== 'photo') return;
@@ -203,33 +208,62 @@
 
   function renderLightbox() {
     if (!state.lb) return;
+    var opening = !lightbox.classList.contains('is-open');
+    if (opening) lastFocus = document.activeElement;
     lightbox.classList.add('is-open');
     document.body.style.overflow = 'hidden'; /* zámek scrollu pod lightboxem */
     if (state.lb.kind === 'photo') {
       lbPhotoEl.hidden = false;
       lbVideoEl.hidden = true;
+      lightbox.setAttribute('aria-labelledby', 'lbTitle');
       var a = albumById(state.lb.albumId);
       var idx = Math.max(0, Math.min(state.lb.i, a.photos.length - 1));
+      var thumbs = document.getElementById('lbThumbs');
+      var thumbHadFocus = thumbs.contains(document.activeElement);
       document.getElementById('lbTitle').textContent = a.name;
-      document.getElementById('lbDate').textContent = a.date + ' · Lukavice';
+      document.getElementById('lbDate').textContent = a.date + ' · ' + CN.t('albumPlace');
       document.getElementById('lbCounter').textContent = (idx + 1) + ' / ' + a.photos.length;
       document.getElementById('lbStage').innerHTML = '<img src="' + a.photos[idx] + '" alt="">';
-      document.getElementById('lbThumbs').innerHTML = a.photos.map(function (src, i) {
-        return '<button type="button" class="' + (i === idx ? 'is-active' : '') + '" data-thumb-i="' + i + '"><img src="' + src + '" alt=""></button>';
+      thumbs.innerHTML = a.photos.map(function (src, i) {
+        return '<button type="button" class="' + (i === idx ? 'is-active' : '') + '" data-thumb-i="' + i + '" aria-label="' + (i + 1) + ' / ' + a.photos.length + '"' +
+          (i === idx ? ' aria-current="true"' : '') + '><img src="' + src + '" alt=""></button>';
       }).join('');
-      document.querySelectorAll('#lbThumbs [data-thumb-i]').forEach(function (btn) {
+      thumbs.querySelectorAll('[data-thumb-i]').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
           e.stopPropagation();
           lbGo(parseInt(btn.getAttribute('data-thumb-i'), 10));
         });
       });
+      /* Náhledy se překreslují — fokus z klávesnice se musí vrátit na aktivní. */
+      if (thumbHadFocus) thumbs.querySelector('.is-active').focus();
+      if (opening) document.getElementById('lbCloseBtn1').focus();
     } else {
       lbPhotoEl.hidden = true;
       lbVideoEl.hidden = false;
+      lightbox.setAttribute('aria-labelledby', 'lbVideoTitle');
       document.getElementById('lbVideoTitle').textContent = state.lb.video.title;
       document.getElementById('lbVideoTime').textContent = '1:24 / ' + state.lb.video.dur;
+      if (opening) document.getElementById('lbCloseBtn2').focus();
     }
   }
+
+  /* Na dotykových displejích se mezi fotkami listuje tahem prstu do strany. */
+  var lbBody = lbPhotoEl.querySelector('.lb-body');
+  var touchX = null, touchY = 0;
+  lbBody.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) { touchX = null; return; }
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+  }, { passive: true });
+  lbBody.addEventListener('touchend', function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    var dy = e.changedTouches[0].clientY - touchY;
+    touchX = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) lbNext(); else lbPrev();
+    }
+  }, { passive: true });
 
   lightbox.addEventListener('click', closeLb);
   lbPhotoEl.addEventListener('click', function (e) { e.stopPropagation(); });
@@ -242,6 +276,15 @@
   document.addEventListener('keydown', function (e) {
     if (!state.lb) return;
     if (e.key === 'Escape') closeLb();
+    else if (e.key === 'Tab') {
+      /* Fokus zůstává uvnitř otevřeného lightboxu (je to modální dialog). */
+      var panel = state.lb.kind === 'photo' ? lbPhotoEl : lbVideoEl;
+      var items = panel.querySelectorAll('button');
+      var first = items[0], last = items[items.length - 1];
+      if (!panel.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+      else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
     else if (state.lb.kind === 'photo') {
       if (e.key === 'ArrowLeft') lbPrev();
       else if (e.key === 'ArrowRight') lbNext();

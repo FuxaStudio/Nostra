@@ -26,8 +26,8 @@
   document.getElementById('conductorImg').src = conductorImg;
 
   var leaders = [
-    { name: 'Eliška Marešová', role: 'Koncertní mistryně · 1. housle', img: faceUrl('1610306673745-258854d4bbcd', 320, 320) },
-    { name: 'Martin Beneš', role: 'Sbormistr & asistent dirigenta', img: faceUrl('1484972759836-b93f9ef2b293', 320, 320) }
+    { name: 'Eliška Marešová', role: CN.t('roleConcertmaster'), img: faceUrl('1610306673745-258854d4bbcd', 320, 320) },
+    { name: 'Martin Beneš', role: CN.t('roleChorusMaster'), img: faceUrl('1484972759836-b93f9ef2b293', 320, 320) }
   ];
   document.getElementById('leadersFeature').innerHTML = leaders.map(function (l) {
     return '<div class="musician">' +
@@ -37,31 +37,32 @@
     '</div>';
   }).join('');
 
+  /* Jména členů zůstávají v originále v obou jazycích, překládá se jen nástroj. */
   var memberData = [
-    { name: 'Anna Procházková', role: '1. housle', f: true },
-    { name: 'Jakub Svoboda', role: '1. housle', f: false },
-    { name: 'Tereza Nováková', role: '1. housle', f: true },
-    { name: 'Filip Horák', role: '2. housle', f: false },
-    { name: 'Klára Pospíšilová', role: '2. housle', f: true },
-    { name: 'Ondřej Marek', role: '2. housle', f: false },
-    { name: 'Karolína Müllerová', role: '2. housle', f: true },
-    { name: 'Veronika Krejčí', role: 'Viola', f: true },
-    { name: 'David Růžička', role: 'Viola', f: false },
-    { name: 'Hana Bláhová', role: 'Violoncello', f: true },
-    { name: 'Lukáš Fiala', role: 'Violoncello', f: false },
-    { name: 'Vojtěch Říha', role: 'Violoncello', f: false },
-    { name: 'Markéta Sedláčková', role: 'Kontrabas', f: true },
-    { name: 'Štěpán Dvořáček', role: 'Kontrabas', f: false },
-    { name: 'Petr Kučera', role: 'Flétna', f: false },
-    { name: 'Lucie Veselá', role: 'Hoboj', f: true },
-    { name: 'Tomáš Urban', role: 'Klarinet', f: false },
-    { name: 'Barbora Doležalová', role: 'Fagot', f: true },
-    { name: 'Jan Šťastný', role: 'Lesní roh', f: false },
-    { name: 'Kateřina Macháčková', role: 'Trubka', f: true },
-    { name: 'Michal Kovář', role: 'Pozoun', f: false },
-    { name: 'Nikola Černá', role: 'Harfa', f: true },
-    { name: 'Adam Pokorný', role: 'Klavír & cembalo', f: false },
-    { name: 'Simona Holubová', role: 'Tympány & bicí', f: true }
+    { name: 'Anna Procházková', role: 'violin1', f: true },
+    { name: 'Jakub Svoboda', role: 'violin1', f: false },
+    { name: 'Tereza Nováková', role: 'violin1', f: true },
+    { name: 'Filip Horák', role: 'violin2', f: false },
+    { name: 'Klára Pospíšilová', role: 'violin2', f: true },
+    { name: 'Ondřej Marek', role: 'violin2', f: false },
+    { name: 'Karolína Müllerová', role: 'violin2', f: true },
+    { name: 'Veronika Krejčí', role: 'viola', f: true },
+    { name: 'David Růžička', role: 'viola', f: false },
+    { name: 'Hana Bláhová', role: 'cello', f: true },
+    { name: 'Lukáš Fiala', role: 'cello', f: false },
+    { name: 'Vojtěch Říha', role: 'cello', f: false },
+    { name: 'Markéta Sedláčková', role: 'doubleBass', f: true },
+    { name: 'Štěpán Dvořáček', role: 'doubleBass', f: false },
+    { name: 'Petr Kučera', role: 'flute', f: false },
+    { name: 'Lucie Veselá', role: 'oboe', f: true },
+    { name: 'Tomáš Urban', role: 'clarinet', f: false },
+    { name: 'Barbora Doležalová', role: 'bassoon', f: true },
+    { name: 'Jan Šťastný', role: 'horn', f: false },
+    { name: 'Kateřina Macháčková', role: 'trumpet', f: true },
+    { name: 'Michal Kovář', role: 'trombone', f: false },
+    { name: 'Nikola Černá', role: 'harp', f: true },
+    { name: 'Adam Pokorný', role: 'piano', f: false },
+    { name: 'Simona Holubová', role: 'timpani', f: true }
   ];
 
   document.getElementById('musiciansGrid').innerHTML = memberData.map(function (m) {
@@ -69,7 +70,7 @@
     return '<div class="musician">' +
       '<div class="photo"><img src="' + img + '" alt="' + m.name + '" loading="lazy"><span class="ring"></span></div>' +
       '<h3>' + m.name + '</h3>' +
-      '<p>' + m.role + '</p>' +
+      '<p>' + CN.t(m.role) + '</p>' +
     '</div>';
   }).join('');
 })();

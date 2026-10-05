@@ -21,7 +21,7 @@
             '<li><svg class="icon" width="15" height="15" style="color:#003FFF"><use href="#i-pin"></use></svg>' + c.venue + '</li>' +
           '</ul>' +
           '<p class="desc">' + c.desc + '</p>' +
-          '<span class="ticket-pill">Vstupenky <span>↗</span></span>' +
+          '<span class="ticket-pill">' + CN.t('tickets') + ' <span>↗</span></span>' +
         '</div>' +
       '</a>'
     );
@@ -42,7 +42,7 @@
   /* ---- Archive ---- */
   document.getElementById('archiveGrid').innerHTML = CN.PAST.map(function (p) {
     return (
-      '<a href="galerie.html" class="archive-card">' +
+      '<a href="' + CN.url('gallery') + '" class="archive-card">' +
         '<div class="thumb">' +
           '<img src="' + p.img + '" alt="' + p.title + '" loading="lazy">' +
           '<div class="tint"></div>' +

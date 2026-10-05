@@ -1,5 +1,6 @@
-/* Shared behaviour for every page: mobile nav drawer, CZ/EN cosmetic toggle
-   and scroll-reveal animations. */
+/* Shared behaviour for every page: mobile nav drawer and scroll-reveal
+   animations. Přepínač CZ/EN je obyčejný odkaz na protějšek stránky
+   (viz .lang-toggle v HTML), takže funguje i bez JavaScriptu. */
 (function () {
   function initMobileNav() {
     var toggle = document.getElementById('navToggle');
@@ -11,10 +12,16 @@
     function open() {
       document.body.classList.add('nav-open');
       toggle.setAttribute('aria-expanded', 'true');
+      /* Zásuvka překryje tlačítko menu — fokus proto přejde na první odkaz. */
+      var first = links.querySelector('a');
+      if (first) first.focus();
     }
     function shut() {
+      if (!document.body.classList.contains('nav-open')) return;
+      var hadFocus = links.contains(document.activeElement);
       document.body.classList.remove('nav-open');
       toggle.setAttribute('aria-expanded', 'false');
+      if (hadFocus) toggle.focus();
     }
 
     toggle.addEventListener('click', function () {
@@ -27,25 +34,30 @@
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') shut();
+      /* Otevřená zásuvka drží fokus v sobě — jinak by Tab utekl pod závoj. */
+      if (e.key === 'Tab' && document.body.classList.contains('nav-open')) {
+        var items = links.querySelectorAll('a, button');
+        var firstEl = items[0], lastEl = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+        else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+        else if (!links.contains(document.activeElement)) { e.preventDefault(); firstEl.focus(); }
+      }
     });
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 1140) shut();
+      if (window.innerWidth > 1240) shut();
     });
   }
 
+  /* Přepínač jazyka je obyčejný odkaz na protějšek stránky. V detailu alba
+     (#album/…) si ale musí vzít adresu alba s sebou — id alb jsou v obou
+     jazycích stejná, takže stačí přilepit hash. */
   function initLangToggle() {
-    var btn = document.getElementById('langToggle');
-    if (!btn) return;
-    var flagCs = btn.querySelector('.flag-cs');
-    var flagEn = btn.querySelector('.flag-en');
-    var label = btn.querySelector('.lang-label');
-    var lang = 'cs';
-    btn.addEventListener('click', function () {
-      lang = lang === 'cs' ? 'en' : 'cs';
-      var isCs = lang === 'cs';
-      if (flagCs) flagCs.hidden = !isCs;
-      if (flagEn) flagEn.hidden = isCs;
-      if (label) label.textContent = isCs ? 'CZ' : 'EN';
+    document.querySelectorAll('.lang-toggle').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (/^#album\//.test(location.hash)) {
+          a.setAttribute('href', a.getAttribute('href').split('#')[0] + location.hash);
+        }
+      });
     });
   }
 
@@ -67,7 +79,7 @@
     /* Samostatné bloky — textové sloupce, hlavičky sekcí, fotky. */
     var SINGLES = [
       '.section-head', '.copy', '.photo-wrap',
-      '.mission .head', '.venues .head', '.genre-section .head',
+      '.genre-section .head',
       '.genre-row',
       '.inquiry .inner',
       '.filters .filter-row',
@@ -79,9 +91,8 @@
     /* Kontejnery, jejichž děti se odhalují se zpožděním po sobě. */
     var GROUPS = [
       '.featured-list', '.grid-concerts', '.grid-archive', '.grid-albums',
-      '.grid-videos', '.grid-photos', '.grid-musicians', '.mission-grid',
-      '.venues-grid', '.stats-strip', '.timeline-items',
-      '.repertoire .tags', '.members-strip', '.leaders-row'
+      '.grid-videos', '.grid-photos', '.grid-musicians', '.grid-leaders',
+      '.members-strip'
     ].join(',');
 
     var io = new IntersectionObserver(function (entries) {

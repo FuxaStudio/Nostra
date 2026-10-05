@@ -1,0 +1,4 @@
+# Vlastní stránka 404 pro hosting s Apache (běžné české webhostingy).
+# Netlify, Cloudflare Pages, GitHub Pages i Vercel použijí 404.html samy
+# a tento soubor ignorují.
+ErrorDocument 404 /404.html
