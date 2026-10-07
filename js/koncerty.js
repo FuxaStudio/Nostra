@@ -55,7 +55,7 @@
 
   /* ---- Nadcházející koncerty: karty ----
      Stejné jako na úvodní stránce. Karta není celá odkazem, protože nese dvě
-     akce: událost (jen kde existuje) a uložení do kalendáře (CN.calendarUrl). */
+     akce: událost (jen kde existuje) a uložení do kalendáře (CN.calendarAttrs). */
   function cardHtml(c) {
     return (
       '<article class="concert-card koncerty-card">' +

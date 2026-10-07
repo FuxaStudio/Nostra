@@ -40,7 +40,7 @@
   /* ---- Tři nejbližší koncerty jako karty ----
      Vzhled vychází z karet na stránce Koncerty. Karta není celá odkazem,
      protože nese dvě akce: událost (jen kde existuje) a uložení do kalendáře.
-     Mapy a .ics: sdílené CN.mapUrl / CN.calendarUrl / CN.calendarFile v data.js. */
+     Mapy a .ics: sdílené CN.mapUrl / CN.calendarAttrs v data.js. */
   var concertGrid = $('homeConcerts');
   if (concertGrid) {
     var next3 = upcoming.slice(0, 3);

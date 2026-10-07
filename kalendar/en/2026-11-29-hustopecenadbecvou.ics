@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Capella Nostra//Web//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:20261129-hustopecenadbecvou@capellanostra.com
+DTSTAMP:20261007T195823Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:Christmas concert – Capella Nostra
+LOCATION:Church of the Exaltation of the Holy Cross\, Hustopeče nad Bečvo
+ u
+END:VEVENT
+END:VCALENDAR

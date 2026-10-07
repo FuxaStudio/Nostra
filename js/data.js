@@ -117,14 +117,21 @@ window.CN = window.CN || {};
 
   /* ---- Sdílené akce u koncertu (úvod i stránka Koncerty) ----
        CN.mapUrl(c)        odkaz na Google Mapy (hledá „místo, obec“, žádné souřadnice se nevymýšlí)
-       CN.calendarUrl(c)   data: URI se souborem .ics pro <a href download>
-       CN.calendarFile(c)  název souboru „capella-nostra-RRRR-MM-DD.ics“ pro atribut download
-       CN.calendarAttrs(c) atributy odkazu „Do kalendáře“ (Android → Google Kalendář, jinde .ics)
-     Potřebují c.iso, c.place, c.town; volitelně c.time, c.title, c.subtitle, c.url. */
+       CN.calendarAttrs(c) atributy odkazu „Do kalendáře“ (viz níže)
+       CN.calendarIcs(c)   text události ve formátu .ics
+       CN.calendarPath(c)  cesta k hotovému .ics od kořene webu, kalendar/<jazyk>/RRRR-MM-DD-obec.ics
+     Potřebují c.iso, c.place, c.town; volitelně c.time, c.title, c.subtitle, c.url.
+     Soubory v kalendar/ vyrábí docs/scripts/make_ics.js – po každé změně
+     CN.CONCERTS ho spustit znovu (node docs/scripts/make_ics.js). */
   CN.mapUrl = function (c) {
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.mapQuery || (c.place + ', ' + c.town));
   };
-  CN.calendarFile = function (c) { return 'capella-nostra-' + c.iso + '.ics'; };
+  var SITE_BASE = (function () {
+    var s = document.currentScript && document.currentScript.src;
+    try { return new URL('../', s || document.baseURI).href; } catch (e) { return ''; }
+  })();
+  function townSlug(c) { return c.town.normalize('NFD').replace(/[^A-Za-z0-9]/g, '').toLowerCase(); }
+  CN.calendarPath = function (c) { return 'kalendar/' + LANG + '/' + c.iso + '-' + townSlug(c) + '.ics'; };
 
   /* Čas jen tam, kde je známý (Europe/Prague, bez DTEND – délka koncertu
      není zveřejněná); jinak celodenní událost (DTEND = následující den). */
@@ -155,7 +162,7 @@ window.CN = window.CN || {};
     }
     return out;
   }
-  CN.calendarUrl = function (c) {
+  CN.calendarIcs = function (c) {
     var d = c.iso.replace(/-/g, '');
     var p = c.iso.split('-');
     var next = new Date(+p[0], +p[1] - 1, +p[2] + 1);
@@ -164,7 +171,7 @@ window.CN = window.CN || {};
       .concat(c.time ? VTIMEZONE : [])
       .concat([
         'BEGIN:VEVENT',
-        'UID:' + d + '-' + c.town.normalize('NFD').replace(/[^A-Za-z0-9]/g, '') + '@capellanostra.com',
+        'UID:' + d + '-' + townSlug(c) + '@capellanostra.com',
         'DTSTAMP:' + stamp,
         c.time
           ? 'DTSTART;TZID=Europe/Prague:' + d + 'T' + c.time.replace(':', '') + '00'
@@ -176,13 +183,12 @@ window.CN = window.CN || {};
         c.url ? 'URL:' + c.url : '',
         'END:VEVENT', 'END:VCALENDAR'
       ]).filter(Boolean).map(icsFold);
-    return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n') + '\r\n');
+    return lines.join('\r\n') + '\r\n';
   };
 
-  /* Android soubor .ics jen tiše stáhne a Google Kalendář ho z telefonu
-     neotevře. Tam proto tlačítko vede na Google Kalendář s předvyplněnou
-     událostí. Stejná pravidla jako u .ics: čas jen když je znám (konec =
-     začátek, délka není zveřejněná), jinak celodenní. */
+  /* Google Kalendář s předvyplněnou událostí – bez stahování souboru.
+     Stejná pravidla jako u .ics: čas jen když je znám (konec = začátek,
+     délka není zveřejněná), jinak celodenní. */
   CN.calendarGoogleUrl = function (c) {
     var d = c.iso.replace(/-/g, '');
     var p = c.iso.split('-');
@@ -200,13 +206,17 @@ window.CN = window.CN || {};
     if (details) q.push('details=' + encodeURIComponent(details));
     return 'https://calendar.google.com/calendar/render?' + q.join('&');
   };
-  var IS_ANDROID = /Android/i.test(navigator.userAgent);
-  /* Atributy odkazu „Do kalendáře“: na Androidu Google Kalendář v novém okně,
-     jinde stažení .ics (Apple Kalendář, Outlook, Windows). */
+  /* Apple (iPhone, iPad, Safari na Macu): hotový soubor .ics z webu – Safari
+     ho nestahuje, rovnou nabídne „Přidat do kalendáře“ (z data: URI to
+     nedělá). Ostatní (Android, Windows, Chrome na Macu): Google Kalendář
+     v novém okně – Android by soubor .ics jen tiše stáhl. */
+  var UA = navigator.userAgent;
+  var APPLE_CALENDAR = /iPhone|iPad|iPod/.test(UA) ||
+    (/Macintosh/.test(UA) && /Safari/.test(UA) && !/Chrome|Chromium|Edg|Firefox|OPR/.test(UA));
   CN.calendarAttrs = function (c) {
-    return IS_ANDROID
-      ? 'href="' + CN.calendarGoogleUrl(c).replace(/&/g, '&amp;') + '" target="_blank" rel="noopener"'
-      : 'href="' + CN.calendarUrl(c) + '" download="' + CN.calendarFile(c) + '"';
+    return APPLE_CALENDAR
+      ? 'href="' + SITE_BASE + CN.calendarPath(c) + '"'
+      : 'href="' + CN.calendarGoogleUrl(c).replace(/&/g, '&amp;') + '" target="_blank" rel="noopener"';
   };
 
   var FB_EVENT = { cs: 'Událost na Facebooku', en: 'Facebook event' };

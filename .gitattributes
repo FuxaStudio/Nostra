@@ -1,0 +1,2 @@
+# Kalendářové soubory musí mít konce řádků CRLF (RFC 5545)
+*.ics -text
