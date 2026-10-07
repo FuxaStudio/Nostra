@@ -164,7 +164,7 @@ Výřez 16 : 9 bere celou šířku a ubírá jen strop a podlahu; hlavy ani nohy
 |---|---|---|
 | `assets/og-cover.jpg` | 1200 × 630, 145 kB | Výřez ze snímku 09: celý soubor při hraní v kostele (housle, cembalo, hoboje, violoncello, kontrabas). |
 
-Odkazují na něj `og:image` všech stránek (absolutní URL s předpokládanou doménou capellanostra.cz).
+Odkazují na něj `og:image` všech stránek (absolutní URL s doménou capellanostra.com).
 
 ## Co chybí
 

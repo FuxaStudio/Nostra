@@ -71,7 +71,7 @@
           '<div class="koncerty-card__actions">' +
             (c.url ? '<a class="btn btn-blue" href="' + esc(c.url) + '" target="_blank" rel="noopener">' +
               esc(c.urlLabel || CN.t('details')) + ' <span class="arrow-ne" aria-hidden="true">↗</span>' + NEW_WINDOW + '</a>' : '') +
-            '<a class="btn btn-outline" href="' + CN.calendarUrl(c) + '" download="' + CN.calendarFile(c) + '">' +
+            '<a class="btn btn-outline" ' + CN.calendarAttrs(c) + '>' +
               icon('calendar') + CN.t('addToCalendar') + '</a>' +
           '</div>' +
         '</div>' +

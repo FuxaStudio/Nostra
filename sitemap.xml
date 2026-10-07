@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Adresy počítají s doménou capellanostra.cz (stejně jako canonical a hreflang v HTML).
+<!-- Adresy počítají s doménou capellanostra.com (stejně jako canonical a hreflang v HTML).
      Zásady ochrany osobních údajů tu záměrně nejsou — mají noindex. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://capellanostra.cz/</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/"/>
+    <loc>https://capellanostra.com/</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/koncerty.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/koncerty.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/concerts.html"/>
+    <loc>https://capellanostra.com/koncerty.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/koncerty.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/concerts.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/o-nas.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/o-nas.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/about.html"/>
+    <loc>https://capellanostra.com/o-nas.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/o-nas.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/about.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/clenove.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/clenove.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/members.html"/>
+    <loc>https://capellanostra.com/clenove.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/clenove.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/members.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/galerie.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/galerie.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/gallery.html"/>
+    <loc>https://capellanostra.com/galerie.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/galerie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/gallery.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/kontakt.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/kontakt.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/contact.html"/>
+    <loc>https://capellanostra.com/kontakt.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/contact.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/en/</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/"/>
+    <loc>https://capellanostra.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/en/concerts.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/koncerty.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/concerts.html"/>
+    <loc>https://capellanostra.com/en/concerts.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/koncerty.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/concerts.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/en/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/o-nas.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/about.html"/>
+    <loc>https://capellanostra.com/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/o-nas.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/about.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/en/members.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/clenove.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/members.html"/>
+    <loc>https://capellanostra.com/en/members.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/clenove.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/members.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/en/gallery.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/galerie.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/gallery.html"/>
+    <loc>https://capellanostra.com/en/gallery.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/galerie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/gallery.html"/>
   </url>
   <url>
-    <loc>https://capellanostra.cz/en/contact.html</loc>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.cz/kontakt.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/contact.html"/>
+    <loc>https://capellanostra.com/en/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://capellanostra.com/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://capellanostra.com/en/contact.html"/>
   </url>
 </urlset>

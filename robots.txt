@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://capellanostra.cz/sitemap.xml
+Sitemap: https://capellanostra.com/sitemap.xml

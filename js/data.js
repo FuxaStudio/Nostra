@@ -119,6 +119,7 @@ window.CN = window.CN || {};
        CN.mapUrl(c)        odkaz na Google Mapy (hledá „místo, obec“, žádné souřadnice se nevymýšlí)
        CN.calendarUrl(c)   data: URI se souborem .ics pro <a href download>
        CN.calendarFile(c)  název souboru „capella-nostra-RRRR-MM-DD.ics“ pro atribut download
+       CN.calendarAttrs(c) atributy odkazu „Do kalendáře“ (Android → Google Kalendář, jinde .ics)
      Potřebují c.iso, c.place, c.town; volitelně c.time, c.title, c.subtitle, c.url. */
   CN.mapUrl = function (c) {
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.mapQuery || (c.place + ', ' + c.town));
@@ -163,7 +164,7 @@ window.CN = window.CN || {};
       .concat(c.time ? VTIMEZONE : [])
       .concat([
         'BEGIN:VEVENT',
-        'UID:' + d + '-' + c.town.normalize('NFD').replace(/[^A-Za-z0-9]/g, '') + '@capellanostra.cz',
+        'UID:' + d + '-' + c.town.normalize('NFD').replace(/[^A-Za-z0-9]/g, '') + '@capellanostra.com',
         'DTSTAMP:' + stamp,
         c.time
           ? 'DTSTART;TZID=Europe/Prague:' + d + 'T' + c.time.replace(':', '') + '00'
@@ -176,6 +177,36 @@ window.CN = window.CN || {};
         'END:VEVENT', 'END:VCALENDAR'
       ]).filter(Boolean).map(icsFold);
     return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n') + '\r\n');
+  };
+
+  /* Android soubor .ics jen tiše stáhne a Google Kalendář ho z telefonu
+     neotevře. Tam proto tlačítko vede na Google Kalendář s předvyplněnou
+     událostí. Stejná pravidla jako u .ics: čas jen když je znám (konec =
+     začátek, délka není zveřejněná), jinak celodenní. */
+  CN.calendarGoogleUrl = function (c) {
+    var d = c.iso.replace(/-/g, '');
+    var p = c.iso.split('-');
+    var next = new Date(+p[0], +p[1] - 1, +p[2] + 1);
+    var start = c.time ? d + 'T' + c.time.replace(':', '') + '00' : d;
+    var end = c.time ? start : next.getFullYear() + pad2(next.getMonth() + 1) + pad2(next.getDate());
+    var q = [
+      'action=TEMPLATE',
+      'text=' + encodeURIComponent((c.title || CN.t('concertFallback')) + ' – Capella Nostra'),
+      'dates=' + start + '/' + end,
+      'location=' + encodeURIComponent(c.place + ', ' + c.town)
+    ];
+    if (c.time) q.push('ctz=Europe/Prague');
+    var details = [c.subtitle, c.url].filter(Boolean).join('\n');
+    if (details) q.push('details=' + encodeURIComponent(details));
+    return 'https://calendar.google.com/calendar/render?' + q.join('&');
+  };
+  var IS_ANDROID = /Android/i.test(navigator.userAgent);
+  /* Atributy odkazu „Do kalendáře“: na Androidu Google Kalendář v novém okně,
+     jinde stažení .ics (Apple Kalendář, Outlook, Windows). */
+  CN.calendarAttrs = function (c) {
+    return IS_ANDROID
+      ? 'href="' + CN.calendarGoogleUrl(c).replace(/&/g, '&amp;') + '" target="_blank" rel="noopener"'
+      : 'href="' + CN.calendarUrl(c) + '" download="' + CN.calendarFile(c) + '"';
   };
 
   var FB_EVENT = { cs: 'Událost na Facebooku', en: 'Facebook event' };

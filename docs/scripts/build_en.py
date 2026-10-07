@@ -341,11 +341,11 @@ def build(cz, en):
     pre = '/' if absolute else ''
     t = t.replace('<html lang="cs">', '<html lang="en">')
     t = t.replace('<meta property="og:locale" content="cs_CZ">', '<meta property="og:locale" content="en_GB">')
-    t = t.replace('<!-- Absolutní adresy počítají s doménou capellanostra.cz. Poběží-li web jinde, nahraďte „https://capellanostra.cz“ ve všech HTML souborech, v sitemap.xml a robots.txt. -->',
-                  '<!-- Absolute URLs assume the domain capellanostra.cz. If the site runs elsewhere, replace “https://capellanostra.cz” in all HTML files, sitemap.xml and robots.txt. -->')
+    t = t.replace('<!-- Absolutní adresy počítají s doménou capellanostra.com. Poběží-li web jinde, nahraďte „https://capellanostra.com“ ve všech HTML souborech, v sitemap.xml a robots.txt. -->',
+                  '<!-- Absolute URLs assume the domain capellanostra.com. If the site runs elsewhere, replace “https://capellanostra.com” in all HTML files, sitemap.xml and robots.txt. -->')
     # canonical + og:url → anglická adresa (hreflang zůstává stejný v obou jazycích)
-    can_cz = 'https://capellanostra.cz/' + ('' if cz == 'index.html' else cz)
-    can_en = 'https://capellanostra.cz/en/' + ('' if en == 'index.html' else en)
+    can_cz = 'https://capellanostra.com/' + ('' if cz == 'index.html' else cz)
+    can_en = 'https://capellanostra.com/en/' + ('' if en == 'index.html' else en)
     t = t.replace('<link rel="canonical" href="%s">' % can_cz, '<link rel="canonical" href="%s">' % can_en)
     t = t.replace('<meta property="og:url" content="%s">' % can_cz, '<meta property="og:url" content="%s">' % can_en)
     # přepínač jazyka → česká verze
