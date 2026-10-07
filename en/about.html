@@ -3,18 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About us — Capella Nostra</title>
-<meta name="description" content="Capella Nostra is a chamber ensemble. Who we are, how we started, what and where we play — and who is behind the music.">
+<title>About us – Capella Nostra, Baroque ensemble</title>
+<meta name="description" content="A young Baroque ensemble from the Pardubice Conservatory. Founded in 2024, it plays music of the 17th and 18th centuries in a historically informed way – Fischer, Vivaldi and trio sonatas.">
 <meta name="theme-color" content="#003FFF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Capella Nostra">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="About us — Capella Nostra">
-<meta property="og:description" content="Capella Nostra is a chamber ensemble. Who we are, how we started, what and where we play — and who is behind the music.">
+<meta property="og:title" content="About us – Capella Nostra, Baroque ensemble">
+<meta property="og:description" content="A young Baroque ensemble from the Pardubice Conservatory. Founded in 2024, it plays music of the 17th and 18th centuries in a historically informed way – Fischer, Vivaldi and trio sonatas.">
 <!-- Absolute URLs assume the domain capellanostra.cz. If the site runs elsewhere, replace “https://capellanostra.cz” in all HTML files, sitemap.xml and robots.txt. -->
 <link rel="canonical" href="https://capellanostra.cz/en/about.html">
 <meta property="og:url" content="https://capellanostra.cz/en/about.html">
 <meta property="og:image" content="https://capellanostra.cz/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Capella Nostra playing in a church: violins, harpsichord, oboes, cello and double bass">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="cs" href="https://capellanostra.cz/o-nas.html">
 <link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/about.html">
@@ -28,11 +31,12 @@
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#obsah">Skip to content</a>
 <script src="../js/icons.js"></script>
 
 <header class="site-header">
   <div class="bar">
-    <a href="index.html" class="brand" aria-label="Capella Nostra — home">
+    <a href="index.html" class="brand" aria-label="Capella Nostra – home">
       <img src="../assets/logo-nav.png" alt="Capella Nostra logo" width="46" height="46">
       <span>Capella Nostra</span>
     </a>
@@ -46,11 +50,11 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="nav-actions">
-        <a class="lang-toggle" href="../o-nas.html" hreflang="cs" lang="cs" aria-label="Přepnout do češtiny" title="Přepnout do češtiny">
+        <a class="btn btn-outline-white lang-toggle" href="../o-nas.html" hreflang="cs" lang="cs" aria-label="Přepnout do češtiny" title="Přepnout do češtiny">
           <svg class="flag-cs" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg>
           <span class="lang-label">CZ</span>
         </a>
-        <a href="contact.html#enquiry" class="nav-cta">Book a concert <span>→</span></a>
+        <a href="contact.html#enquiry" class="btn btn-white nav-cta">Book a concert</a>
       </div>
       <button class="nav-close" id="navClose" type="button" aria-label="Close menu">
         <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
@@ -63,123 +67,147 @@
   </div>
 </header>
 
-<!-- HERO — same component as the concerts / gallery pages -->
-<section class="page-hero" id="onasHero">
-  <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=1920&h=1080&fit=crop&q=75&auto=format" alt="Capella Nostra in concert">
+<main id="obsah" tabindex="-1">
+
+<!-- HERO — stejná komponenta jako koncerty / galerie -->
+<section class="page-hero onas-hero" id="onasHero">
+  <img src="../assets/img/snimky/15-soubor-slunecni-skvrny-1600.webp"
+       srcset="../assets/img/snimky/15-soubor-slunecni-skvrny-960.webp 960w, ../assets/img/snimky/15-soubor-slunecni-skvrny-1600.webp 1600w, ../assets/img/snimky/15-soubor-slunecni-skvrny-2560.webp 2560w"
+       sizes="100vw" width="2560" height="1440" fetchpriority="high"
+       alt="Capella Nostra playing in a church (still from the ensemble’s filming)">
   <div class="scrim"></div>
   <div class="inner">
     <div class="container-lg">
       <p class="eyebrow">About us</p>
-      <h1>The Capella Nostra Chamber Ensemble</h1>
-      <p class="hero-sub">Classical music live — properly rehearsed, and played where it sounds best.</p>
+      <h1>The Baroque ensemble Capella Nostra</h1>
+      <p class="hero-sub">Students and graduates of the Pardubice Conservatory playing music of the 17th and 18th centuries in a historically informed way.</p>
     </div>
   </div>
 </section>
 
-<!-- ABOUT US — who we are -->
+<!-- KDO JSME -->
 <section class="about-intro">
   <div class="container">
     <div class="row">
       <div class="copy">
         <p class="eyebrow">Who we are</p>
-        <h2 class="h2" style="text-wrap:balance;margin-bottom:22px;">We play the classics for the people in the hall, not for the display case</h2>
-        <p class="lede">We are Capella Nostra — a chamber ensemble born out of the urge to play classical music to the full. We keep to the score, but we play it alive and with feeling. We believe that classical music played well speaks to anyone who takes a seat in the hall.</p>
+        <h2 class="h2" style="text-wrap:balance;margin-bottom:22px;">Baroque played with knowledge and relish</h2>
+        <p class="lede">Capella Nostra is a Baroque ensemble made up mostly of students and graduates of the Pardubice Conservatory. It is devoted to the historically informed performance of music from the 17th and 18th centuries.</p>
+        <p class="onas-text">Its members share extensive concert experience and success in international competitions.</p>
+        <p class="onas-award"><span class="n" aria-hidden="true">1st</span><strong><span class="sr-only">1st </span>prize in the historically informed performance category</strong><span>Camerata Teplice competition</span></p>
       </div>
       <div class="photo-wrap">
         <div class="ring-frame">
           <div class="ring-outer"></div>
           <div class="ring-inner"></div>
-          <div class="ring-photo"><img src="https://images.unsplash.com/photo-1488630228244-bcdf33562a43?w=800&h=800&fit=crop&q=80&auto=format" alt="A Capella Nostra musician in concert"></div>
+          <div class="ring-photo"><img src="../assets/img/snimky/14-kontrabas-violoncello-usmev-960.webp"
+               srcset="../assets/img/snimky/14-kontrabas-violoncello-usmev-960.webp 960w, ../assets/img/snimky/14-kontrabas-violoncello-usmev-1600.webp 1600w"
+               sizes="(max-width: 640px) calc(100vw - 120px), 460px" width="960" height="540"
+               alt="Ema Světlíková playing the double bass (still from the ensemble’s filming)"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- OUR STORY -->
+<!-- NÁŠ PŘÍBĚH -->
 <section class="story">
   <div class="container">
     <div class="row">
       <div class="photo-wrap">
-        <div class="frame"><img src="https://images.unsplash.com/photo-1615414046707-3d7d91938aa4?w=1000&h=800&fit=crop&q=80&auto=format" alt="Capella Nostra musicians in rehearsal"></div>
+        <div class="frame"><img src="../assets/img/snimky/03-cembalo-ruce-detail-960.webp"
+             srcset="../assets/img/snimky/03-cembalo-ruce-detail-960.webp 960w, ../assets/img/snimky/03-cembalo-ruce-detail-1600.webp 1600w"
+             sizes="(max-width: 560px) calc(100vw - 40px), 470px" width="960" height="540" loading="lazy"
+             alt="Hands on the keyboard of a decorated harpsichord"></div>
       </div>
       <div class="copy">
         <p class="eyebrow">Our story</p>
-        <h2 class="h2" style="text-wrap:balance;margin-bottom:20px;">It started with evenings in a rehearsal room</h2>
-        <p>At the start there were only a handful of us. We met in the evenings in a single rehearsal room, played mostly for ourselves, and in time realised it would be a shame to keep it to ourselves.</p>
-        <p>The ensemble has been led from the beginning by its founder and conductor, Jan Kohout. Those chamber rehearsals under his baton grew into a first concert series and, a few years later, an album of our own. Today we play dozens of concerts a year.</p>
+        <h2 class="h2" style="text-wrap:balance;margin-bottom:20px;">It started with five</h2>
+        <p>The ensemble was founded in 2024 at the Pardubice Conservatory, on the initiative of the students themselves. It began as a chamber group of five players.</p>
+        <p>It has since grown to eleven players and an artistic supervisor, but it keeps returning to the principles of Baroque chamber playing.</p>
+        <p>The ensemble is led by Adam Suk, a student, organist and harpsichordist, as artistic director, and by professor MgA.&nbsp;Michal Hanuš as artistic supervisor.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHERE AND WHAT WE PLAY — full-width cinematic split -->
+<!-- KDE A CO HRAJEME — kinematický split přes celou šířku -->
 <section class="kc-full">
   <div class="kc-frame">
     <div class="kc-shot">
-      <img src="https://images.unsplash.com/photo-1571299803548-831c31e293e7?w=1300&h=1500&fit=crop&q=80&auto=format" alt="Capella Nostra in concert">
+      <img src="../assets/img/snimky/07-soubor-bocni-pohled-lod-1600.webp"
+           srcset="../assets/img/snimky/07-soubor-bocni-pohled-lod-960.webp 960w, ../assets/img/snimky/07-soubor-bocni-pohled-lod-1600.webp 1600w, ../assets/img/snimky/07-soubor-bocni-pohled-lod-2560.webp 2560w"
+           sizes="(max-width: 860px) 100vw, 53vw" width="1600" height="900" loading="lazy"
+           alt="Capella Nostra playing in a church, side view across rows of chairs (still from the ensemble’s filming)">
     </div>
     <div class="kc-panel">
       <div class="inner">
-        <p class="eyebrow">Where and what we play</p>
-        <h2>From Baroque to film music</h2>
+        <p class="eyebrow">What and where we play</p>
+        <h2>Fischer, Vivaldi and trio sonatas</h2>
+        <p class="kc-lead">The ensemble plays both well-known and less often performed Baroque repertoire and looks for new sound possibilities in it.</p>
         <ol class="kc-tracks">
-          <li><span class="no">01</span><span class="nm">Baroque</span><span class="cm">Bach · Vivaldi</span></li>
-          <li><span class="no">02</span><span class="nm">Classical</span><span class="cm">Mozart · Haydn</span></li>
-          <li><span class="no">03</span><span class="nm">Romantic</span><span class="cm">Dvořák · Brahms</span></li>
-          <li><span class="no">04</span><span class="nm">Sacred music</span><span class="cm">Fauré · Rutter</span></li>
-          <li><span class="no">05</span><span class="nm">Film music</span><span class="cm">Williams · Zimmer</span></li>
-          <li><span class="no">06</span><span class="nm">Contemporary works</span><span class="cm">premieres</span></li>
+          <li><span class="no">01</span><span class="nm">J.&nbsp;C.&nbsp;F.&nbsp;Fischer</span><span class="cm">March in C&nbsp;major · Ouverture</span></li>
+          <li><span class="no">02</span><span class="nm">A.&nbsp;Vivaldi</span><span class="cm">Flute Concerto in G&nbsp;minor, RV&nbsp;439 · Concerto for oboe and violin</span></li>
+          <li><span class="no">03</span><span class="nm">Baroque trio sonatas</span><span class="cm">All Souls’ concert, 1&nbsp;November 2026</span></li>
         </ol>
-        <p class="kc-where">We play in churches, concert halls, châteaux and at festivals — wherever the music sounds best.</p>
+        <h3 class="kc-sub">Where the ensemble has played</h3>
+        <ul class="kc-fests">
+          <li>Trutnov Music Festival</li>
+          <li>Chamber Series at the Gočár Gallery</li>
+          <li>J.&nbsp;C.&nbsp;F.&nbsp;Fischer International Music Festival</li>
+          <li>Bojanovské muzicírování</li>
+        </ul>
+        <p class="kc-where">In 2026 it also played at the Evangelical church in Dvakačovice and at Fabrika 1861 in Semily.</p>
+        <a href="concerts.html" class="kc-link">Concert programme <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MEMBERS — link through to the Members page -->
+<!-- ČLENOVÉ — proklik na stránku Členové -->
 <section class="members-teaser">
   <div class="container">
     <div class="section-head">
       <div>
         <p class="eyebrow">Members</p>
-        <h2 class="h2" style="margin-bottom:14px;">The people behind the music</h2>
-        <p>Behind the ensemble’s name are twenty-four musicians — here are a few of them.</p>
+        <h2 class="h2" style="margin-bottom:14px;">Who plays in the ensemble</h2>
+        <p>Eleven players and the artistic supervisor MgA.&nbsp;Michal Hanuš. Six of them are shown here, the rest on the Members page.</p>
       </div>
-      <a href="members.html" class="btn btn-blue" style="white-space:nowrap;">Meet the members <span>→</span></a>
+      <a href="members.html" class="btn btn-blue">All members</a>
     </div>
     <div class="members-strip">
       <figure class="m-card">
-        <div class="m-photo"><img src="https://images.unsplash.com/photo-1610306673745-258854d4bbcd?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Eliška Marešová" loading="lazy"></div>
-        <figcaption><span class="m-name">Eliška Marešová</span><span class="m-role">Concertmaster</span></figcaption>
+        <div class="m-photo"><img src="../assets/img/clenove/suk-480.webp" srcset="../assets/img/clenove/suk-480.webp 480w, ../assets/img/clenove/suk-960.webp 960w" sizes="(max-width: 560px) 50vw, (max-width: 860px) 33vw, 220px" width="480" height="600" loading="lazy" alt="Adam Suk, harpsichord"></div>
+        <figcaption><span class="m-name">Adam Suk</span><span class="m-role">Harpsichord, artistic director</span></figcaption>
       </figure>
       <figure class="m-card">
-        <div class="m-photo"><img src="https://images.unsplash.com/photo-1755388601179-bebe91a7c907?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Jakub Svoboda" loading="lazy"></div>
-        <figcaption><span class="m-name">Jakub Svoboda</span><span class="m-role">First violin</span></figcaption>
+        <div class="m-photo"><img src="../assets/img/clenove/plavec-480.webp" srcset="../assets/img/clenove/plavec-480.webp 480w, ../assets/img/clenove/plavec-960.webp 960w" sizes="(max-width: 560px) 50vw, (max-width: 860px) 33vw, 220px" width="480" height="600" loading="lazy" alt="Daniel Plavec with a violin"></div>
+        <figcaption><span class="m-name">Daniel Plavec</span><span class="m-role">Violin, concertmaster</span></figcaption>
       </figure>
       <figure class="m-card">
-        <div class="m-photo"><img src="https://images.unsplash.com/photo-1725215956940-91f616b95443?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Veronika Krejčí" loading="lazy"></div>
-        <figcaption><span class="m-name">Veronika Krejčí</span><span class="m-role">Viola</span></figcaption>
+        <div class="m-photo"><img src="../assets/img/clenove/stehno-480.webp" srcset="../assets/img/clenove/stehno-480.webp 480w, ../assets/img/clenove/stehno-960.webp 960w" sizes="(max-width: 560px) 50vw, (max-width: 860px) 33vw, 220px" width="480" height="600" loading="lazy" alt="Michael Stehno with a trumpet"></div>
+        <figcaption><span class="m-name">Michael Stehno</span><span class="m-role">Trumpet, management</span></figcaption>
       </figure>
       <figure class="m-card">
-        <div class="m-photo"><img src="https://images.unsplash.com/photo-1643035921321-a060a99513c0?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Lukáš Fiala" loading="lazy"></div>
-        <figcaption><span class="m-name">Lukáš Fiala</span><span class="m-role">Cello</span></figcaption>
+        <div class="m-photo"><img src="../assets/img/clenove/jadrny-480.webp" srcset="../assets/img/clenove/jadrny-480.webp 480w, ../assets/img/clenove/jadrny-960.webp 960w" sizes="(max-width: 560px) 50vw, (max-width: 860px) 33vw, 220px" width="480" height="600" loading="lazy" alt="Tadeáš Jadrný with a cello"></div>
+        <figcaption><span class="m-name">Tadeáš Jadrný</span><span class="m-role">Cello</span></figcaption>
       </figure>
       <figure class="m-card">
-        <div class="m-photo"><img src="https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Lucie Veselá" loading="lazy"></div>
-        <figcaption><span class="m-name">Lucie Veselá</span><span class="m-role">Oboe</span></figcaption>
+        <div class="m-photo"><img src="../assets/img/clenove/svetlikova-480.webp" srcset="../assets/img/clenove/svetlikova-480.webp 480w, ../assets/img/clenove/svetlikova-960.webp 960w" sizes="(max-width: 560px) 50vw, (max-width: 860px) 33vw, 220px" width="480" height="600" loading="lazy" alt="Ema Světlíková with a double bass"></div>
+        <figcaption><span class="m-name">Ema Světlíková</span><span class="m-role">Double bass</span></figcaption>
       </figure>
       <figure class="m-card">
-        <div class="m-photo"><img src="https://images.unsplash.com/photo-1626913634123-2457b43792c1?w=360&h=450&fit=crop&crop=faces&q=78&auto=format" alt="Jan Šťastný" loading="lazy"></div>
-        <figcaption><span class="m-name">Jan Šťastný</span><span class="m-role">French horn</span></figcaption>
+        <div class="m-photo"><img src="../assets/img/clenove/rykr-480.webp" srcset="../assets/img/clenove/rykr-480.webp 480w, ../assets/img/clenove/rykr-960.webp 960w" sizes="(max-width: 560px) 50vw, (max-width: 860px) 33vw, 220px" width="480" height="600" loading="lazy" alt="Tomáš Rykr with an oboe"></div>
+        <figcaption><span class="m-name">Tomáš Rykr</span><span class="m-role">Oboe</span></figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- CTA — book a concert -->
-<section class="inquiry">
-  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<!-- CTA „Poptávka“ – sdílený pás. Stejný blok je na index.html, o-nas.html, koncerty.html
+     a clenove.html; při změně upravit všude (styly: .inquiry v ../css/style.css). -->
+<section class="inquiry" aria-labelledby="inquiryTitle">
+  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M-700,72c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
     <path d="M-700,94c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
     <path d="M-700,116c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
@@ -187,21 +215,42 @@
     <path d="M-700,160c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
     <path d="M-700,182c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
   </g></svg>
-  <div class="inner">
-    <p class="eyebrow">Enquiries</p>
-    <h2 class="h2">Would you like Capella Nostra at your event?</h2>
-    <p>A concert, a celebration or a corporate event — we will gladly put together a programme to suit. Get in touch and we will agree on a date and a repertoire.</p>
-    <a href="contact.html#enquiry" class="btn btn-blue btn-lg">Book a concert <span>→</span></a>
+  <div class="container inquiry-grid">
+    <div class="inquiry-main">
+      <div class="inquiry-head">
+        <p class="eyebrow">For organisers</p>
+        <h2 class="h2" id="inquiryTitle">Would you like Capella&nbsp;Nostra at your event?</h2>
+      </div>
+      <div class="inquiry-action">
+        <a href="contact.html#enquiry" class="btn btn-blue">Book a concert</a>
+      </div>
+    </div>
+    <div class="inquiry-side">
+      <p class="inquiry-text">We play in churches and at festivals. Tell us when and where you are planning the concert. We will get back to you and agree on the programme together.</p>
+      <dl class="inquiry-contacts">
+        <div>
+          <dt>Phone</dt>
+          <dd><a href="tel:+420702871260">+420&nbsp;702&nbsp;871&nbsp;260</a><small>Michael Stehno, ensemble manager</small></dd>
+        </div>
+        <div>
+          <dt>E-mail</dt>
+          <dd><a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a></dd>
+        </div>
+      </dl>
+    </div>
   </div>
 </section>
+
+</main>
 
 <footer class="site-footer">
   <div class="inner">
     <h2 class="footer-word">Capella Nostra</h2>
     <p class="footer-tagline">Music that brings people together.</p>
     <div class="footer-social">
-      <a href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
-      <a href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="#" aria-label="YouTube"><svg class="icon" width="20" height="20"><use href="#i-youtube"></use></svg></a>
     </div>
     <ul class="footer-nav">
       <li><a href="index.html">Home</a></li>
@@ -212,10 +261,11 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="footer-contact">
-      <a href="mailto:info@capellanostra.cz">info@capellanostra.cz</a>
+      <a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a>
       <span aria-hidden="true">·</span>
-      <a href="tel:+420777123456">+420 777 123 456</a>
+      <a href="tel:+420702871260">+420&nbsp;702&nbsp;871&nbsp;260</a>
     </div>
+    <p class="footer-legal">Operator: [TO BE COMPLETED: association name, company ID, registered office]</p>
     <hr class="footer-hr">
     <div class="footer-bottom">
       <span class="copyright">Capella Nostra © 2026</span>

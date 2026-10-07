@@ -1,3 +1,5 @@
 Podklady/
 .playwright-mcp/
 .superpowers/
+.playwright-cli/
+__pycache__/

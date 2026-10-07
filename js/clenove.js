@@ -1,76 +1,56 @@
 (function () {
   var CN = window.CN;
+  var EN = CN.LANG === 'en';
 
-  document.getElementById('heroImg').src = CN.img('orchestra', 4, 1920, 1080);
+  /* Členové podle Podklady/zadani.md. Pořadí odsouhlasené 6. 10. 2026:
+     vedení (garant, koncertní mistr, management), pak hráči podle nástrojů
+     a uvnitř nástroje abecedně podle příjmení. Adam Suk má vlastní sekci v HTML.
+     Jména zůstávají v originále v obou jazycích, překládá se jen role. */
+  var LEADERS = [
+    { name: 'Michal Hanuš', title: 'MgA.', role: { cs: 'Umělecký garant', en: 'Artistic supervisor' } },
+    { slug: 'plavec', name: 'Daniel Plavec', role: { cs: 'Housle, koncertní mistr', en: 'Violin, concertmaster' }, with: { cs: 's houslemi', en: 'with a violin' } },
+    { slug: 'stehno', name: 'Michael Stehno', role: { cs: 'Trubka, management', en: 'Trumpet, management' }, with: { cs: 's trubkou', en: 'with a trumpet' } }
+  ];
+  var PLAYERS = [
+    { slug: 'majvaldova', name: 'Tereza Majvaldová', role: { cs: 'Housle', en: 'Violin' }, with: { cs: 's houslemi', en: 'with a violin' } },
+    { slug: 'zdvihalova', name: 'Marie Zdvihalová', role: { cs: 'Housle', en: 'Violin' }, with: { cs: 's houslemi', en: 'with a violin' } },
+    { slug: 'janicek', name: 'Adam Janíček', role: { cs: 'Housle, viola', en: 'Violin, viola' }, with: { cs: 's houslemi', en: 'with a violin' } },
+    { slug: 'kabrt', name: 'Jiří Kábrt', role: { cs: 'Housle, viola', en: 'Violin, viola' }, with: { cs: 's houslemi', en: 'with a violin' } },
+    { slug: 'jadrny', name: 'Tadeáš Jadrný', role: { cs: 'Violoncello', en: 'Cello' }, with: { cs: 's violoncellem', en: 'with a cello' } },
+    { slug: 'svetlikova', name: 'Ema Světlíková', role: { cs: 'Kontrabas', en: 'Double bass' }, with: { cs: 's kontrabasem', en: 'with a double bass' } },
+    { slug: 'linkova', name: 'Amélie Linková', role: { cs: 'Hoboj', en: 'Oboe' }, with: { cs: 's hobojem', en: 'with an oboe' } },
+    { slug: 'rykr', name: 'Tomáš Rykr', role: { cs: 'Hoboj', en: 'Oboe' }, with: { cs: 's hobojem', en: 'with an oboe' } }
+  ];
 
-  /* Gender-matched violinist/musician portraits (Czech surnames make gender
-     unambiguous, so photos are assigned per person rather than cycled blindly). */
-  var FEMALE_POOL = [
-    '1499442711659-a9566695faed', '1725215956940-91f616b95443', '1465821185615-20b3c2fbf41b',
-    '1586351011807-b79c8ef43057', '1631474962645-d8eb9111572d', '1534782710882-2f5e2c80c1b5',
-    '1628016046698-5ca1a3a03b8f'
-  ];
-  var MALE_POOL = [
-    '1755388601179-bebe91a7c907', '1653071999858-b54e6aa411f2', '1643035921321-a060a99513c0',
-    '1643035920561-7ba082785c2b', '1626913634123-2457b43792c1', '1626913630350-e9580b32fe16',
-    '1755389176283-3cd924205df0'
-  ];
-  function faceUrl(id, w, h) {
-    return 'https://images.unsplash.com/photo-' + id + '?w=' + w + '&h=' + h + '&fit=crop&crop=faces&q=78&auto=format';
+  function role(m) { return EN ? m.role.en : m.role.cs; }
+
+  /* Garant nemá fotku a mít nebude: místo portrétu typografická karta
+     stejné velikosti (žádná silueta ani zástupný avatar). */
+  function typeCard(m) {
+    return '<div class="musician musician--type" role="listitem">' +
+      '<div class="photo type-card">' +
+        '<h3><span class="type-card__title">' + m.title + '</span> ' + m.name + '</h3>' +
+        '<span class="type-card__rule" aria-hidden="true"></span>' +
+        '<p>' + role(m) + '</p>' +
+      '</div>' +
+    '</div>';
   }
-  var fi = 0, mi = 0;
-  function nextFemale(w, h) { return faceUrl(FEMALE_POOL[fi++ % FEMALE_POOL.length], w, h); }
-  function nextMale(w, h) { return faceUrl(MALE_POOL[mi++ % MALE_POOL.length], w, h); }
 
-  var conductorImg = CN.img('portrait', 0, 640, 640, { faces: true, q: 82 });
-  document.getElementById('conductorImg').src = conductorImg;
-
-  var leaders = [
-    { name: 'Eliška Marešová', role: CN.t('roleConcertmaster'), img: faceUrl('1610306673745-258854d4bbcd', 320, 320) },
-    { name: 'Martin Beneš', role: CN.t('roleChorusMaster'), img: faceUrl('1484972759836-b93f9ef2b293', 320, 320) }
-  ];
-  document.getElementById('leadersFeature').innerHTML = leaders.map(function (l) {
-    return '<div class="musician">' +
-      '<div class="photo"><img src="' + l.img + '" alt="' + l.name + '"><span class="ring"></span></div>' +
-      '<h3>' + l.name + '</h3>' +
-      '<p>' + l.role + '</p>' +
-    '</div>';
-  }).join('');
-
-  /* Jména členů zůstávají v originále v obou jazycích, překládá se jen nástroj. */
-  var memberData = [
-    { name: 'Anna Procházková', role: 'violin1', f: true },
-    { name: 'Jakub Svoboda', role: 'violin1', f: false },
-    { name: 'Tereza Nováková', role: 'violin1', f: true },
-    { name: 'Filip Horák', role: 'violin2', f: false },
-    { name: 'Klára Pospíšilová', role: 'violin2', f: true },
-    { name: 'Ondřej Marek', role: 'violin2', f: false },
-    { name: 'Karolína Müllerová', role: 'violin2', f: true },
-    { name: 'Veronika Krejčí', role: 'viola', f: true },
-    { name: 'David Růžička', role: 'viola', f: false },
-    { name: 'Hana Bláhová', role: 'cello', f: true },
-    { name: 'Lukáš Fiala', role: 'cello', f: false },
-    { name: 'Vojtěch Říha', role: 'cello', f: false },
-    { name: 'Markéta Sedláčková', role: 'doubleBass', f: true },
-    { name: 'Štěpán Dvořáček', role: 'doubleBass', f: false },
-    { name: 'Petr Kučera', role: 'flute', f: false },
-    { name: 'Lucie Veselá', role: 'oboe', f: true },
-    { name: 'Tomáš Urban', role: 'clarinet', f: false },
-    { name: 'Barbora Doležalová', role: 'bassoon', f: true },
-    { name: 'Jan Šťastný', role: 'horn', f: false },
-    { name: 'Kateřina Macháčková', role: 'trumpet', f: true },
-    { name: 'Michal Kovář', role: 'trombone', f: false },
-    { name: 'Nikola Černá', role: 'harp', f: true },
-    { name: 'Adam Pokorný', role: 'piano', f: false },
-    { name: 'Simona Holubová', role: 'timpani', f: true }
-  ];
-
-  document.getElementById('musiciansGrid').innerHTML = memberData.map(function (m) {
-    var img = m.f ? nextFemale(260, 260) : nextMale(260, 260);
-    return '<div class="musician">' +
-      '<div class="photo"><img src="' + img + '" alt="' + m.name + '" loading="lazy"><span class="ring"></span></div>' +
+  function portrait(m, sizes) {
+    if (!m.slug) return typeCard(m);
+    var alt = m.name + ' ' + (EN ? m.with.en : m.with.cs.replace(' ', ' '));
+    return '<div class="musician" role="listitem">' +
+      '<div class="photo"><img src="' + CN.photo.member(m.slug, 480) + '" srcset="' + CN.photo.memberSrcset(m.slug) + '"' +
+        ' sizes="' + sizes + '" width="480" height="600" loading="lazy" alt="' + alt + '"><span class="ring"></span></div>' +
       '<h3>' + m.name + '</h3>' +
-      '<p>' + CN.t(m.role) + '</p>' +
+      '<p>' + role(m) + '</p>' +
     '</div>';
+  }
+
+  document.getElementById('leadersFeature').innerHTML = LEADERS.map(function (m) {
+    return portrait(m, '(max-width: 680px) 220px, 310px');
+  }).join('');
+  document.getElementById('musiciansGrid').innerHTML = PLAYERS.map(function (m) {
+    return portrait(m, '(max-width: 680px) 45vw, 310px');
   }).join('');
 })();

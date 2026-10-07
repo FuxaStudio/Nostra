@@ -81,7 +81,7 @@
       '.section-head', '.copy', '.photo-wrap',
       '.genre-section .head',
       '.genre-row',
-      '.inquiry .inner',
+      '.inquiry-grid',
       '.filters .filter-row',
       '.featured .eyebrow', '.featured .h2',
       '.contact-info', '.contact-form-wrap',
@@ -90,7 +90,7 @@
 
     /* Kontejnery, jejichž děti se odhalují se zpožděním po sobě. */
     var GROUPS = [
-      '.featured-list', '.grid-concerts', '.grid-archive', '.grid-albums',
+      '.grid-concerts', '.grid-archive', '.grid-albums',
       '.grid-videos', '.grid-photos', '.grid-musicians', '.grid-leaders',
       '.members-strip'
     ].join(',');
@@ -105,19 +105,45 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
 
     function tag(el, delayMs) {
-      if (el.classList.contains('reveal')) return;
+      if (el.classList.contains('reveal')) return false;
       var ancestor = el.parentElement && el.parentElement.closest('.reveal');
-      if (ancestor) return; /* nevnořovat animaci do animace */
+      if (ancestor) return false; /* nevnořovat animaci do animace */
       el.classList.add('reveal');
       if (delayMs) el.style.setProperty('--reveal-delay', delayMs + 'ms');
-      io.observe(el);
+      return true;
     }
 
+    /* Bloky, které už při načtení zasahují do obrazovky (typicky obsah vykukující
+       pod hero), se odhalí hned. Observer by je pustil až po 10 % výšky + 36 px,
+       takže by z nich byl vidět jen kousek (fotka ano, vedlejší text ne). Pozice
+       se čtou předem najednou, aby přidávání tříd nevynucovalo layout dokola. */
     function scan() {
-      document.querySelectorAll(SINGLES).forEach(function (el) { tag(el, 0); });
+      var items = [];
+      document.querySelectorAll(SINGLES).forEach(function (el) { items.push([el, 0]); });
       document.querySelectorAll(GROUPS).forEach(function (group) {
         Array.prototype.forEach.call(group.children, function (child, i) {
-          tag(child, Math.min(i, 8) * 70);
+          items.push([child, Math.min(i, 8) * 70]);
+        });
+      });
+
+      var fold = window.innerHeight;
+      var rects = items.map(function (it) {
+        return it[0].classList.contains('reveal') ? null : it[0].getBoundingClientRect();
+      });
+
+      var now = [];
+      items.forEach(function (it, i) {
+        if (!tag(it[0], it[1])) return;
+        var r = rects[i];
+        if (r && r.height > 0 && r.top < fold) now.push(it[0]);
+        else io.observe(it[0]);
+      });
+
+      /* Dva snímky: prohlížeč nejdřív vykreslí výchozí stav .reveal, jinak by
+         přechod neproběhl a blok by jen bez animace "skočil" na místo. */
+      if (now.length) requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          now.forEach(function (el) { el.classList.add('is-visible'); });
         });
       });
     }

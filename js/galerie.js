@@ -7,33 +7,68 @@
     return null;
   }
 
+  /* ---- Videa ----
+     Pět skladeb z natáčení. Vlastní YouTube kanál zatím není: video bez
+     `youtube` (ID z adresy youtube.com/watch?v=<ID>) má na kartě štítek
+     „Brzy na YouTube“ a v okně místo přehrávače jen náhled se stejnou větou.
+     Po nahrání stačí doplnit ID (a případně `dur`, délku podle YouTube,
+     např. '3:29'). Přehrává se přes youtube-nocookie.com až po kliknutí –
+     do té doby web na YouTube nic nenačítá.
+     Náhledy jsou z videa, ke kterému patří (16 = video 01, 28 = 02, smyčce ve
+     tmě = 04), a liší se od obálek alb i hera, aby se na stránce neopakovaly. */
+  var V = CN.LANG === 'en' ? 1 : 0;   /* index jazyka v [cs, en] */
   var VIDEOS = [
-    { id: 'vltava', title: CN.t('videoVltava'), dur: '4:12', thumb: CN.galleryImg(3, 700, 394) },
-    { id: 'priprava', title: CN.t('videoBackstage'), dur: '2:45', thumb: CN.galleryImg(16, 700, 394) },
-    { id: 'novosvetska', title: CN.t('videoNewWorld'), dur: '6:30', thumb: CN.galleryImg(5, 700, 394) }
+    { id: 'fischer-marche', composer: 'J. C. F. Fischer', title: ['Marche C dur', 'March in C major'][V],
+      youtube: null, dur: null, poster: CN.photo.still('16-housle-u-pultu', 960), posterFull: CN.photo.still('16-housle-u-pultu', 1600) },
+    { id: 'fischer-ouverture', composer: 'J. C. F. Fischer', title: 'Ouverture',
+      youtube: null, dur: null, poster: CN.photo.still('28-soubor-presbytar-zboku', 960), posterFull: CN.photo.still('28-soubor-presbytar-zboku', 1600) },
+    { id: 'vivaldi-rv439-allegro', composer: 'A. Vivaldi',
+      title: ['Koncert pro flétnu a orchestr g moll RV 439 – Allegro', 'Flute Concerto in G minor, RV 439 – Allegro'][V],
+      youtube: null, dur: null, poster: CN.photo('galerie/cembalo-pult-celek-960.webp'), posterFull: CN.photo('galerie/cembalo-pult-celek-1600.webp') },
+    { id: 'vivaldi-rv439-largo', composer: 'A. Vivaldi',
+      title: ['Koncert pro flétnu a orchestr g moll RV 439 – Largo', 'Flute Concerto in G minor, RV 439 – Largo'][V],
+      youtube: null, dur: null, poster: CN.photo('galerie/housle-tma-smycce-960.webp'), posterFull: CN.photo('galerie/housle-tma-smycce-1600.webp') },
+    { id: 'vivaldi-hoboj-housle', composer: 'A. Vivaldi',
+      title: ['Koncert pro hoboj a housle – Allegro', 'Concerto for oboe and violin – Allegro'][V],
+      youtube: null, dur: null, poster: CN.photo('galerie/hoboj-housle-solo-960.webp'), posterFull: CN.photo('galerie/hoboj-housle-solo-1600.webp') }
   ];
 
-  var FILTERS = [
-    { key: 'all', label: CN.t('filterAll') },
-    { key: 'koncerty', label: CN.t('filterConcerts') },
-    { key: 'zkousky', label: CN.t('filterRehearsals') },
-    { key: 'videa', label: CN.t('filterVideos') }
-  ];
+  /* Filtry mají smysl až u většího počtu alb – jinak se celý pruh skryje. */
   var VISIBLE_COUNT = 6;
+  var FILTERS = [{ key: 'all', label: CN.t('filterAll') }];
+  ALBUMS.forEach(function (a) {
+    if (FILTERS.some(function (f) { return f.key === a.group; })) return;
+    FILTERS.push({ key: a.group, label: a.cat });
+  });
+  if (VIDEOS.length) FILTERS.push({ key: 'videa', label: CN.t('filterVideos') });
+  var SHOW_FILTERS = ALBUMS.length > VISIBLE_COUNT && FILTERS.length > 2;
+
   var state = { filter: 'all', expanded: false, lb: null };
 
   var galleryView = document.getElementById('galleryView');
   var albumView = document.getElementById('albumView');
-
-  document.getElementById('heroImg').src = CN.img('orchestra', 2, 1920, 1080);
+  var filtersSection = document.querySelector('.filters');
+  if (filtersSection) filtersSection.hidden = !SHOW_FILTERS;
 
   function scrollTop() { window.scrollTo(0, 0); }
 
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function photoCount(n) {
+    if (CN.LANG === 'en') return n + ' ' + (n === 1 ? 'photo' : 'photos');
+    return n + ' ' + (n === 1 ? 'fotka' : n > 1 && n < 5 ? 'fotky' : 'fotek');
+  }
+  function thumbOf(a, i) { return (a.thumbs && a.thumbs[i]) || a.photos[i]; }
+  function altOf(a, i) { return (a.alts && a.alts[i]) || ''; }
+
   /* ---------------- gallery index ---------------- */
   function renderFilters() {
+    if (!SHOW_FILTERS) return;
     document.getElementById('filterRow').innerHTML = FILTERS.map(function (f) {
       var active = state.filter === f.key;
-      return '<button type="button" class="filter-pill' + (active ? ' is-active' : '') + '" data-filter="' + f.key + '">' + f.label + '</button>';
+      return '<button type="button" class="btn btn-outline filter-pill' + (active ? ' is-active' : '') + '" data-filter="' + f.key + '"' +
+        ' aria-pressed="' + active + '">' + f.label + '</button>';
     }).join('');
     document.querySelectorAll('#filterRow [data-filter]').forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -47,21 +82,29 @@
   function albumCardHtml(a) {
     return '<a href="#album/' + a.id + '" class="album-card" data-open="' + a.id + '">' +
       '<div class="thumb">' +
-        '<img src="' + a.cover + '" alt="' + a.name + '" loading="lazy">' +
+        '<img src="' + a.cover + '" alt="" loading="lazy">' +
         '<span class="cat-badge">' + a.cat + '</span>' +
-        '<span class="count-badge">' + a.count + ' ' + CN.t('photosCount') + '</span>' +
+        '<span class="count-badge">' + photoCount(a.count) + '</span>' +
       '</div>' +
-      '<div class="body"><h3>' + a.name + '</h3><p class="date">' + a.date + '</p></div>' +
+      '<div class="body"><h3>' + a.name + '</h3>' +
+        (a.date ? '<p class="date">' + a.date + '</p>' : '') +
+        (a.desc ? '<p class="album-desc">' + a.desc + '</p>' : '') +
+      '</div>' +
     '</a>';
   }
   function videoCardHtml(v) {
-    return '<a href="#" class="video-card" data-play="' + v.id + '">' +
+    var label = v.composer + ' – ' + v.title;
+    var href = v.youtube ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.youtube) : '#';
+    return '<a href="' + href + '" class="video-card' + (v.youtube ? '' : ' is-soon') + '" data-play="' + v.id + '"' +
+      ' aria-label="' + (v.youtube ? CN.t('videoPlay') : CN.t('videoSoonAria')) + esc(label) + '">' +
       '<div class="thumb">' +
-        '<img src="' + v.thumb + '" alt="' + v.title + '" loading="lazy">' +
+        '<img src="' + v.poster + '" alt="" loading="lazy">' +
         '<div class="scrim"></div>' +
-        '<span class="play-btn"><svg class="icon" width="20" height="20" style="color:#003FFF"><use href="#i-play"></use></svg></span>' +
-        '<span class="dur-badge">' + v.dur + '</span>' +
+        '<span class="play-btn" aria-hidden="true"><svg class="icon" width="20" height="20" style="color:#003FFF"><use href="#i-play"></use></svg></span>' +
+        (v.dur ? '<span class="dur-badge">' + v.dur + '</span>' : '') +
+        (v.youtube ? '' : '<span class="dur-badge">' + CN.t('videoSoon') + '</span>') +
       '</div>' +
+      '<p class="composer">' + v.composer + '</p>' +
       '<h3>' + v.title + '</h3>' +
     '</a>';
   }
@@ -78,7 +121,7 @@
       loadWrap.hidden = true;
       videosGridMain.style.display = 'grid';
       videosGridMain.innerHTML = VIDEOS.map(videoCardHtml).join('');
-      videosSection.style.display = 'none';
+      videosSection.hidden = true;
     } else {
       videosGridMain.style.display = 'none';
       albumsGrid.style.display = 'grid';
@@ -86,15 +129,15 @@
       var visible = state.expanded ? filtered : filtered.slice(0, VISIBLE_COUNT);
       albumsGrid.innerHTML = visible.map(albumCardHtml).join('');
       loadWrap.hidden = state.expanded || filtered.length <= VISIBLE_COUNT;
-      if (state.filter === 'all') {
-        videosSection.style.display = 'block';
-        document.getElementById('videosGrid').innerHTML = VIDEOS.map(videoCardHtml).join('');
-      } else {
-        videosSection.style.display = 'none';
-      }
+      var showVideos = state.filter === 'all' && VIDEOS.length > 0;
+      videosSection.hidden = !showVideos;
+      videosSection.style.display = '';
+      if (showVideos) document.getElementById('videosGrid').innerHTML = VIDEOS.map(videoCardHtml).join('');
     }
     bindGalleryClicks();
   }
+
+  function lbPlayerEl() { return document.getElementById('lbPlayer'); }
 
   function bindGalleryClicks() {
     document.querySelectorAll('[data-open]').forEach(function (a) {
@@ -105,9 +148,10 @@
     });
     document.querySelectorAll('[data-play]').forEach(function (a) {
       a.addEventListener('click', function (e) {
-        e.preventDefault();
         var v = VIDEOS.filter(function (x) { return x.id === a.getAttribute('data-play'); })[0];
-        if (v) openVideo(v);
+        if (!v || !lbPlayerEl()) return; /* bez přehrávače otevře YouTube */
+        e.preventDefault();
+        openVideo(v);
       });
     });
   }
@@ -122,12 +166,14 @@
     var a = albumById(id) || ALBUMS[0];
     document.getElementById('albumKicker').textContent = CN.t('albumKicker') + ' · ' + a.cat;
     document.getElementById('albumTitle').textContent = a.name;
+    var desc = document.getElementById('albumDesc');
+    if (desc) desc.textContent = a.desc || '';
     document.getElementById('albumMeta').innerHTML =
-      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + a.date + '</li>' +
-      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-pin"></use></svg>' + CN.t('albumPlace') + '</li>' +
-      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-photos"></use></svg>' + a.count + ' ' + CN.t('photosCount') + '</li>';
+      (a.date ? '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-calendar"></use></svg>' + a.date + '</li>' : '') +
+      '<li><svg class="icon" width="16" height="16" style="color:#003FFF"><use href="#i-photos"></use></svg>' + photoCount(a.count) + '</li>';
     document.getElementById('albumPhotosGrid').innerHTML = a.photos.map(function (src, i) {
-      return '<a href="#" class="photo-tile" data-photo-i="' + i + '"><img src="' + src + '" alt="" loading="lazy"></a>';
+      return '<a href="' + src + '" class="photo-tile" data-photo-i="' + i + '">' +
+        '<img src="' + thumbOf(a, i) + '" alt="' + esc(altOf(a, i)) + '" loading="lazy"></a>';
     }).join('');
     document.querySelectorAll('[data-photo-i]').forEach(function (el) {
       el.addEventListener('click', function (e) {
@@ -165,6 +211,7 @@
   var lightbox = document.getElementById('lightbox');
   var lbPhotoEl = document.getElementById('lbPhoto');
   var lbVideoEl = document.getElementById('lbVideo');
+  var lbPlayer = document.getElementById('lbPlayer');
 
   function openPhoto(albumId, i) {
     state.lb = { kind: 'photo', albumId: albumId, i: i };
@@ -182,6 +229,7 @@
     lightbox.classList.remove('is-open');
     lbPhotoEl.hidden = true;
     lbVideoEl.hidden = true;
+    if (lbPlayer) lbPlayer.innerHTML = ''; /* zastaví přehrávání */
     document.body.style.overflow = '';
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
     lastFocus = null;
@@ -221,12 +269,12 @@
       var thumbs = document.getElementById('lbThumbs');
       var thumbHadFocus = thumbs.contains(document.activeElement);
       document.getElementById('lbTitle').textContent = a.name;
-      document.getElementById('lbDate').textContent = a.date + ' · ' + CN.t('albumPlace');
+      document.getElementById('lbDate').textContent = [a.date, a.cat].filter(Boolean).join(' · ');
       document.getElementById('lbCounter').textContent = (idx + 1) + ' / ' + a.photos.length;
-      document.getElementById('lbStage').innerHTML = '<img src="' + a.photos[idx] + '" alt="">';
+      document.getElementById('lbStage').innerHTML = '<img src="' + a.photos[idx] + '" alt="' + esc(altOf(a, idx)) + '">';
       thumbs.innerHTML = a.photos.map(function (src, i) {
         return '<button type="button" class="' + (i === idx ? 'is-active' : '') + '" data-thumb-i="' + i + '" aria-label="' + (i + 1) + ' / ' + a.photos.length + '"' +
-          (i === idx ? ' aria-current="true"' : '') + '><img src="' + src + '" alt=""></button>';
+          (i === idx ? ' aria-current="true"' : '') + '><img src="' + thumbOf(a, i) + '" alt="" loading="lazy"></button>';
       }).join('');
       thumbs.querySelectorAll('[data-thumb-i]').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
@@ -236,13 +284,25 @@
       });
       /* Náhledy se překreslují — fokus z klávesnice se musí vrátit na aktivní. */
       if (thumbHadFocus) thumbs.querySelector('.is-active').focus();
+      var active = thumbs.querySelector('.is-active');
+      if (active && active.scrollIntoView) active.scrollIntoView({ block: 'nearest', inline: 'center' });
       if (opening) document.getElementById('lbCloseBtn1').focus();
     } else {
+      var v = state.lb.video;
       lbPhotoEl.hidden = true;
       lbVideoEl.hidden = false;
       lightbox.setAttribute('aria-labelledby', 'lbVideoTitle');
-      document.getElementById('lbVideoTitle').textContent = state.lb.video.title;
-      document.getElementById('lbVideoTime').textContent = '1:24 / ' + state.lb.video.dur;
+      document.getElementById('lbVideoTitle').textContent = v.composer + ' – ' + v.title;
+      if (opening && lbPlayer && v.youtube) {
+        lbPlayer.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(v.youtube) +
+          '?autoplay=1&rel=0" title="' + esc(v.composer + ' – ' + v.title) + '"' +
+          ' allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>';
+      } else if (opening && lbPlayer) {
+        /* Video ještě není na YouTube: náhled ve stejném rámu, kde se pak přehraje. */
+        lbPlayer.innerHTML = '<img src="' + (v.posterFull || v.poster) + '" alt="">' +
+          '<div class="player-soon"><span class="play-btn" aria-hidden="true"><svg class="icon" width="26" height="26" style="color:#003FFF"><use href="#i-play"></use></svg></span>' +
+          '<p>' + CN.t('videoSoonText') + '</p></div>';
+      }
       if (opening) document.getElementById('lbCloseBtn2').focus();
     }
   }
@@ -279,7 +339,7 @@
     else if (e.key === 'Tab') {
       /* Fokus zůstává uvnitř otevřeného lightboxu (je to modální dialog). */
       var panel = state.lb.kind === 'photo' ? lbPhotoEl : lbVideoEl;
-      var items = panel.querySelectorAll('button');
+      var items = panel.querySelectorAll('button, iframe');
       var first = items[0], last = items[items.length - 1];
       if (!panel.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
       else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }

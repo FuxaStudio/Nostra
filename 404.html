@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stránka nenalezena — Capella Nostra</title>
+<title>Stránka nenalezena – Capella Nostra</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#003FFF">
-<!-- Stránka 404 se může zobrazit na libovolné adrese (i v /en/…), proto
-     všechny cesty začínají lomítkem od kořene webu. -->
+<!-- Cloudflare tuto stránku vrátí pro chybné adresy mimo /en/ (tam je
+     en/404.html), proto všechny cesty začínají lomítkem od kořene webu. -->
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -17,11 +17,12 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
 <script src="/js/icons.js"></script>
 
 <header class="site-header">
   <div class="bar">
-    <a href="/index.html" class="brand" aria-label="Capella Nostra — domů">
+    <a href="/index.html" class="brand" aria-label="Capella Nostra – domů">
       <img src="/assets/logo-nav.png" alt="Capella Nostra logo" width="46" height="46">
       <span>Capella Nostra</span>
     </a>
@@ -35,11 +36,11 @@
         <a href="/kontakt.html">Kontakt</a>
       </nav>
       <div class="nav-actions">
-        <a class="lang-toggle" href="/en/index.html" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
+        <a class="btn btn-outline-white lang-toggle" href="/en/index.html" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
           <svg class="flag-en" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg>
           <span class="lang-label">EN</span>
         </a>
-        <a href="/kontakt.html#poptavka" class="nav-cta">Poptat koncert <span>→</span></a>
+        <a href="/kontakt.html#poptavka" class="btn btn-white nav-cta">Poptat koncert</a>
       </div>
       <button class="nav-close" id="navClose" type="button" aria-label="Zavřít menu">
         <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
@@ -52,17 +53,16 @@
   </div>
 </header>
 
-<main class="notfound">
+<main class="notfound" id="obsah" tabindex="-1">
   <div class="container">
     <div class="inner">
       <p class="eyebrow">Chyba 404</p>
       <h1 class="h1">Tahle stránka tu není</h1>
-      <p class="lede">Odkaz je možná starý, nebo se v adrese objevil překlep. Zkuste to z úvodní stránky, případně se rovnou podívejte na program koncertů.</p>
+      <p class="lede">Odkaz je možná starý, nebo se v&nbsp;adrese objevil překlep. Zkuste to z&nbsp;úvodní stránky, případně se rovnou podívejte na program koncertů.</p>
       <div class="actions">
-        <a href="/index.html" class="btn btn-blue">Na úvodní stránku <span>→</span></a>
+        <a href="/index.html" class="btn btn-blue">Na úvodní stránku</a>
         <a href="/koncerty.html" class="btn btn-outline">Program koncertů</a>
       </div>
-      <p class="en" lang="en">Page not found. <a href="/en/index.html">Continue to the English homepage</a>.</p>
     </div>
   </div>
 </main>
@@ -72,8 +72,9 @@
     <h2 class="footer-word">Capella Nostra</h2>
     <p class="footer-tagline">Hudba, která spojuje.</p>
     <div class="footer-social">
-      <a href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
-      <a href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="#" aria-label="YouTube"><svg class="icon" width="20" height="20"><use href="#i-youtube"></use></svg></a>
     </div>
     <ul class="footer-nav">
       <li><a href="/index.html">Domů</a></li>
@@ -84,10 +85,11 @@
       <li><a href="/kontakt.html">Kontakt</a></li>
     </ul>
     <div class="footer-contact">
-      <a href="mailto:info@capellanostra.cz">info@capellanostra.cz</a>
+      <a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a>
       <span aria-hidden="true">·</span>
-      <a href="tel:+420777123456">+420 777 123 456</a>
+      <a href="tel:+420702871260">+420&nbsp;702&nbsp;871&nbsp;260</a>
     </div>
+    <p class="footer-legal">Provozovatel: [DOPLNIT: název spolku, IČO, sídlo]</p>
     <hr class="footer-hr">
     <div class="footer-bottom">
       <span class="copyright">Capella Nostra © 2026</span>

@@ -3,18 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Capella Nostra — komorní orchestr | Hudba, která spojuje</title>
-<meta name="description" content="Capella Nostra je komorní soubor přinášející jedinečné koncertní zážitky v kostelech, sálech i na zámcích po celé zemi.">
+<title>Capella Nostra – barokní soubor z Konzervatoře Pardubice</title>
+<meta name="description" content="Capella Nostra je barokní soubor z Konzervatoře Pardubice, hraje hudbu 17. a 18. století historicky poučeně. Nejbližší koncerty, členové a poptávka.">
 <meta name="theme-color" content="#003FFF">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Capella Nostra">
 <meta property="og:locale" content="cs_CZ">
-<meta property="og:title" content="Capella Nostra — komorní orchestr | Hudba, která spojuje">
-<meta property="og:description" content="Capella Nostra je komorní soubor přinášející jedinečné koncertní zážitky v kostelech, sálech i na zámcích po celé zemi.">
+<meta property="og:title" content="Capella Nostra – barokní soubor z Konzervatoře Pardubice">
+<meta property="og:description" content="Mladý barokní soubor z Konzervatoře Pardubice. Hudba 17. a 18. století, historicky poučeně. Program koncertů a poptávka pro pořadatele.">
 <!-- Absolutní adresy počítají s doménou capellanostra.cz. Poběží-li web jinde, nahraďte „https://capellanostra.cz“ ve všech HTML souborech, v sitemap.xml a robots.txt. -->
 <link rel="canonical" href="https://capellanostra.cz/">
 <meta property="og:url" content="https://capellanostra.cz/">
 <meta property="og:image" content="https://capellanostra.cz/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Capella Nostra při hraní: housle, cembalo, hoboje, violoncello a kontrabas">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" hreflang="cs" href="https://capellanostra.cz/">
 <link rel="alternate" hreflang="en" href="https://capellanostra.cz/en/">
@@ -28,11 +31,12 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<a class="skip-link" href="#obsah">Přeskočit na obsah</a>
 <script src="js/icons.js"></script>
 
 <header class="site-header">
   <div class="bar">
-    <a href="index.html" class="brand" aria-label="Capella Nostra — domů">
+    <a href="index.html" class="brand" aria-label="Capella Nostra – domů">
       <img src="assets/logo-nav.png" alt="Capella Nostra logo" width="46" height="46">
       <span>Capella Nostra</span>
     </a>
@@ -46,11 +50,11 @@
         <a href="kontakt.html">Kontakt</a>
       </nav>
       <div class="nav-actions">
-        <a class="lang-toggle" href="en/index.html" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
+        <a class="btn btn-outline-white lang-toggle" href="en/index.html" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
           <svg class="flag-en" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg>
           <span class="lang-label">EN</span>
         </a>
-        <a href="kontakt.html#poptavka" class="nav-cta">Poptat koncert <span>→</span></a>
+        <a href="kontakt.html#poptavka" class="btn btn-white nav-cta">Poptat koncert</a>
       </div>
       <button class="nav-close" id="navClose" type="button" aria-label="Zavřít menu">
         <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
@@ -63,15 +67,26 @@
   </div>
 </header>
 
-<h1 class="sr-only">Capella Nostra — komorní orchestr hrající klasickou hudbu v kostelech, sálech a na zámcích</h1>
+<main id="obsah" tabindex="-1">
 
-<section class="hero-home" id="hero">
-  <img class="hero-bg" id="heroBg0" alt="">
-  <img class="hero-bg" id="heroBg1" alt="">
-  <img class="hero-bg" id="heroBg2" alt="">
-  <div class="hero-scrim"></div>
-  <div class="hero-inner">
-    <div class="hero-row" id="heroRow"></div>
+<!-- Hero: smyčka z videí souboru na pozadí (js/home.js, část „Hero“). Nejdřív se
+     ukáže první snímek videa, video se načte až po stránce. Původní hero
+     s karuselem koncertů je uložený ve stare-hero.html. -->
+<section class="hero-video" id="hero" aria-label="Úvod">
+  <picture class="hero-video__poster">
+    <source media="(max-width: 640px), (max-aspect-ratio: 7/10)" srcset="assets/video/hero-soubor-poster-mobil.webp" width="720" height="1280">
+    <img src="assets/video/hero-soubor-poster-1920.webp" srcset="assets/video/hero-soubor-poster-960.webp 960w, assets/video/hero-soubor-poster-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high">
+  </picture>
+  <video class="hero-video__media" id="heroVideo" muted loop playsinline preload="none" aria-hidden="true"
+         data-src="assets/video/hero-soubor-1080.mp4" data-src-mobile="assets/video/hero-soubor-mobil.mp4"></video>
+  <div class="hero-video__scrim"></div>
+  <div class="container-lg hero-video__inner">
+    <h1>Capella Nostra</h1>
+    <p class="hero-video__sub">Barokní soubor z&nbsp;Konzervatoře v&nbsp;Pardubicích</p>
+    <div class="hero-video__actions">
+      <a href="koncerty.html" class="btn btn-blue">Nejbližší koncerty</a>
+      <a href="kontakt.html#poptavka" class="btn btn-outline-white">Poptat koncert</a>
+    </div>
   </div>
 </section>
 
@@ -79,18 +94,21 @@
   <div class="container-lg">
     <p class="eyebrow">Nadcházející koncerty</p>
     <h2 class="h2" style="margin-bottom:52px;">Přijďte si poslechnout Capellu Nostru naživo</h2>
-    <div class="featured-grid">
-      <div class="featured-photo" id="featuredPhoto"></div>
-      <div class="featured-list" id="eventList"></div>
+    <!-- Tři nejbližší koncerty jako karty (stejná komponenta jako na stránce Koncerty),
+         vykresluje js/home.js. Proběhlé koncerty se schovají samy. -->
+    <div class="grid-concerts home-cards" id="homeConcerts"></div>
+    <div class="home-empty" id="homeConcertsEmpty" hidden>
+      <p class="home-empty__title">Žádný koncert teď v&nbsp;programu nemáme.</p>
+      <p>Nové termíny zveřejníme tady a&nbsp;na <a href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener">Facebooku</a> a&nbsp;<a href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener">Instagramu</a>. Mezitím si můžete prohlédnout <a href="koncerty.html">proběhlé koncerty</a>, nebo nás <a href="kontakt.html#poptavka">pozvat na svou akci</a>.</p>
     </div>
     <div style="display:flex;justify-content:center;margin-top:46px;">
-      <a href="koncerty.html" class="btn btn-blue">Všechny koncerty →</a>
+      <a href="koncerty.html" class="btn btn-blue">Všechny koncerty</a>
     </div>
   </div>
 </section>
 
 <section class="season">
-  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M-700,72c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
     <path d="M-700,94c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
     <path d="M-700,116c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
@@ -102,13 +120,19 @@
     <div class="row">
       <div class="copy">
         <p class="eyebrow eyebrow--onblue">O nás</p>
-        <h2 class="h2" style="color:#fff;margin-bottom:22px;">Hudba, která spojuje tradici, vášeň a společné zážitky</h2>
-        <p class="lede">Capella Nostra je komorní soubor sdružující hudebníky se společnou vášní pro kvalitní interpretaci klasické hudby. Naším cílem je přinášet posluchačům jedinečné koncertní zážitky, ať už v historických prostorách, koncertních sálech nebo na kulturních akcích.</p>
-        <a href="o-nas.html" class="btn btn-white">Více o souboru →</a>
+        <h2 class="h2" style="color:#fff;margin-bottom:22px;">Barokní soubor z&nbsp;Konzervatoře Pardubice</h2>
+        <p class="lede">Capella Nostra vznikla v&nbsp;roce 2024 na Konzervatoři Pardubice ze zájmu samotných studentů. Začínala jako komorní uskupení pěti hráčů, dnes má jedenáct hráčů a&nbsp;uměleckého garanta. Hraje hudbu 17. a&nbsp;18.&nbsp;století historicky poučeně: barokní triové sonáty, J.&nbsp;C.&nbsp;F.&nbsp;Fischera nebo Antonia Vivaldiho.</p>
+        <a href="o-nas.html" class="btn btn-white">Více o&nbsp;souboru</a>
       </div>
       <div class="photo-wrap">
         <div class="ring">
-          <img src="" alt="Capella Nostra na pódiu" id="seasonImg">
+          <!-- Kruhový výřez ze snímku 16 : 9 – potřebná šířka zdroje je ~1,8× průměru kruhu. -->
+          <img class="home-season-photo"
+               src="assets/img/snimky/02-cembalo-suk-profil-1600.webp"
+               srcset="assets/img/snimky/02-cembalo-suk-profil-960.webp 960w, assets/img/snimky/02-cembalo-suk-profil-1600.webp 1600w, assets/img/snimky/02-cembalo-suk-profil-2560.webp 2560w"
+               sizes="(max-width: 600px) 170vw, 960px"
+               width="1600" height="900" loading="lazy"
+               alt="Adam Suk u&nbsp;cembala, za ním kontrabas a&nbsp;violoncello">
         </div>
       </div>
     </div>
@@ -120,45 +144,96 @@
     <div class="row">
       <div class="copy">
         <p class="eyebrow">Členové souboru</p>
-        <h2 class="h2" style="margin-bottom:22px;">Hudebníci, kteří dávají hudbě život</h2>
-        <p class="lede">Každý člen Capelly Nostry přispívá svými zkušenostmi, talentem a vášní k jedinečnému zvuku našeho souboru. Společně vytváříme koncerty plné emocí a nezapomenutelných okamžiků.</p>
+        <h2 class="h2" style="margin-bottom:22px;">Jedenáct hráčů a&nbsp;umělecký garant</h2>
+        <p class="lede">Převážně studenti a&nbsp;absolventi Konzervatoře Pardubice: housle a&nbsp;viola, violoncello, kontrabas, dva hoboje, trubka a&nbsp;cembalo. Soubor vede cembalista Adam Suk, uměleckým garantem je MgA.&nbsp;Michal Hanuš.</p>
         <div style="display:flex;gap:14px;">
-          <a href="clenove.html" class="btn btn-blue">Poznat členy <span>→</span></a>
+          <a href="clenove.html" class="btn btn-blue">Poznat členy</a>
         </div>
       </div>
       <div class="photo-wrap">
         <div class="ring-frame">
           <div class="ring-outer"></div>
           <div class="ring-inner"></div>
-          <div class="ring-photo"><img src="" alt="Členové Capelly Nostry" id="recommendImg"></div>
+          <div class="ring-photo">
+            <!-- Čtvercový výřez, ve kterém je celý soubor (docs/scripts/make_souborovka_kruh.py). -->
+            <img src="assets/img/soubor/souborovka-kruh-600.webp"
+                 srcset="assets/img/soubor/souborovka-kruh-600.webp 600w, assets/img/soubor/souborovka-kruh-1200.webp 1200w"
+                 sizes="(max-width: 860px) 80vw, 500px"
+                 width="600" height="600" loading="lazy"
+                 alt="Členové Capelly Nostry s&nbsp;nástroji">
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="genre-section">
-  <img class="bg-photo" alt="" id="genreBg">
+<!-- Ukázka galerie: alba z CN.ALBUMS ({id, name, cover, photos}), vykresluje js/home.js.
+     Bez alb se celá sekce skryje. -->
+<section class="genre-section home-gallery" id="homeGallery" aria-labelledby="galleryTitle">
+  <img class="bg-photo" src="assets/img/snimky/12-housle-tma-detail-1600.webp"
+       srcset="assets/img/snimky/12-housle-tma-detail-960.webp 960w, assets/img/snimky/12-housle-tma-detail-1600.webp 1600w, assets/img/snimky/12-housle-tma-detail-2560.webp 2560w"
+       sizes="100vw" loading="lazy" alt="">
   <div class="scrim"></div>
   <div class="container">
     <div class="head">
       <p class="eyebrow eyebrow--onblue">Galerie</p>
-      <h2 class="h2">Zachycené okamžiky z našich koncertů</h2>
+      <h2 class="h2" id="galleryTitle">Z&nbsp;focení a&nbsp;natáčení souboru</h2>
     </div>
     <div class="genre-row" id="genreRow"></div>
     <div class="genre-cta">
-      <a href="galerie.html" class="btn btn-white">Celá galerie <span>→</span></a>
+      <a href="galerie.html" class="btn btn-white">Celá galerie</a>
     </div>
   </div>
 </section>
+
+<!-- CTA „Poptávka“ – sdílený pás. Stejný blok je na index.html, o-nas.html, koncerty.html
+     a clenove.html; při změně upravit všude (styly: .inquiry v css/style.css). -->
+<section class="inquiry" aria-labelledby="inquiryTitle">
+  <svg class="wave-bg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="rgba(8,16,86,.26)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-700,72c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
+    <path d="M-700,94c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
+    <path d="M-700,116c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
+    <path d="M-700,138c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
+    <path d="M-700,160c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
+    <path d="M-700,182c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48c175,0 175,48 350,48c175,0 175,-48 350,-48"></path>
+  </g></svg>
+  <div class="container inquiry-grid">
+    <div class="inquiry-main">
+      <div class="inquiry-head">
+        <p class="eyebrow">Pro pořadatele</p>
+        <h2 class="h2" id="inquiryTitle">Chcete Capellu&nbsp;Nostru na své akci?</h2>
+      </div>
+      <div class="inquiry-action">
+        <a href="kontakt.html#poptavka" class="btn btn-blue">Poptat koncert</a>
+      </div>
+    </div>
+    <div class="inquiry-side">
+      <p class="inquiry-text">Hrajeme v&nbsp;kostelech i&nbsp;na festivalech. Napište, kdy a&nbsp;kde koncert chystáte. Ozveme se a&nbsp;program domluvíme spolu.</p>
+      <dl class="inquiry-contacts">
+        <div>
+          <dt>Telefon</dt>
+          <dd><a href="tel:+420702871260">+420&nbsp;702&nbsp;871&nbsp;260</a><small>Michael Stehno, manažer souboru</small></dd>
+        </div>
+        <div>
+          <dt>E-mail</dt>
+          <dd><a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer class="site-footer">
   <div class="inner">
     <h2 class="footer-word">Capella Nostra</h2>
     <p class="footer-tagline">Hudba, která spojuje.</p>
     <div class="footer-social">
-      <a href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
-      <a href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="https://www.instagram.com/capellanostra/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" width="20" height="20"><use href="#i-instagram"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="https://www.facebook.com/profile.php?id=61582602670966" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" width="20" height="20"><use href="#i-facebook"></use></svg></a>
+      <a class="btn-icon btn-icon-white" href="#" aria-label="YouTube"><svg class="icon" width="20" height="20"><use href="#i-youtube"></use></svg></a>
     </div>
     <ul class="footer-nav">
       <li><a href="index.html">Domů</a></li>
@@ -169,10 +244,11 @@
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
     <div class="footer-contact">
-      <a href="mailto:info@capellanostra.cz">info@capellanostra.cz</a>
+      <a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a>
       <span aria-hidden="true">·</span>
-      <a href="tel:+420777123456">+420 777 123 456</a>
+      <a href="tel:+420702871260">+420&nbsp;702&nbsp;871&nbsp;260</a>
     </div>
+    <p class="footer-legal">Provozovatel: [DOPLNIT: název spolku, IČO, sídlo]</p>
     <hr class="footer-hr">
     <div class="footer-bottom">
       <span class="copyright">Capella Nostra © 2026</span>

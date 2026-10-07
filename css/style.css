@@ -4,10 +4,11 @@
 :root{
   --blue:#003FFF;
   --blue-hover:#0030c4;
+  /* Hover bílého tlačítka – modrý text na něm má kontrast 5 : 1. */
+  --blue-tint:#d5dfff;
   --navy:#111a44;
   --navy-gray:#3a4366;
   --muted:#5b6a9a;
-  --muted-3:#8a93b5;
   --cream:#f7f5f2;
   --dark-navy:#0a1330;
   --white:#fff;
@@ -55,6 +56,10 @@ button{cursor:pointer;}
 
 .icon{flex:none;display:inline-block;vertical-align:middle;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* Odkaz „Přeskočit na obsah“ – viditelný jen při fokusu z klávesnice. */
+.skip-link{position:absolute;top:10px;left:10px;z-index:300;background:#fff;color:var(--blue);font-weight:700;font-size:15px;padding:12px 18px;border-radius:30px;transform:translateY(-200%);transition:transform .15s ease;}
+.skip-link:focus{transform:none;box-shadow:0 8px 24px rgba(0,0,0,.2);outline:3px solid var(--blue);outline-offset:2px;}
+main:focus{outline:none;}
 
 .container{max-width:var(--container);margin:0 auto;padding:0 40px;}
 .container-lg{max-width:var(--container-lg);margin:0 auto;padding:0 40px;}
@@ -66,22 +71,48 @@ button{cursor:pointer;}
 /* ===================================================================
    Buttons & pills
 =================================================================== */
+/* Jedno tlačítko pro celý web (sjednoceno 7. 10. 2026): jedna velikost,
+   čtyři barvy podle pozadí a jeden hover – mění se jen barva, nic se nezvedá.
+   Obrys je vnitřní stín, takže obrysové tlačítko má stejnou výšku jako plné.
+   Pohyb mají jen šipky (viz konec souboru) a krátké zmáčknutí při kliknutí. */
 .btn{
-  display:inline-flex;align-items:center;gap:9px;
-  font-weight:600;font-size:15px;line-height:1;
-  padding:13px 24px;border-radius:40px;border:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:44px;padding:0 20px;
+  font-family:var(--font);font-weight:600;font-size:15px;line-height:1;
+  border:0;border-radius:999px;
   white-space:nowrap;cursor:pointer;
-  transition:background .15s ease,color .15s ease,transform .15s ease,box-shadow .15s ease;
-  font-family:var(--font);
+  transition:background-color .15s ease,color .15s ease,box-shadow .15s ease,transform .1s ease;
 }
+.btn .icon{width:16px;height:16px;flex:none;color:currentColor;}
 .btn-blue{background:var(--blue);color:#fff;}
 .btn-blue:hover{background:var(--blue-hover);}
 .btn-white{background:#fff;color:var(--blue);}
-.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.18);}
-.btn-outline{background:#fff;border:1.7px solid var(--blue);color:var(--blue);}
+.btn-white:hover{background:var(--blue-tint);}
+.btn-outline{background:transparent;color:var(--blue);box-shadow:inset 0 0 0 1.6px var(--blue);}
 .btn-outline:hover{background:var(--blue);color:#fff;}
-.btn-lg{padding:15px 30px;font-size:16px;border-radius:42px;}
-.btn:active{transform:translateY(0);}
+.btn-outline-white{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.6px #fff;}
+.btn-outline-white:hover{background:#fff;color:var(--blue);}
+.btn:active{transform:scale(.97);}
+/* Během odesílání formuláře („Odesílám…“) tlačítko nereaguje. */
+.btn:disabled{opacity:.6;cursor:default;pointer-events:none;}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
+/* Na modrém a tmavém pozadí by modrý focus rámeček zanikl. */
+.btn-white:focus-visible,.btn-outline-white:focus-visible{outline-color:#fff;}
+
+/* Ikonové kolečko = obrysové tlačítko bez textu (sociální sítě). */
+.btn-icon{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:44px;height:44px;border-radius:50%;
+  transition:background-color .15s ease,color .15s ease,transform .1s ease;
+}
+.btn-icon .icon{width:20px;height:20px;}
+.btn-icon:active{transform:scale(.97);}
+.btn-icon-white{color:#fff;box-shadow:inset 0 0 0 1.6px #fff;}
+.btn-icon-white:hover{background:#fff;color:var(--blue);}
+.btn-icon-blue{color:var(--blue);box-shadow:inset 0 0 0 1.6px var(--blue);}
+.btn-icon-blue:hover{background:var(--blue);color:#fff;}
+.btn-icon:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
+.btn-icon-white:focus-visible{outline-color:#fff;}
 
 /* ===================================================================
    Header / nav
@@ -115,21 +146,21 @@ button{cursor:pointer;}
 .nav-links a.is-active{font-weight:700;background:rgba(255,255,255,.18);padding:8px 15px;border-radius:30px;}
 .nav-links a.is-active:hover{opacity:1;}
 
-.nav-actions a.nav-cta{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--blue);font-weight:600;font-size:15px;padding:11px 22px;border-radius:40px;white-space:nowrap;flex:none;transition:transform .15s ease,box-shadow .15s ease;}
-.nav-actions a.nav-cta:hover{opacity:1;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.16);}
-
-/* Přepínač jazyka je odkaz na protějšek stránky. Dvojice tříd drží vyšší
-   specificitu než .nav-links a, aby si pilulka udržela svůj tvar i v mobilní
-   zásuvce, kde odkazy přepínají na plnou šířku. */
-.nav-actions .lang-toggle{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;font-family:inherit;font-weight:600;font-size:14px;width:auto;padding:8px 13px;border-radius:40px;cursor:pointer;white-space:nowrap;flex:none;}
-.nav-actions .lang-toggle:hover{background:rgba(255,255,255,.24);opacity:1;}
+/* CTA a přepínač jazyka jsou obyčejná .btn (btn-white / btn-outline-white);
+   tady je jen to, co je pro navbar specifické. */
+.nav-actions .nav-cta{flex:none;}
+.nav-actions .lang-toggle{flex:none;padding:0 16px;}
 .nav-actions .lang-toggle svg{border-radius:2px;display:block;flex:none;width:22px;height:15px;}
 
+/* Menu a zavřít menu vypadají jako ikonové kolečko .btn-icon-white. */
 .nav-toggle{
-  display:none;flex:none;width:40px;height:40px;border-radius:50%;
-  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+  display:none;flex:none;width:44px;height:44px;border-radius:50%;
+  background:transparent;border:0;box-shadow:inset 0 0 0 1.6px #fff;
   align-items:center;justify-content:center;margin-left:auto;cursor:pointer;color:#fff;
+  transition:background-color .15s ease,color .15s ease;
 }
+.nav-toggle:hover,.nav-close:hover{background:#fff;color:var(--blue);}
+.nav-toggle:focus-visible,.nav-close:focus-visible{outline:3px solid #fff;outline-offset:3px;}
 .nav-toggle svg{width:18px;height:18px;}
 .nav-close{display:none;}
 .nav-scrim{display:none;}
@@ -157,12 +188,13 @@ button{cursor:pointer;}
   .nav-links a.is-active{padding:12px 16px;}
   /* V zásuvce má přednost CTA, jazyk zůstává drobnou pilulkou pod ním. */
   .nav-actions{flex-direction:column;align-items:flex-start;gap:12px;width:100%;margin-top:16px;}
-  .nav-actions a.nav-cta{order:1;width:100%;justify-content:center;}
+  .nav-actions .nav-cta{order:1;width:100%;}
   .nav-actions .lang-toggle{order:2;}
   .nav-close{
-    display:flex;position:absolute;top:22px;right:22px;width:38px;height:38px;
-    border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);
+    display:flex;position:absolute;top:22px;right:22px;width:44px;height:44px;
+    border-radius:50%;background:transparent;border:0;box-shadow:inset 0 0 0 1.6px #fff;
     align-items:center;justify-content:center;cursor:pointer;color:#fff;
+    transition:background-color .15s ease,color .15s ease;
   }
   .nav-scrim{position:fixed;inset:0;background:rgba(6,10,30,.5);z-index:65;opacity:0;pointer-events:none;transition:opacity .28s ease;}
   .nav-open .nav-scrim{display:block;opacity:1;pointer-events:auto;}
@@ -199,13 +231,12 @@ button{cursor:pointer;}
 .footer-word{color:#fff;font-size:clamp(46px,8.4vw,132px);font-weight:800;letter-spacing:-.025em;line-height:.9;margin:0 0 18px;}
 .footer-tagline{font-size:clamp(17px,2vw,22px);color:#cdd7ff;margin:0 auto 30px;max-width:520px;}
 .footer-social{display:flex;gap:12px;justify-content:center;margin-bottom:38px;}
-.footer-social a{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;color:#fff;transition:background .15s ease,border-color .15s ease;}
-.footer-social a:hover{background:rgba(255,255,255,.14);border-color:#fff;}
 .footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin:0 0 36px;}
 .footer-nav a{font-size:16px;font-weight:600;color:#fff;}
 .footer-nav a:hover{opacity:.8;}
 .footer-contact{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px;font-size:14.5px;color:#e7ecff;margin-bottom:34px;}
 .footer-contact a{color:#fff;text-decoration:underline;text-underline-offset:3px;}
+.site-footer .footer-legal{font-size:13px;line-height:1.5;color:#cdd7ff;margin:-16px auto 30px;max-width:560px;}
 .footer-hr{border:none;border-top:1px solid rgba(255,255,255,.22);margin:0 0 22px;}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px 20px;font-size:13px;color:#cdd7ff;flex-wrap:wrap;}
 .footer-bottom strong{color:#fff;}
@@ -215,6 +246,8 @@ button{cursor:pointer;}
 .footer-bottom .credit strong{text-decoration:underline;text-underline-offset:3px;}
 @media (max-width:640px){
   .footer-bottom{justify-content:center;text-align:center;}
+  .footer-contact{flex-direction:column;}
+  .footer-contact span[aria-hidden]{display:none;}
 }
 
 /* ===================================================================
@@ -303,64 +336,31 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 }
 
 .featured{background:var(--cream);padding:100px 0 110px;}
-/* Explicitní dvousloupcová mřížka — na rozdíl od flex-wrap se nezalomí
-   při implicitní šířce, ale přepne na jeden sloupec až v media query níže.
-   Díky tomu se breakpoint zalomení a odepnutí sticky obrázku shodují. */
-.featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;}
-.featured-photo{position:sticky;top:100px;height:663px;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;background:#cdd3da;}
-.featured-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.featured-photo .panel{position:relative;margin:20px;background:#fff;border-radius:14px;padding:22px 24px;max-width:430px;}
-.featured-photo .panel h3{font-size:24px;font-weight:700;color:var(--navy);line-height:1.12;margin-bottom:8px;}
-.featured-photo .panel .sub{font-size:15px;font-weight:600;color:var(--navy-gray);margin-bottom:16px;}
-.featured-photo .panel ul{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
-.featured-photo .panel li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--navy-gray);font-weight:600;}
-
-.featured-list{display:flex;flex-direction:column;gap:14px;}
-.event-row{position:relative;background:#fff;border-radius:14px;padding:16px;display:flex;gap:18px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.05);text-decoration:none;cursor:pointer;}
-.event-row img{flex:none;width:104px;height:104px;border-radius:10px;object-fit:cover;background:#e7e4dd;}
-.event-row .body{flex:1;min-width:0;padding-right:10px;}
-.event-row h3{font-size:18px;font-weight:700;color:var(--blue);line-height:1.18;margin-bottom:6px;transition:color .5s cubic-bezier(.22,.61,.36,1);}
-.event-row .sub{font-size:14px;font-weight:600;color:var(--navy);line-height:1.34;margin-bottom:10px;transition:color .5s cubic-bezier(.22,.61,.36,1);}
-.event-row ul{display:flex;flex-wrap:wrap;gap:8px 22px;}
-.event-row li{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--navy-gray);transition:color .5s cubic-bezier(.22,.61,.36,1);}
-.event-row li svg{color:var(--blue);transition:color .5s cubic-bezier(.22,.61,.36,1);}
-/* Hover: celá karta se překlopí do značkové modré (dle reference), text i ikony zbělají. */
-.event-row:hover{background:var(--blue);box-shadow:0 14px 30px rgba(0,63,255,.28);}
-.event-row:hover h3,.event-row:hover .sub,.event-row:hover li,.event-row:hover li svg{color:#fff;}
-.event-row:focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
-
-@media (max-width:1040px){
-  /* Jeden sloupec: velký obrázek nad seznamem koncertů. */
-  .featured-grid{grid-template-columns:1fr;}
-  /* position:relative (ne static) — jinak se absolutní obrázek uvnitř
-     (inset:0) umístí vůči viewportu a překryje celou stránku.
-     Zrušíme sticky i pevnou výšku: obrázek už není postranní sloupec,
-     takže by připnutý přejížděl přes karty. Výška roste podle panelu
-     (min-height), aby se tlačítko "Detail koncertu" neořízlo. */
-  .featured-photo{position:relative;top:auto;height:auto;min-height:400px;}
-}
-
-/* Úzké telefony — karta koncertu se z vodorovné přeskládá na svislou
-   (obrázek nahoře, text pod ním), jinak se text mačká vedle náhledu. */
-@media (max-width:480px){
-  .event-row{flex-direction:column;align-items:stretch;gap:14px;}
-  .event-row img{width:100%;height:170px;}
-  .event-row .body{padding-right:0;}
-}
-
 .season{position:relative;background:var(--blue);padding:104px 0;overflow:hidden;}
-.season .row{position:relative;display:flex;flex-wrap:wrap;flex-direction:row-reverse;align-items:center;justify-content:space-between;gap:56px;}
-.season .copy{flex:1 1 440px;max-width:480px;}
+/* O nás a Členové mají stejnou mřížku: dva stejné sloupce, text i kruh
+   dosedají k okrajům kontejneru (jako nadpisy a karty ostatních sekcí),
+   stejná šířka textu, stejný průměr kruhu a stejný zlom do jednoho sloupce.
+   Mezera mezi nimi tak vyjde v obou sekcích stejně. */
+.season .row,.recommend .row{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:64px;}
+.season .copy,.recommend .copy{width:100%;max-width:560px;}
+.season .photo-wrap,.recommend .photo-wrap{display:flex;width:100%;}
+.season .photo-wrap{grid-column:1;grid-row:1;justify-content:flex-start;}
+.season .copy{grid-column:2;grid-row:1;justify-self:end;}
 .season .copy p.lede{color:#e7ecff;margin-bottom:30px;}
-.season .photo-wrap{flex:1 1 480px;display:flex;justify-content:center;}
-.season .photo-wrap .ring{width:100%;max-width:540px;aspect-ratio:1;border-radius:50%;overflow:hidden;}
+.season .photo-wrap .ring{width:100%;max-width:580px;aspect-ratio:1;border-radius:50%;overflow:hidden;}
 .season .photo-wrap img{width:100%;height:100%;object-fit:cover;}
 
 .recommend{background:var(--cream);padding:104px 0;}
-.recommend .row{display:flex;flex-wrap:wrap;align-items:center;gap:56px;}
-.recommend .copy{flex:1 1 420px;max-width:520px;}
 .recommend .copy p.lede{margin-bottom:30px;}
-.recommend .photo-wrap{flex:1 1 460px;display:flex;justify-content:center;}
+.recommend .photo-wrap{justify-content:flex-end;}
+.recommend .ring-frame{max-width:580px;}
+@media (max-width:860px){
+  .season .row,.recommend .row{grid-template-columns:minmax(0,1fr);gap:48px;}
+  .season .copy,.recommend .copy{grid-column:auto;grid-row:auto;justify-self:start;max-width:none;}
+  .season .photo-wrap{grid-column:auto;grid-row:auto;}
+  .season .photo-wrap,.recommend .photo-wrap{justify-content:center;}
+  .season .photo-wrap .ring,.recommend .ring-frame{max-width:480px;}
+}
 .ring-frame{position:relative;width:100%;max-width:470px;aspect-ratio:1;}
 .ring-frame .ring-outer,.ring-frame .ring-inner{position:absolute;border-radius:50%;border:2px solid var(--blue);}
 .ring-frame .ring-outer{inset:0;}
@@ -394,10 +394,89 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
   .genre-card[aria-hidden="true"]{display:none;}
 }
 
+/* === Úvod === */
+/* Hero s videem na pozadí (index.html). Na počítači a tabletu na šířku je text
+   vlevo dole, do 900 px (mobil, tablet na výšku) na střed. Přechod do tmavé
+   drží bílý text čitelný i na světlém kostele. Pravidla .hero-home níže patří
+   původnímu karuselu (en/index.html a archiv stare-hero.html). */
+.hero-video{
+  position:relative;margin-top:calc(-1 * var(--nav-pull));
+  /* +12px: hero se vytahuje pod navbar o --nav-pull, který je o 4–12 px vyšší
+     než lišta, takže by dole zůstal proužek další sekce. */
+  height:calc(100vh + 12px);height:calc(100svh + 12px);min-height:600px;max-height:1080px;
+  display:flex;align-items:flex-end;overflow:hidden;background:var(--dark-navy);color:#fff;
+}
+.hero-video__poster img,.hero-video__media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-video__media{opacity:0;transition:opacity .6s ease;}
+.hero-video__media.is-playing{opacity:1;}
+.hero-video__scrim{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(to top,rgba(10,19,48,.82) 0%,rgba(10,19,48,.5) 38%,rgba(10,19,48,0) 66%),
+  linear-gradient(to right,rgba(10,19,48,.55) 0%,rgba(10,19,48,0) 55%),
+  linear-gradient(to bottom,rgba(10,19,48,.35) 0%,rgba(10,19,48,0) 22%);}
+.hero-video__inner{position:relative;width:100%;padding-bottom:clamp(40px,5vw,72px);}
+.hero-video h1{font-size:clamp(56px,8.6vw,132px);font-weight:800;letter-spacing:-.045em;line-height:.88;color:#fff;text-wrap:balance;}
+.hero-video__sub{margin-top:clamp(12px,1.3vw,20px);font-size:clamp(16px,1.5vw,22px);font-weight:500;line-height:1.4;color:rgba(255,255,255,.92);}
+.hero-video__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(22px,2.2vw,34px);}
+@media (max-width:1100px){
+  .hero-video__sub{font-size:clamp(17px,2.3vw,21px);}
+}
+@media (max-width:900px){
+  .hero-video__inner{text-align:center;}
+  .hero-video h1{font-size:clamp(44px,10.5vw,96px);}
+  .hero-video__actions{justify-content:center;}
+  .hero-video__scrim{background:
+    linear-gradient(to top,rgba(10,19,48,.82) 0%,rgba(10,19,48,.5) 40%,rgba(10,19,48,0) 66%),
+    linear-gradient(to bottom,rgba(10,19,48,.35) 0%,rgba(10,19,48,0) 22%);}
+}
+@media (max-width:640px){
+  .hero-video{min-height:560px;}
+  .hero-video h1{font-size:clamp(44px,15vw,64px);line-height:.9;}
+  .hero-video__sub{font-size:16px;}
+  .hero-video__inner{padding-bottom:28px;}
+  .hero-video__actions{flex-direction:column;gap:10px;margin-top:22px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-video__media{display:none;}
+}
+
+/* Hero: jediný koncert (nebo prázdný stav) se neroztahuje přes celou šířku. */
+.hero-home .hero-slide:only-child{flex:0 1 480px;}
+.hero-card--empty h2{margin-top:0;}
+/* <img> nese width/height (proti poskakování), výšku ale určuje aspect-ratio. */
+.hero-card .hero-shot img{height:auto;}
+.hero-empty-text{font-size:15px;line-height:1.5;color:var(--navy-gray);margin:0 0 18px;}
+@media (max-width:860px){
+  .hero-home .hero-slide:only-child{flex:1 1 auto;}
+  .hero-card--empty h2{margin-top:22px;}
+  .hero-empty-text{color:rgba(255,255,255,.85);max-width:36ch;margin-bottom:24px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-card .progress{display:none;}   /* bez automatického přepínání */
+}
+
+/* Nadcházející koncerty: karty podle stránky Koncerty (.grid-concerts,
+   .concert-card) + úpravy pro úvod. Karta není odkazem (nese dvě akce),
+   proto bez zvedání na hover; tlačítka drží dole, aby byla na všech kartách
+   v jedné linii i u karet bez času a odkazu. Selektory přes .concert-card,
+   protože základní pravidla karet jsou ve zdroji až za tímto blokem. */
+/* Pravidla karet (.home-card__*) sdílí s kartami na stránce Koncerty – jsou
+   v bloku „Koncerty“ níže, za základními pravidly .concert-card. */
+
+/* Prázdný stav, když není žádný nadcházející koncert */
+.home-empty{border-top:1px solid var(--border-4);border-bottom:1px solid var(--border-4);padding:36px 0;max-width:760px;}
+.home-empty__title{font-size:24px;font-weight:700;line-height:1.25;color:var(--navy);margin-bottom:10px;}
+.home-empty p:not(.home-empty__title){font-size:17px;line-height:1.6;color:var(--navy-gray);}
+.home-empty a{font-weight:600;color:var(--blue);text-decoration:underline;text-underline-offset:3px;}
+
+/* O nás: Adam Suk sedí v pravé části snímku – kruhový výřez se posune k němu. */
+.season .photo-wrap img.home-season-photo{object-position:72% 50%;}
+
 /* ===================================================================
    KONCERTY
 =================================================================== */
-.page-hero{position:relative;margin-top:calc(-1 * var(--nav-pull));min-height:680px;display:flex;align-items:center;overflow:hidden;background:var(--dark-navy);}
+/* Výška podle obrazovky (78 %), ne pevně v px: na notebooku pod fotkou vykoukne
+   obsah, na velkém monitoru hero nepůsobí jako pruh přes půlku. vh = fallback. */
+.page-hero{position:relative;margin-top:calc(-1 * var(--nav-pull));min-height:clamp(560px,78vh,960px);min-height:clamp(560px,78svh,960px);display:flex;align-items:center;overflow:hidden;background:var(--dark-navy);}
 .page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .page-hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,40,.58),rgba(8,12,40,.42) 46%,rgba(8,12,40,.72));pointer-events:none;}
 .page-hero .inner{position:relative;width:100%;padding:calc(var(--nav-pull) + 10px) 0 40px;text-align:center;}
@@ -405,7 +484,7 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .page-hero .hero-sub{font-size:clamp(16px,1.7vw,19px);line-height:1.5;color:rgba(226,232,255,.82);font-weight:500;max-width:42ch;margin:22px auto 0;}
 
 @media (max-width:860px){
-  .page-hero{min-height:70vh;}
+  .page-hero{min-height:70vh;min-height:70svh;}
 }
 
 .upcoming{background:#fff;padding:84px 0 96px;}
@@ -423,12 +502,8 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .concert-card ul{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
 .concert-card li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--navy-gray);font-weight:500;line-height:1.3;}
 .concert-card p.desc{font-size:14.5px;line-height:1.48;color:var(--muted);margin-bottom:18px;}
-.ticket-pill{display:inline-flex;align-items:center;gap:7px;border:1.6px solid var(--blue);color:var(--blue);font-weight:600;font-size:14px;padding:9px 18px;border-radius:34px;transition:background .15s ease,color .15s ease;}
-.concert-card:hover .ticket-pill{background:var(--blue);color:#fff;}
 
 .load-more-wrap{display:flex;justify-content:center;margin-top:50px;}
-.btn-load-more{cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.7px solid var(--blue);color:var(--blue);font-weight:600;font-size:15px;padding:13px 28px;border-radius:38px;transition:background .15s ease,color .15s ease;}
-.btn-load-more:hover{background:var(--blue);color:#fff;}
 
 .archive{background:var(--cream);padding:84px 0 96px;}
 .archive .section-head a{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--blue);}
@@ -448,34 +523,119 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
   .archive-card h3{font-size:15px;}
 }
 
-/* CTA „Poptávka" – světlá varianta, aby se sekce oddělila od modré patičky */
+/* CTA „Poptávka" – sdílený pás (Úvod, O nás, Koncerty, Členové). Světlý, aby se
+   oddělil od modré patičky. Dva sloupce svisle vycentrované proti sobě:
+   vlevo popisek, nadpis a tlačítko, vpravo text a pod linkou kontakty.
+   Okraje dává .container, takže sedí se zbytkem webu. */
 .inquiry{position:relative;background:#fff;padding:100px 0;overflow:hidden;border-top:1px solid #ece7de;}
+.inquiry .wave-bg{opacity:.55;}
 .inquiry .wave-bg g{stroke:rgba(0,63,255,.12);}
-.inquiry .inner{position:relative;max-width:760px;margin:0 auto;padding:0 40px;text-align:center;}
-.inquiry h2{color:var(--navy);margin-bottom:18px;}
-/* :where(:not(.eyebrow)) — odstavcový styl nesmí přebít popisek nad nadpisem
-   (a :where nezvyšuje specificitu, takže ostatní pravidla platí jako dřív). */
-.inquiry p:where(:not(.eyebrow)){font-size:18px;line-height:1.55;color:var(--muted);margin-bottom:32px;}
+.inquiry-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px 80px;align-items:center;}
+.inquiry-head h2{font-size:clamp(32px,4.4vw,62px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance;margin:0;}
+.inquiry-action{margin-top:36px;}
+/* Pravý blok má šířku textových sloupců na zbytku webu (O nás → Náš příběh:
+   520 px) a končí na pravém okraji obsahu, takže text, linka i kontakty
+   mají společný pravý okraj a sedí se sekcemi nad pásem. */
+.inquiry-side{justify-self:end;width:100%;max-width:520px;}
+.inquiry .inquiry-text{font-size:18px;line-height:1.55;color:var(--muted);margin:0;}
+.inquiry-contacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px;margin:28px 0 0;padding-top:22px;border-top:1px solid #e3e6f0;}
+.inquiry-contacts dt{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.inquiry-contacts dd{margin:0;overflow-wrap:anywhere;}
+.inquiry-contacts a{font-size:16px;font-weight:600;color:var(--navy);text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:text-decoration-color .15s ease;}
+.inquiry-contacts a:hover{text-decoration-color:currentColor;}
+.inquiry-contacts small{display:block;font-size:14px;line-height:1.45;color:var(--muted);margin-top:2px;}
+@media (max-width:860px){
+  .inquiry{padding:80px 0;}
+  .inquiry-grid{column-gap:40px;}
+  .inquiry-contacts{grid-template-columns:minmax(0,1fr);gap:14px;}
+}
+/* Mobil: jeden sloupec v pořadí nadpis → text → tlačítko → kontakty
+   (obálky se rozpustí, pořadí určuje order) */
+@media (max-width:640px){
+  .inquiry{padding:64px 0 68px;}
+  .inquiry-grid{grid-template-columns:minmax(0,1fr);gap:0;}
+  .inquiry-main,.inquiry-side{display:contents;}
+  .inquiry-head{order:1;}
+  .inquiry .inquiry-text{order:2;margin-top:18px;}
+  .inquiry-action{order:3;margin-top:30px;}
+  .inquiry-contacts{order:4;margin-top:30px;}
+}
+
+
+/* === Koncerty === */
+/* Česká stránka koncerty.html. Sdílené .page-hero, .concert-card, .archive-card
+   a .inquiry výše zůstávají beze změny (používají je i jiné stránky a
+   /en/concerts.html), tady jsou jen úpravy pod třídami koncerty-*. */
+
+/* Hero: rozvržení stejné jako na ostatních podstránkách (sdílené .page-hero –
+   výška i text na středu). Snímek lodi je světlý, proto silnější scrim. */
+.koncerty-hero img{object-position:50% 70%;}
+.koncerty-hero .scrim{background:linear-gradient(180deg,rgba(8,12,40,.68),rgba(8,12,40,.62) 46%,rgba(8,12,40,.78));}
+/* Sdílené hero centruje text svisle, takže jeho poloha závisí na počtu řádků.
+   Ostatní podstránky mají podtitul na dva řádky – užší sloupec ho zalomí stejně
+   a nadpis tak sedí na stejném místě. */
+.koncerty-hero .hero-sub{max-width:34ch;text-wrap:balance;}
+
+/* Karty koncertů s akcemi – sdílené Úvodem (.home-cards, .home-card__*) a touto
+   stránkou (.koncerty-card*). Karta není celá odkazem (nese dvě akce), proto se
+   nezvedá; tlačítka přitlačená ke spodku, aby byla na všech kartách v jedné linii.
+   Musí stát za základními pravidly .concert-card (stejná specificita). */
+.home-cards .concert-card,.koncerty-card{display:flex;flex-direction:column;}
+.home-cards .concert-card:hover,.koncerty-card:hover{transform:none;box-shadow:var(--shadow-card);}
+.home-cards .concert-card .body,.koncerty-card .body{flex:1;display:flex;flex-direction:column;padding:20px 22px 22px;}
+.home-cards .concert-card h3,.koncerty-card h3{margin-bottom:4px;}
+.home-card__sub,.koncerty-card__sub{font-size:14.5px;font-weight:600;line-height:1.4;color:var(--navy-gray);margin-bottom:4px;}
+.home-cards .concert-card ul,.koncerty-card ul{margin:10px 0 20px;}
+.home-cards .concert-card li,.koncerty-card li{align-items:flex-start;}
+.home-cards .concert-card li .icon,.koncerty-card li .icon{color:var(--blue);margin-top:1px;}
+.home-card__map,.koncerty-card__map,.ac-map{text-decoration:underline;text-decoration-color:rgba(0,63,255,.35);text-decoration-thickness:1px;text-underline-offset:3px;transition:color .15s ease,text-decoration-color .15s ease;}
+.home-card__map:hover,.koncerty-card__map:hover,.ac-map:hover{color:var(--blue);text-decoration-color:currentColor;}
+/* Tlačítka karet jsou obyčejná .btn. Mezera 8 px: při 10 px se „Událost na Facebooku“
+   + „Do kalendáře“ na 1440 px o necelý pixel nevejdou vedle sebe. */
+.home-card__actions,.koncerty-card__actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px;}
+.home-card__map:focus-visible,.koncerty-card__map:focus-visible,.ac-map:focus-visible,.ac-link:focus-visible,.program-empty a:focus-visible,.inquiry-contacts a:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px;}
+
+/* Prázdný stav, když není žádný nadcházející koncert */
+.program-empty{border-top:1px solid var(--border-4);border-bottom:1px solid var(--border-4);padding:40px 0;}
+.program-empty-title{font-size:clamp(20px,2vw,24px);font-weight:700;color:var(--navy);margin-bottom:8px;}
+.program-empty p:not(.program-empty-title){font-size:17px;line-height:1.5;color:var(--muted);}
+.program-empty a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+
+/* Archiv – menší karty; auto-fit, aby čtyři karty vyplnily šířku bez prázdného
+   sloupce. Datum tmavší než --archive-ink kvůli kontrastu (AA). */
+.archive-note{font-size:16.5px;line-height:1.5;color:#625a4b;max-width:62ch;margin-top:14px;}
+.koncerty-archive .grid-archive{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px 24px;}
+/* Archivní karta už není celá odkazem (místo → Mapy, pořadatel → web), proto se nezvedá. */
+.koncerty-archive-card:hover{transform:none;}
+.koncerty-archive .archive-card .date{color:#7a6d52;}
+.koncerty-archive .archive-card .ac-meta{font-size:14px;line-height:1.45;color:#625a4b;margin-top:5px;}
+.koncerty-archive .archive-card .ac-place{font-size:14px;line-height:1.45;color:#625a4b;margin-top:3px;}
+.koncerty-archive .archive-card .ac-link{display:inline-block;font-size:14px;font-weight:600;color:var(--blue);text-decoration:underline;text-underline-offset:3px;margin-top:9px;}
+.koncerty-archive .archive-card .ac-link:hover{color:var(--blue-hover);}
+
+@media (max-width:560px){
+  .koncerty-archive .grid-archive{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 14px;}
+  .koncerty-archive .archive-card .ac-meta{font-size:13px;}
+}
 
 /* ===================================================================
    O NÁS
 =================================================================== */
 .about-intro{background:#fff;padding:76px 0 66px;}
-.about-intro .row{display:flex;flex-wrap:wrap;align-items:center;gap:56px;justify-content:space-between;}
-.about-intro .copy{flex:1 1 440px;max-width:480px;min-width:0;}
-.about-intro .copy p.lede{margin-bottom:30px;max-width:480px;}
-.about-intro .actions{display:flex;gap:14px;flex-wrap:wrap;}
-.about-intro .photo-wrap{flex:1 1 500px;display:flex;justify-content:center;min-width:0;}
-.about-intro .ring-frame{max-width:540px;}
-.about-intro .ring-frame .ring-inner{inset:19px;}
-.about-intro .ring-frame .ring-photo{inset:40px;background:#e7ecfb;}
+/* Kdo jsme a Náš příběh mají stejnou mřížku, jen zrcadlově. Text i fotka sedí
+   u vnějšího kraje a šířky jsou spárované křížem (text Kdo jsme = fotka Příběhu
+   = 480 px, kruh Kdo jsme = text Příběhu = 540 px), takže střed fotky v jedné
+   sekci leží přesně pod středem textu v druhé. */
+.about-intro .row,.story .row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px;}
+.about-intro .copy{justify-self:start;width:100%;max-width:480px;min-width:0;}
+.about-intro .copy p.lede{max-width:480px;}
+.about-intro .photo-wrap{justify-self:end;width:100%;max-width:540px;display:flex;justify-content:center;min-width:0;}
 
 .story{background:var(--cream);padding:88px 0;}
-.story .row{display:flex;flex-wrap:wrap;align-items:center;gap:56px;}
-.story .photo-wrap{flex:1 1 480px;display:flex;justify-content:center;min-width:0;}
-.story .photo-wrap .frame{width:100%;max-width:470px;aspect-ratio:1;border-radius:50%;overflow:hidden;background:#e6e2d8;box-shadow:0 22px 54px rgba(17,26,68,.14);}
+.story .photo-wrap{justify-self:start;width:100%;max-width:480px;display:flex;justify-content:center;min-width:0;}
+.story .photo-wrap .frame{width:100%;max-width:480px;aspect-ratio:1;border-radius:50%;overflow:hidden;background:#e6e2d8;box-shadow:0 22px 54px rgba(17,26,68,.14);}
 .story .photo-wrap img{width:100%;height:100%;object-fit:cover;}
-.story .copy{flex:1 1 420px;max-width:520px;min-width:0;}
+.story .copy{justify-self:end;width:100%;max-width:540px;min-width:0;}
 .story .copy p:where(:not(.eyebrow)){font-size:17.5px;line-height:1.62;color:var(--navy-gray);margin-bottom:16px;}
 .story .copy p:last-child{margin-bottom:0;}
 
@@ -500,26 +660,64 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 ------------------------------------------------------------------- */
 .kc-full .kc-frame{display:grid;grid-template-columns:1.06fr .94fr;min-height:700px;}
 .kc-shot{position:relative;background:#0b1230;overflow:hidden;}
-.kc-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.kc-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;} /* snímek 07: soubor je vpravo od středu */
 .kc-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,40,.22),rgba(8,12,40,.6));}
 .kc-panel{background:var(--navy);color:#fff;display:flex;align-items:center;padding:clamp(44px,6vw,92px);}
 .kc-panel .inner{width:100%;max-width:560px;}
 .kc-panel .eyebrow{color:#9db8ff;}
 .kc-panel h2{color:#fff;font-size:clamp(28px,3.1vw,40px);line-height:1.05;letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance;}
 .kc-tracks{list-style:none;margin:24px 0 0;padding:0;}
-.kc-tracks li{display:flex;gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid rgba(255,255,255,.15);}
+/* Skladatel nahoře, skladby pod ním – názvy skladeb jsou dlouhé, vedle sebe by se nevešly. */
+.kc-tracks li{display:grid;grid-template-columns:34px 1fr;column-gap:8px;row-gap:4px;align-items:baseline;padding:15px 0;border-top:1px solid rgba(255,255,255,.15);}
 .kc-tracks li:last-child{border-bottom:1px solid rgba(255,255,255,.15);}
-.kc-tracks .no{min-width:26px;font-size:13px;font-weight:700;color:#7f8fc9;flex:none;}
+.kc-tracks .no{grid-row:span 2;font-size:13px;font-weight:700;color:#8f9dd6;}
 .kc-tracks .nm{font-size:18.5px;font-weight:700;color:#fff;letter-spacing:-.01em;}
-.kc-tracks .cm{margin-left:auto;font-size:13.5px;color:#aeb8e6;text-align:right;padding-left:12px;flex:none;}
+.kc-tracks .cm{font-size:14.5px;line-height:1.45;color:#c2caf2;}
 .kc-where{margin-top:22px;font-size:14.5px;line-height:1.55;color:#c7cffc;}
 .kc-where strong{color:#fff;font-weight:700;}
 @media (max-width:860px){
   .kc-full .kc-frame{grid-template-columns:1fr;}
-  .kc-shot{min-height:320px;}
 }
-@media (max-width:520px){
-  .kc-tracks .cm{display:none;}
+/* === O souboru === */
+/* Hero: soubor je uprostřed snímku přímo pod textem, proto tmavší střed scrimu. */
+.onas-hero img{object-position:50% 62%;}
+.onas-hero .scrim{background:linear-gradient(180deg,rgba(8,12,40,.6),rgba(8,12,40,.56) 46%,rgba(8,12,40,.74));}
+
+/* Kdo jsme: dvojitý kruh (sdílená komponenta .ring-frame) a 1. cena jako velká „1.“ pod textem. */
+.about-intro .copy p.lede{margin-bottom:16px;}
+.onas-text{font-size:17px;line-height:1.6;color:var(--navy-gray);margin-bottom:26px;max-width:480px;}
+.about-intro .ring-frame{max-width:540px;}
+.about-intro .ring-frame .ring-inner{inset:19px;}
+.about-intro .ring-frame .ring-photo{inset:40px;background:#e7ecfb;}
+/* Ema Světlíková sedí v levé třetině snímku 16 : 9, výřez do kruhu se posouvá k ní. */
+.about-intro .ring-frame .ring-photo img{object-position:24% 50%;}
+.onas-award{display:grid;grid-template-columns:auto 1fr;column-gap:18px;row-gap:4px;align-items:center;max-width:480px;padding-top:22px;border-top:1px solid #dfe3f0;}
+.onas-award .n{grid-row:span 2;font-size:64px;font-weight:800;line-height:.8;letter-spacing:-.04em;color:var(--blue);}
+.onas-award strong{font-size:16.5px;font-weight:700;line-height:1.3;color:var(--navy);}
+.onas-award > span:last-child{font-size:14.5px;font-weight:600;color:var(--muted);}
+@media (max-width:640px){
+  .onas-award .n{font-size:54px;}
+}
+/* Pod sebou: v obou sekcích fotka nahoře na středu a text pod ní. Jinak by se kruh
+   z Kdo jsme a kruh z Příběhu na telefonu potkaly hned pod sebou. */
+@media (max-width:1100px){
+  .about-intro .row,.story .row{grid-template-columns:minmax(0,1fr);gap:44px;}
+  .about-intro .photo-wrap,.story .photo-wrap{justify-self:center;}
+  .about-intro .photo-wrap{order:-1;}
+  .about-intro .copy,.story .copy{justify-self:start;max-width:560px;}
+}
+
+
+/* Kde a co hrajeme */
+.kc-lead{margin-top:14px;font-size:16px;line-height:1.55;color:#c7cffc;max-width:46ch;}
+.kc-sub{margin:34px 0 4px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9db8ff;}
+.kc-fests li{padding:9px 0;font-size:16.5px;font-weight:600;line-height:1.35;color:#fff;border-bottom:1px solid rgba(255,255,255,.12);}
+.kc-link{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-size:15px;font-weight:700;color:#fff;border-bottom:1.5px solid rgba(255,255,255,.45);padding-bottom:3px;transition:border-color .15s ease;}
+.kc-link:hover{border-color:#fff;}
+.kc-link:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:2px;}
+@media (max-width:860px){
+  .kc-shot{min-height:0;aspect-ratio:16/10;}
+  .kc-shot img{object-position:60% 50%;}
 }
 
 /* ===================================================================
@@ -532,14 +730,12 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .leadership .copy{flex:1 1 380px;max-width:520px;min-width:0;color:#fff;}
 .leadership h2{font-size:clamp(30px,3.4vw,40px);color:#fff;letter-spacing:-.012em;line-height:1.05;margin-bottom:8px;}
 .leadership .role{font-size:18px;font-weight:600;color:#dbe3ff;margin-bottom:20px;}
-.leadership .note{font-size:17px;line-height:1.6;color:#e7ecff;max-width:520px;margin-bottom:28px;}
 /* Umělecký vedoucí — stack na střed, jakmile se dva sloupce nevejdou vedle sebe */
 @media (max-width:900px){
   .leadership{padding:64px 0;}
   .leadership .row{flex-direction:column;align-items:center;text-align:center;gap:32px;}
   .leadership .conductor-photo{flex:none;width:min(78vw,300px);}
   .leadership .copy{flex:none;width:100%;max-width:none;min-width:0;}
-  .leadership .note{margin-left:auto;margin-right:auto;}
 }
 .musicians{background:var(--cream);padding:84px 0 96px;}
 .musicians .section-head{align-items:baseline;margin-bottom:42px;}
@@ -570,14 +766,82 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
   .grid-leaders .musician{width:190px;}
 }
 
+/* === Členové === */
+/* Česká stránka clenove.html. Staví na sdílených .page-hero, .leadership
+   a .musician (ty používá i en/members.html), proto jen přepisy s prefixem
+   .clenove-* a nové prvky; původní pravidla výše zůstávají beze změny. */
+.clenove-hero img{object-position:50% 38%;}
+
+/* Adam Suk – modrá sekce s portrétem, zkráceným CV a odkazy */
+/* Varianta B (6. 10. 2026): celá stránka drží standardní okraje webu (kontejner 1440 px,
+   obsah 1360 px). Text začíná u levého, fotka končí u pravého okraje jako na O nás. */
+.clenove-lead .row{align-items:flex-start;justify-content:space-between;gap:48px;}
+.clenove-lead .conductor-photo{margin-top:8px;}
+.clenove-lead .conductor-photo img{object-position:50% 14%;}
+.clenove-lead .copy{flex:0 1 600px;max-width:600px;}
+.clenove-lead .role{margin-bottom:24px;}
+.clenove-lead .cv p{font-size:17px;line-height:1.62;color:#e7ecff;margin:0 0 14px;text-wrap:pretty;}
+.cv-more{margin-top:6px;}
+.cv-more summary{display:inline-flex;align-items:center;gap:10px;list-style:none;cursor:pointer;font-size:16px;font-weight:700;color:#fff;padding:6px 0;border-bottom:1.5px solid rgba(255,255,255,.5);transition:border-color .15s ease;}
+.cv-more summary::-webkit-details-marker{display:none;}
+.cv-more summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-3px) rotate(45deg);transition:transform .2s ease;}
+.cv-more[open] summary::after{transform:translateY(2px) rotate(-135deg);}
+.cv-more summary:hover{border-color:#fff;}
+.cv-more summary:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:2px;}
+.cv-more[open] .cv-more__open,
+.cv-more:not([open]) .cv-more__close{display:none;}
+.cv-more__body{padding-top:22px;}
+.clenove-lead .cv-more__body p{font-size:16px;}
+.lead-social{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+@media (max-width:900px){
+  .clenove-lead .row{align-items:center;gap:32px;}
+  .clenove-lead .copy{max-width:600px;text-align:left;}
+  .clenove-lead .copy > .eyebrow,.clenove-lead h2,.clenove-lead .role{text-align:center;}
+  .lead-social{justify-content:center;}
+}
+
+/* Vedení souboru (řádek oddělený linkou) a mřížka hráčů přes celou šířku obsahu.
+   Vedení má šířku jednoho sloupce mřížky, takže jsou všechny kruhy stejně velké. */
+.clenove-team{--col-gap:40px;}
+.clenove-team .grid-leaders{gap:var(--col-gap);margin:0 0 56px;align-items:flex-start;}
+.clenove-team .leaders-divider{max-width:none;margin:0 0 60px;}
+.clenove-team .grid-leaders .musician{width:calc((100% - 3 * var(--col-gap)) / 4);}
+.clenove-team .grid-musicians{grid-template-columns:repeat(4,minmax(0,1fr));gap:52px var(--col-gap);max-width:none;margin:0;}
+.clenove-team .musician .photo img{object-position:50% 12%;}
+.clenove-team .musician h3{font-size:17px;margin-bottom:4px;}
+.clenove-team .musician p{font-size:14px;}
+
+/* Garant bez fotky: typografická karta v rozměru portrétu (ne silueta ani avatar) */
+.musician .type-card{container-type:inline-size;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 12%;background:var(--blue);color:#fff;text-align:center;margin-bottom:0;}
+.musician .photo.type-card h3{font-size:clamp(20px,14cqi,30px);font-weight:800;letter-spacing:-.015em;line-height:1.08;color:#fff;margin:0;text-wrap:balance;}
+.type-card__title{display:block;font-size:15px;font-weight:600;letter-spacing:.02em;color:#cdd9ff;margin-bottom:6px;}
+.type-card__rule{width:32px;height:2px;background:rgba(255,255,255,.5);margin:16px 0 14px;}
+.musician .photo.type-card p{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#dbe3ff;}
+
+.team-photo{margin:104px 0 0;border-radius:24px;overflow:hidden;background:#e7ecfb;}
+.team-photo img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;}
+
+@media (max-width:960px){
+  .clenove-team{--col-gap:22px;}
+  .clenove-team .grid-musicians{row-gap:36px;}
+}
+@media (max-width:680px){
+  .clenove-team .grid-leaders{margin-bottom:40px;}
+  .clenove-team .leaders-divider{margin-bottom:44px;}
+  .clenove-team .grid-leaders{flex-direction:column;align-items:center;gap:36px;}
+  .clenove-team .grid-leaders .musician{width:min(220px,100%);}
+  .clenove-team .grid-musicians{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 16px;}
+  .clenove-team .musician h3{font-size:16px;}
+  .clenove-team .musician p{font-size:13px;}
+  .team-photo{margin-top:64px;border-radius:18px;}
+}
+
 /* ===================================================================
    GALERIE
 =================================================================== */
 .filters{background:#fff;padding:30px 0 6px;}
 .filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
-.filter-pill{cursor:pointer;font-family:inherit;border:1.5px solid #d9dcea;background:#fff;color:var(--navy-gray);font-size:14px;font-weight:600;padding:9px 18px;border-radius:30px;transition:background .15s ease,color .15s ease,border-color .15s ease;}
-.filter-pill.is-active{background:var(--blue);color:#fff;border-color:var(--blue);}
-.filter-pill:not(.is-active):hover{border-color:var(--blue);color:var(--blue);}
+.filter-pill.is-active{background:var(--blue);color:#fff;box-shadow:none;cursor:default;}
 
 .gallery-grid-section{background:#fff;padding:24px 0 64px;}
 .grid-albums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;}
@@ -613,8 +877,9 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .album-head li{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--navy-gray);}
 
 .album-photos{background:#fff;padding:30px 0 72px;}
-.grid-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:18px;}
-.photo-tile{position:relative;display:block;border-radius:14px;overflow:hidden;aspect-ratio:1;background:linear-gradient(152deg,#eef1f8,#dde6fa);cursor:pointer;transition:transform .18s ease;}
+.grid-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px;}
+/* Alba stojí na snímcích z natáčení (16:9) a focení (3:2) – dlaždice drží 3:2. */
+.photo-tile{position:relative;display:block;border-radius:14px;overflow:hidden;aspect-ratio:3/2;background:linear-gradient(152deg,#eef1f8,#dde6fa);cursor:pointer;transition:transform .18s ease;}
 .photo-tile:hover{transform:scale(1.015);}
 .photo-tile img{width:100%;height:100%;object-fit:cover;}
 
@@ -649,12 +914,6 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .lb-video .lb-head .lb-icon-btn{margin-left:auto;}
 .lb-video .lb-stage-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:18px 0;min-height:0;}
 .lb-video .player{width:100%;max-width:980px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;position:relative;background:linear-gradient(150deg,#101a40,#0a1330);display:flex;align-items:center;justify-content:center;animation:lbPop .25s ease;cursor:default;}
-.lb-video .player .play-btn{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(0,0,0,.45);}
-.lb-video .player .ph-label{position:absolute;bottom:12px;left:14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7);}
-.lb-scrub{flex:none;display:flex;align-items:center;gap:14px;max-width:980px;width:100%;margin:0 auto;color:#fff;}
-.lb-scrub .track{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.22);}
-.lb-scrub .track > span{display:block;width:34%;height:100%;border-radius:4px;background:#fff;}
-.lb-scrub .time{font-size:13px;color:#cdd9ff;font-weight:600;white-space:nowrap;}
 
 /* ---- Galerie: responzivní breakpointy ---- */
 @media (max-width:1040px){
@@ -685,7 +944,25 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
   .lb-arrow{width:38px;height:38px;}
   .lb-arrow svg{width:16px;height:16px;}
   .lb-thumbs button{width:54px;height:38px;}
-  .lb-scrub{gap:10px;}
+}
+
+/* === Galerie === */
+/* Karta alba: datum zatím neznáme, místo něj krátký popis obsahu. */
+.album-card .album-desc{font-size:14.5px;line-height:1.5;color:var(--navy-gray);margin-top:2px;}
+/* Video karta: skladatel nad názvem skladby. */
+.video-card .composer{font-size:13px;font-weight:600;color:var(--muted);margin-top:12px;}
+.video-card .composer + h3{margin-top:3px;}
+#galerieHero .hero-sub{text-wrap:balance;}
+/* Přehrávač YouTube se vkládá až po kliknutí. */
+.lb-video .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+/* Video, které ještě není na YouTube: náhled se štítkem místo přehrávače. */
+.video-card.is-soon .play-btn{opacity:.9;}
+.lb-video .player > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.player-soon{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;text-align:center;background:rgba(8,12,40,.55);}
+.player-soon .play-btn{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(0,0,0,.45);}
+.player-soon p{margin:0;font-size:clamp(15px,1.6vw,18px);font-weight:600;color:#fff;}
+@media (max-width:420px){
+  .grid-photos{grid-template-columns:minmax(0,1fr);}
 }
 
 /* ===================================================================
@@ -699,14 +976,13 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .contact-row{display:flex;align-items:center;gap:15px;padding:16px 0;transition:transform .15s ease;}
 .contact-row:hover{transform:translateX(3px);}
 .contact-row .ic{width:50px;height:50px;border-radius:14px;background:#edf1ff;display:flex;align-items:center;justify-content:center;flex:none;color:var(--blue);}
-.contact-row .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--muted-3);margin-bottom:3px;}
+.contact-row .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
 .contact-row .value{display:block;font-size:18px;font-weight:700;color:var(--navy);word-break:break-word;}
+.contact-row .note{display:block;font-size:14px;line-height:1.45;color:var(--muted);margin-top:2px;}
 
 .social-block{padding:18px 0 0;}
-.social-block .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--muted-3);margin-bottom:14px;}
+.social-block .label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
 .social-block .row{display:flex;gap:11px;flex-wrap:wrap;}
-.social-block a{width:46px;height:46px;border-radius:50%;border:1.5px solid #cdd6f5;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s ease,border-color .15s ease;color:var(--blue);}
-.social-block a:hover{background:#edf1ff;border-color:var(--blue);}
 
 .contact-form-wrap{flex:1.25 1 460px;min-width:0;}
 .contact-form{background:#fff;border:1px solid var(--border-2);border-radius:24px;padding:34px 34px 36px;box-shadow:0 12px 44px rgba(17,26,68,.09);}
@@ -768,8 +1044,6 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 .notfound .inner{max-width:640px;}
 .notfound .lede{margin-top:18px;}
 .notfound .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;}
-.notfound .en{margin-top:48px;padding-top:22px;border-top:1px solid #e4e0d6;font-size:15px;line-height:1.55;color:var(--navy-gray);}
-.notfound .en a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px;}
 @media (max-width:640px){
   .notfound{padding:calc(64px + var(--nav-pull)) 0 88px;}
 }
@@ -785,28 +1059,18 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
 }
 .reveal.is-visible{opacity:1;transform:none;}
 
-/* Karty koncertů na Home (.event-row) nesou i .reveal, jehož transition výše
-   pokrývá jen opacity+transform → pozadí a stín hoveru by jinak skákaly.
-   Toto pravidlo je ve zdroji za .reveal (stejná specificita → vyhrává): zachová
-   náběh reveal (se stagger delay) a přidá plynulý hover pozadí i stínu bez
-   zpoždění. V reduced-motion ho níže přebije `.reveal{transition:none}`. */
-.event-row{
-  transition:opacity .7s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0s),
-             transform .7s cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0s),
-             background-color .5s cubic-bezier(.22,.61,.36,1),
-             box-shadow .5s cubic-bezier(.22,.61,.36,1);
-}
-
-/* Šipky v tlačítkách se na hover jemně posunou */
-.btn span,.nav-cta span,.ticket-pill span{display:inline-block;transition:transform .18s ease;}
-.btn:hover span,.nav-cta:hover span,.concert-card:hover .ticket-pill span{transform:translateX(3px);}
+/* Tlačítka šipku → nemají (rozhodnuto 7. 10. 2026 – byla všude a nic neříkala).
+   Jen odkazy ven z webu mají ↗ (.arrow-ne), která se na hover posune šikmo nahoru. */
+.btn .arrow-ne{display:inline-block;transition:transform .18s ease;}
+.btn:hover .arrow-ne{transform:translate(2px,-2px);}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   .reveal{opacity:1;transform:none;transition:none;}
   .hero-card{animation:none;}
   .hero-home .hero-bg{transition:none;}
-  .btn span,.nav-cta span,.ticket-pill span{transition:none;}
+  .btn .arrow-ne,.skip-link{transition:none;}
+  .btn:active,.btn-icon:active{transform:none;}
   .wave-bg path,.wave-bg g{animation:none;}
 }
 
@@ -817,7 +1081,6 @@ h1,h2{letter-spacing:-.012em;line-height:1.08;color:var(--navy);font-weight:700;
   .featured{padding:64px 0 72px;}
   .season,.recommend,.genre-section{padding:68px 0;}
   .upcoming,.archive,.musicians{padding:60px 0 72px;}
-  .inquiry{padding:72px 0;}
   .about-intro{padding:56px 0 52px;}
   .story{padding:64px 0;}
   .members-teaser{padding:60px 0;}

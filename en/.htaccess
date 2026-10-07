@@ -1,0 +1,4 @@
+# Anglická stránka 404 pro chybné adresy v /en/… (Apache).
+# Kořenový .htaccess platí pro zbytek webu; Cloudflare Pages najde
+# en/404.html samo, na Netlify je potřeba řádek v _redirects.
+ErrorDocument 404 /en/404.html
