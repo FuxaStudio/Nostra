@@ -11,6 +11,9 @@ MAP = {
     'clenove.html': 'members.html', 'galerie.html': 'gallery.html', 'kontakt.html': 'contact.html',
     'zasady-ochrany-osobnich-udaju.html': 'privacy-policy.html',
 }
+# Adresy bez .html (Cloudflare servíruje /koncerty z koncerty.html), úvod = „./“.
+def slug(f):
+    return '' if f == 'index.html' else f[:-len('.html')]
 # en/404.html se udržuje ručně (cesty od kořene, vlastní .htaccess v /en/).
 CZ_FLAG = ('<svg class="flag-cs" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true">'
            '<rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect>'
@@ -72,8 +75,8 @@ PAGES['index.html'] = INQUIRY + [
      '<p class="home-empty__title">There are no concerts in the programme right now.</p>'),
     ('<p>Nové termíny zveřejníme tady a&nbsp;na <a', '<p>We will announce new dates here and on <a'),
     ('>Facebooku</a> a&nbsp;<a', '>Facebook</a> and <a'),
-    ('>Instagramu</a>. Mezitím si můžete prohlédnout <a href="koncerty.html">proběhlé koncerty</a>, nebo nás <a href="kontakt.html#poptavka">pozvat na svou akci</a>.</p>',
-     '>Instagram</a>. In the meantime you can look through our <a href="koncerty.html">past concerts</a> or <a href="kontakt.html#poptavka">invite us to your event</a>.</p>'),
+    ('>Instagramu</a>. Mezitím si můžete prohlédnout <a href="koncerty">proběhlé koncerty</a>, nebo nás <a href="kontakt#poptavka">pozvat na svou akci</a>.</p>',
+     '>Instagram</a>. In the meantime you can look through our <a href="koncerty">past concerts</a> or <a href="kontakt#poptavka">invite us to your event</a>.</p>'),
     ('>Všechny koncerty<', '>All concerts<'),
     ('<p class="eyebrow eyebrow--onblue">O nás</p>', '<p class="eyebrow eyebrow--onblue">About us</p>'),
     ('>Barokní soubor z&nbsp;Konzervatoře Pardubice</h2>', '>A Baroque ensemble from the Pardubice Conservatory</h2>'),
@@ -176,7 +179,7 @@ PAGES['koncerty.html'] = INQUIRY + [
     ('<h2 class="h2" id="upcomingTitle">Nadcházející koncerty</h2>', '<h2 class="h2" id="upcomingTitle">Upcoming concerts</h2>'),
     ('<p class="program-empty-title">Další koncerty zatím nejsou v&nbsp;programu.</p>',
      '<p class="program-empty-title">No further concerts are scheduled yet.</p>'),
-    ('<p>Nové termíny zveřejňujeme na <a', '<p>We announce new dates on <a'),
+    ('<p>Nové termíny zveřejníme tady a&nbsp;na <a', '<p>We will announce new dates here and on <a'),
     ('>Facebooku</a> a&nbsp;<a', '>Facebook</a> and <a'),
     ('>Instagramu</a>.</p>', '>Instagram</a>.</p>'),
     ('<p class="eyebrow">Proběhlé koncerty</p>', '<p class="eyebrow">Past concerts</p>'),
@@ -267,8 +270,8 @@ PAGES['kontakt.html'] = [
     ('<label for="cn-phone">Telefon</label>', '<label for="cn-phone">Phone</label>'),
     ('<label for="cn-message">Zpráva <span', '<label for="cn-message">Message <span'),
     ('placeholder="Termín, místo a&nbsp;typ akce…"', 'placeholder="Date, venue and type of event…"'),
-    ('<span>Souhlasím se <a href="zasady-ochrany-osobnich-udaju.html" target="_blank">zpracováním osobních údajů</a> za účelem vyřízení mé poptávky.<span class="sr-only"> (otevře se v&nbsp;novém okně)</span></span>',
-     '<span>I agree to the <a href="zasady-ochrany-osobnich-udaju.html" target="_blank">processing of my personal data</a> for the purpose of handling my enquiry.<span class="sr-only"> (opens in a new window)</span></span>'),
+    ('<span>Souhlasím se <a href="zasady-ochrany-osobnich-udaju" target="_blank">zpracováním osobních údajů</a> za účelem vyřízení mé poptávky.<span class="sr-only"> (otevře se v&nbsp;novém okně)</span></span>',
+     '<span>I agree to the <a href="zasady-ochrany-osobnich-udaju" target="_blank">processing of my personal data</a> for the purpose of handling my enquiry.<span class="sr-only"> (opens in a new window)</span></span>'),
     ('>Odeslat poptávku<', '>Send enquiry<'),
     ('tabindex="-1">Děkujeme za zprávu!</h2>', 'tabindex="-1">Thank you for your message!</h2>'),
     ('<p>Vaše poptávka byla odeslána. Ozveme se vám co nejdříve.</p>', '<p>Your enquiry has been sent. We will get back to you as soon as possible.</p>'),
@@ -299,11 +302,23 @@ PAGES['zasady-ochrany-osobnich-udaju.html'] = [
     ('<p>Údaje z&nbsp;poptávkového formuláře uchováváme po dobu nezbytnou k&nbsp;vyřízení poptávky a&nbsp;následné komunikace, nejdéle však [DOPLNIT: např. 2 roky] od posledního kontaktu. Poté je smažeme.</p>',
      '<p>We keep the data from the enquiry form for as long as is necessary to handle the enquiry and any follow-up communication, and for no longer than [TO BE COMPLETED: e.g. 2 years] from the last contact. After that we delete it.</p>'),
     ('<h2>5. Předávání údajů</h2>', '<h2>5. Sharing of data</h2>'),
-    ('<p>Vaše osobní údaje nepředáváme žádným třetím stranám s&nbsp;výjimkou poskytovatelů technických služeb nezbytných pro provoz webu a&nbsp;e-mailové komunikace (např. webhosting). Údaje nepředáváme mimo Evropskou unii.</p>',
-     '<p>We do not share your personal data with any third parties, except for providers of the technical services needed to run the website and our e-mail communication (web hosting, for example). We do not transfer data outside the European Union.</p>'),
+    ('<p>Vaše osobní údaje neprodáváme ani je nepředáváme pro marketingové účely. Pracují s&nbsp;nimi jen poskytovatelé technických služeb, bez kterých web a&nbsp;e-mailová komunikace nefungují:</p>',
+     '<p>We do not sell your personal data or share it for marketing purposes. It is handled only by providers of the technical services that the website and our e-mail communication depend on:</p>'),
+    ('<li>Web3Forms – doručí zprávu z&nbsp;formuláře do naší e-mailové schránky,</li>',
+     '<li>Web3Forms – delivers messages from the form to our mailbox,</li>'),
+    ('<li>Google (služba Gmail) – v&nbsp;e-mailové schránce souboru zprávy uchováváme,</li>',
+     '<li>Google (Gmail) – we keep the messages in the ensemble’s mailbox,</li>'),
+    ('<li>Cloudflare – na jeho serverech web běží.</li>',
+     '<li>Cloudflare – the website runs on its servers.</li>'),
+    ('<p>Tito poskytovatelé mohou údaje zpracovávat i&nbsp;mimo Evropskou unii, zejména v&nbsp;USA. Předání v&nbsp;takovém případě probíhá na základě záruk podle nařízení GDPR, například standardních smluvních doložek Evropské komise.</p>',
+     '<p>These providers may process data outside the European Union as well, in particular in the USA. Any such transfer takes place on the basis of safeguards under the GDPR, such as the European Commission’s standard contractual clauses.</p>'),
     ('<h2>6. Cookies a&nbsp;analytika</h2>', '<h2>6. Cookies and analytics</h2>'),
     ('<p>Tento web nepoužívá analytické ani marketingové cookies a&nbsp;nesleduje vaše chování. Ukládají se pouze technické údaje nezbytné pro fungování stránek.</p>',
      '<p>This website uses no analytical or marketing cookies and does not track your behaviour. Only the technical data necessary for the site to function is stored.</p>'),
+    ('<p>Písmo, fotografie i&nbsp;ostatní soubory stránek se načítají přímo z&nbsp;tohoto webu, ne ze služeb třetích stran. Odkazy na Google Mapy, Google Kalendář, Facebook nebo Instagram vedou na weby těchto služeb, které se řídí vlastními zásadami.</p>',
+     '<p>The font, photographs and all other files of the site are loaded directly from this website, not from third-party services. Links to Google Maps, Google Calendar, Facebook or Instagram lead to the websites of those services, which are governed by their own policies.</p>'),
+    ('<!-- Až se na webu začnou přehrávat videa z YouTube, doplnit sem větu o YouTube (přehrávač se načte až po kliknutí, přes youtube-nocookie.com). -->',
+     '<!-- Once YouTube videos start playing on the site, add a sentence about YouTube here (the player loads only after a click, via youtube-nocookie.com). -->'),
     ('<h2>7. Vaše práva</h2>', '<h2>7. Your rights</h2>'),
     ('<p>V&nbsp;souvislosti se zpracováním osobních údajů máte právo:</p>', '<p>In connection with the processing of personal data you have the right:</p>'),
     ('<li>na přístup ke svým osobním údajům,</li>', '<li>to access your personal data,</li>'),
@@ -344,12 +359,12 @@ def build(cz, en):
     t = t.replace('<!-- Absolutní adresy počítají s doménou capellanostra.com. Poběží-li web jinde, nahraďte „https://capellanostra.com“ ve všech HTML souborech, v sitemap.xml a robots.txt. -->',
                   '<!-- Absolute URLs assume the domain capellanostra.com. If the site runs elsewhere, replace “https://capellanostra.com” in all HTML files, sitemap.xml and robots.txt. -->')
     # canonical + og:url → anglická adresa (hreflang zůstává stejný v obou jazycích)
-    can_cz = 'https://capellanostra.com/' + ('' if cz == 'index.html' else cz)
-    can_en = 'https://capellanostra.com/en/' + ('' if en == 'index.html' else en)
+    can_cz = 'https://capellanostra.com/' + slug(cz)
+    can_en = 'https://capellanostra.com/en/' + slug(en)
     t = t.replace('<link rel="canonical" href="%s">' % can_cz, '<link rel="canonical" href="%s">' % can_en)
     t = t.replace('<meta property="og:url" content="%s">' % can_cz, '<meta property="og:url" content="%s">' % can_en)
     # přepínač jazyka → česká verze
-    target = ('/' + cz) if absolute else ('../' + cz)
+    target = ('/' + slug(cz)) if absolute else ('../' + slug(cz))
     t, n = re.subn(r'<a class="([^"]*lang-toggle)" href="[^"]*" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">.*?</a>',
                    lambda m: '<a class="%s" href="%s" hreflang="cs" lang="cs" aria-label="Přepnout do češtiny" title="Přepnout do češtiny">\n          %s\n          <span class="lang-label">CZ</span>\n        </a>'
                    % (m.group(1), target, CZ_FLAG), t, flags=re.S)
@@ -364,7 +379,10 @@ def build(cz, en):
         t = t.replace(a, b)
     # odkazy mezi stránkami
     for c, e in MAP.items():
-        t = t.replace('href="%s%s' % (pre, c), 'href="%s%s' % ('/en/' if absolute else '', e))
+        if c == 'index.html':
+            continue  # „./“ vede v /en/ samo na anglický úvod
+        t = re.sub(r'href="%s%s(?=["#])' % (re.escape(pre), slug(c)),
+                   'href="%s%s' % ('/en/' if absolute else '', slug(e)), t)
     t = t.replace('#poptavka', '#enquiry').replace('id="poptavka"', 'id="enquiry"')
     if not absolute:
         t = re.sub(r'(?<=["\s,])(assets|css|js)/', r'../\1/', t)

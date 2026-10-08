@@ -161,7 +161,34 @@
     }).observe(document.body, { childList: true, subtree: true });
   }
 
+  /* Úvod: lišta nad videem je průhledná (.is-top) a modrý pill se rozevře,
+     až hero odjede o 20 % své výšky. Výchozí stav nese už HTML; když stránka
+     začíná níž (obnovený scroll), přepne se lišta bez animace. */
+  function initOverlayNav() {
+    var header = document.querySelector('.site-header--overlay');
+    var hero = document.getElementById('hero');
+    if (!header || !hero) return;
+
+    function update() {
+      header.classList.toggle('is-top', window.scrollY < hero.offsetHeight * 0.2);
+    }
+    header.style.setProperty('--pill-dur', '0ms');
+    update();
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { header.style.removeProperty('--pill-dur'); });
+    });
+
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; update(); });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initOverlayNav();
     initMobileNav();
     initLangToggle();
     initPlaceholderLinks();

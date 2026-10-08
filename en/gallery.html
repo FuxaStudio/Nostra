@@ -12,22 +12,21 @@
 <meta property="og:title" content="Gallery – Capella Nostra">
 <meta property="og:description" content="Stills from video filming and portraits of the members of Capella Nostra, a Baroque ensemble from the Pardubice Conservatory.">
 <!-- Absolute URLs assume the domain capellanostra.com. If the site runs elsewhere, replace “https://capellanostra.com” in all HTML files, sitemap.xml and robots.txt. -->
-<link rel="canonical" href="https://capellanostra.com/en/gallery.html">
-<meta property="og:url" content="https://capellanostra.com/en/gallery.html">
+<link rel="canonical" href="https://capellanostra.com/en/gallery">
+<meta property="og:url" content="https://capellanostra.com/en/gallery">
 <meta property="og:image" content="https://capellanostra.com/assets/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Capella Nostra playing: violins, harpsichord, oboes, cello and double bass">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="alternate" hreflang="cs" href="https://capellanostra.com/galerie.html">
-<link rel="alternate" hreflang="en" href="https://capellanostra.com/en/gallery.html">
-<link rel="alternate" hreflang="x-default" href="https://capellanostra.com/galerie.html">
+<link rel="alternate" hreflang="cs" href="https://capellanostra.com/galerie">
+<link rel="alternate" hreflang="en" href="https://capellanostra.com/en/gallery">
+<link rel="alternate" hreflang="x-default" href="https://capellanostra.com/galerie">
 <link rel="icon" href="../favicon.ico" sizes="32x32">
 <link rel="icon" href="../assets/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/schibsted-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -36,25 +35,25 @@
 
 <header class="site-header">
   <div class="bar">
-    <a href="index.html" class="brand" aria-label="Capella Nostra – home">
+    <a href="./" class="brand" aria-label="Capella Nostra – home">
       <img src="../assets/logo-nav.png" alt="Capella Nostra logo" width="46" height="46">
       <span>Capella Nostra</span>
     </a>
     <div class="nav-panel" id="navLinks">
       <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="concerts.html">Concerts</a>
-        <a href="about.html">About us</a>
-        <a href="members.html">Members</a>
-        <a href="gallery.html" class="is-active">Gallery</a>
-        <a href="contact.html">Contact</a>
+        <a href="./">Home</a>
+        <a href="concerts">Concerts</a>
+        <a href="about">About us</a>
+        <a href="members">Members</a>
+        <a href="gallery" class="is-active">Gallery</a>
+        <a href="contact">Contact</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-outline-white lang-toggle" href="../galerie.html" hreflang="cs" lang="cs" aria-label="Přepnout do češtiny" title="Přepnout do češtiny">
+        <a class="btn btn-outline-white lang-toggle" href="../galerie" hreflang="cs" lang="cs" aria-label="Přepnout do češtiny" title="Přepnout do češtiny">
           <svg class="flag-cs" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="15" fill="#fff"></rect><rect width="60" height="15" y="15" fill="#D7141A"></rect><path d="M0,0 L30,15 L0,30 Z" fill="#11457E"></path></svg>
           <span class="lang-label">CZ</span>
         </a>
-        <a href="contact.html#enquiry" class="btn btn-white nav-cta">Book a concert</a>
+        <a href="contact#enquiry" class="btn btn-white nav-cta">Book a concert</a>
       </div>
       <button class="nav-close" id="navClose" type="button" aria-label="Close menu">
         <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
@@ -141,12 +140,12 @@
       <a class="btn-icon btn-icon-white" href="#" aria-label="YouTube"><svg class="icon" width="20" height="20"><use href="#i-youtube"></use></svg></a>
     </div>
     <ul class="footer-nav">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="concerts.html">Concerts</a></li>
-      <li><a href="about.html">About us</a></li>
-      <li><a href="members.html">Members</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="./">Home</a></li>
+      <li><a href="concerts">Concerts</a></li>
+      <li><a href="about">About us</a></li>
+      <li><a href="members">Members</a></li>
+      <li><a href="gallery">Gallery</a></li>
+      <li><a href="contact">Contact</a></li>
     </ul>
     <div class="footer-contact">
       <a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a>
@@ -157,7 +156,7 @@
     <hr class="footer-hr">
     <div class="footer-bottom">
       <span class="copyright">Capella Nostra © 2026</span>
-      <div><a href="privacy-policy.html" class="privacy">Privacy Policy</a></div>
+      <div><a href="privacy-policy" class="privacy">Privacy Policy</a></div>
       <a href="https://fuxastudio.cz/" target="_blank" rel="noopener" class="credit">Website by: <strong>FuxaStudio</strong></a>
     </div>
   </div>

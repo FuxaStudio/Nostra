@@ -47,6 +47,8 @@
     if (!next3.length) {
       concertGrid.hidden = true;
       $('homeConcertsEmpty').hidden = false;
+      /* Vzkaz už na proběhlé koncerty odkazuje, tlačítko by bylo navíc. */
+      $('homeConcertsMore').hidden = true;
     } else {
       concertGrid.innerHTML = next3.map(function (c) {
         return '<article class="concert-card home-card">' +

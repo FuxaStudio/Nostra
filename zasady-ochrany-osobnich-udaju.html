@@ -8,15 +8,14 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#003FFF">
 <!-- Absolutní adresy počítají s doménou capellanostra.com. Poběží-li web jinde, nahraďte „https://capellanostra.com“ ve všech HTML souborech, v sitemap.xml a robots.txt. -->
-<link rel="alternate" hreflang="cs" href="https://capellanostra.com/zasady-ochrany-osobnich-udaju.html">
-<link rel="alternate" hreflang="en" href="https://capellanostra.com/en/privacy-policy.html">
-<link rel="alternate" hreflang="x-default" href="https://capellanostra.com/zasady-ochrany-osobnich-udaju.html">
+<link rel="alternate" hreflang="cs" href="https://capellanostra.com/zasady-ochrany-osobnich-udaju">
+<link rel="alternate" hreflang="en" href="https://capellanostra.com/en/privacy-policy">
+<link rel="alternate" hreflang="x-default" href="https://capellanostra.com/zasady-ochrany-osobnich-udaju">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/schibsted-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -25,25 +24,25 @@
 
 <header class="site-header">
   <div class="bar">
-    <a href="index.html" class="brand" aria-label="Capella Nostra – domů">
+    <a href="./" class="brand" aria-label="Capella Nostra – domů">
       <img src="assets/logo-nav.png" alt="Capella Nostra logo" width="46" height="46">
       <span>Capella Nostra</span>
     </a>
     <div class="nav-panel" id="navLinks">
       <nav class="nav-links">
-        <a href="index.html">Domů</a>
-        <a href="koncerty.html">Koncerty</a>
-        <a href="o-nas.html">O nás</a>
-        <a href="clenove.html">Členové</a>
-        <a href="galerie.html">Galerie</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="./">Domů</a>
+        <a href="koncerty">Koncerty</a>
+        <a href="o-nas">O nás</a>
+        <a href="clenove">Členové</a>
+        <a href="galerie">Galerie</a>
+        <a href="kontakt">Kontakt</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-outline-white lang-toggle" href="en/privacy-policy.html" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
+        <a class="btn btn-outline-white lang-toggle" href="en/privacy-policy" hreflang="en" lang="en" aria-label="Switch to English" title="Switch to English">
           <svg class="flag-en" width="22" height="15" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"></rect><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"></path><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="2.5"></path><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"></path><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"></path></svg>
           <span class="lang-label">EN</span>
         </a>
-        <a href="kontakt.html#poptavka" class="btn btn-white nav-cta">Poptat koncert</a>
+        <a href="kontakt#poptavka" class="btn btn-white nav-cta">Poptat koncert</a>
       </div>
       <button class="nav-close" id="navClose" type="button" aria-label="Zavřít menu">
         <svg class="icon" width="16" height="16"><use href="#i-close"></use></svg>
@@ -83,10 +82,18 @@
     <p>Údaje z&nbsp;poptávkového formuláře uchováváme po dobu nezbytnou k&nbsp;vyřízení poptávky a&nbsp;následné komunikace, nejdéle však [DOPLNIT: např. 2 roky] od posledního kontaktu. Poté je smažeme.</p>
 
     <h2>5. Předávání údajů</h2>
-    <p>Vaše osobní údaje nepředáváme žádným třetím stranám s&nbsp;výjimkou poskytovatelů technických služeb nezbytných pro provoz webu a&nbsp;e-mailové komunikace (např. webhosting). Údaje nepředáváme mimo Evropskou unii.</p>
+    <p>Vaše osobní údaje neprodáváme ani je nepředáváme pro marketingové účely. Pracují s&nbsp;nimi jen poskytovatelé technických služeb, bez kterých web a&nbsp;e-mailová komunikace nefungují:</p>
+    <ul>
+      <li>Web3Forms – doručí zprávu z&nbsp;formuláře do naší e-mailové schránky,</li>
+      <li>Google (služba Gmail) – v&nbsp;e-mailové schránce souboru zprávy uchováváme,</li>
+      <li>Cloudflare – na jeho serverech web běží.</li>
+    </ul>
+    <p>Tito poskytovatelé mohou údaje zpracovávat i&nbsp;mimo Evropskou unii, zejména v&nbsp;USA. Předání v&nbsp;takovém případě probíhá na základě záruk podle nařízení GDPR, například standardních smluvních doložek Evropské komise.</p>
 
     <h2>6. Cookies a&nbsp;analytika</h2>
     <p>Tento web nepoužívá analytické ani marketingové cookies a&nbsp;nesleduje vaše chování. Ukládají se pouze technické údaje nezbytné pro fungování stránek.</p>
+    <p>Písmo, fotografie i&nbsp;ostatní soubory stránek se načítají přímo z&nbsp;tohoto webu, ne ze služeb třetích stran. Odkazy na Google Mapy, Google Kalendář, Facebook nebo Instagram vedou na weby těchto služeb, které se řídí vlastními zásadami.</p>
+    <!-- Až se na webu začnou přehrávat videa z YouTube, doplnit sem větu o YouTube (přehrávač se načte až po kliknutí, přes youtube-nocookie.com). -->
 
     <h2>7. Vaše práva</h2>
     <p>V&nbsp;souvislosti se zpracováním osobních údajů máte právo:</p>
@@ -116,12 +123,12 @@
       <a class="btn-icon btn-icon-white" href="#" aria-label="YouTube"><svg class="icon" width="20" height="20"><use href="#i-youtube"></use></svg></a>
     </div>
     <ul class="footer-nav">
-      <li><a href="index.html">Domů</a></li>
-      <li><a href="koncerty.html">Koncerty</a></li>
-      <li><a href="o-nas.html">O nás</a></li>
-      <li><a href="clenove.html">Členové</a></li>
-      <li><a href="galerie.html">Galerie</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
+      <li><a href="./">Domů</a></li>
+      <li><a href="koncerty">Koncerty</a></li>
+      <li><a href="o-nas">O nás</a></li>
+      <li><a href="clenove">Členové</a></li>
+      <li><a href="galerie">Galerie</a></li>
+      <li><a href="kontakt">Kontakt</a></li>
     </ul>
     <div class="footer-contact">
       <a href="mailto:capellanostra@gmail.com">capellanostra@gmail.com</a>
@@ -132,7 +139,7 @@
     <hr class="footer-hr">
     <div class="footer-bottom">
       <span class="copyright">Capella Nostra © 2026</span>
-      <div><a href="zasady-ochrany-osobnich-udaju.html" class="privacy">Zásady ochrany osobních údajů</a></div>
+      <div><a href="zasady-ochrany-osobnich-udaju" class="privacy">Zásady ochrany osobních údajů</a></div>
       <a href="https://fuxastudio.cz/" target="_blank" rel="noopener" class="credit">Realizace webu: <strong>FuxaStudio</strong></a>
     </div>
   </div>

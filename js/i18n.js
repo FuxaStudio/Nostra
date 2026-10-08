@@ -13,26 +13,27 @@ window.CN = window.CN || {};
   var lang = (document.documentElement.getAttribute('lang') || 'cs').toLowerCase();
   CN.LANG = lang.indexOf('en') === 0 ? 'en' : 'cs';
 
-  /* Page filenames per language. EN pages live side by side in /en/, so the
-     same relative filename works from either tree. */
+  /* Page addresses per language, without .html (Cloudflare serves /koncerty
+     from koncerty.html). EN pages live side by side in /en/, so the same
+     relative address works from either tree. */
   var ROUTES = {
     cs: {
-      home: 'index.html',
-      concerts: 'koncerty.html',
-      about: 'o-nas.html',
-      members: 'clenove.html',
-      gallery: 'galerie.html',
-      contact: 'kontakt.html',
-      privacy: 'zasady-ochrany-osobnich-udaju.html'
+      home: './',
+      concerts: 'koncerty',
+      about: 'o-nas',
+      members: 'clenove',
+      gallery: 'galerie',
+      contact: 'kontakt',
+      privacy: 'zasady-ochrany-osobnich-udaju'
     },
     en: {
-      home: 'index.html',
-      concerts: 'concerts.html',
-      about: 'about.html',
-      members: 'members.html',
-      gallery: 'gallery.html',
-      contact: 'contact.html',
-      privacy: 'privacy-policy.html'
+      home: './',
+      concerts: 'concerts',
+      about: 'about',
+      members: 'members',
+      gallery: 'gallery',
+      contact: 'contact',
+      privacy: 'privacy-policy'
     }
   };
   CN.url = function (key) { return ROUTES[CN.LANG][key] || ROUTES.cs[key]; };
